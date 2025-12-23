@@ -26,3 +26,9 @@ export class InternalServerError extends AppError {
     super(message, 500);
   }
 }
+
+export class ValidationError extends AppError {
+  constructor(message = "Validation failed") {
+    super(message, 422);
+  }
+}

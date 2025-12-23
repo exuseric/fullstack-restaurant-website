@@ -29,7 +29,7 @@ export const menuItems = pgTable(
       sql`((setweight(to_tsvector('english'::regconfig, COALESCE(title)), 'A'::"char") || ''::tsvector) || setweight(to_tsvector('english'::regconfig, COALESCE(description)), 'B'::"char"))`,
     ),
     categoryId: serial("category_id").notNull(),
-    price: numeric({ precision: 10, scale: 2 }),
+    price: numeric({ precision: 10, scale: 2 }).$type<number>(),
   },
   (table) => [
     index("menu_items_search_vector_idx").using(
