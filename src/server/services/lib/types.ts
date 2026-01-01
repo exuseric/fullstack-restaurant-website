@@ -8,30 +8,17 @@ export interface CategoryRepository {
 }
 
 export interface CategoryService {
-  findById(id: MenuCategory["id"]): Promise<MenuCategory | null>;
+  findById(id: MenuCategory["id"]): Promise<MenuCategory>;
   allCategories(): Promise<MenuCategory[]>;
-}
-
-export interface MenuStateManager {
-  reset(): MenuStateManager;
-  setId(id: MenuItem["id"]): MenuStateManager;
-  setCategoryId(categoryId: MenuItem["categoryId"]): MenuStateManager;
-  setSearchQuery(query: string): MenuStateManager;
-  setOrderBy(orderBy: MenuState["orderBy"]): MenuStateManager;
-  setPagination(pagination: Pagination): MenuStateManager;
-  setPriceRange(range: PriceRange): MenuStateManager;
-  readonly value: MenuState;
 }
 
 export interface MenuService {
   findById(id: MenuItem["id"]): MenuService;
   findMany(): MenuService;
   findByCategoryId(categoryId: MenuItem["categoryId"]): MenuService;
-  findByPriceRange(range: PriceRange): MenuService;
-  search(query: string): MenuService;
+  searchTerm(args: { query: string, orderBy?: OrderBy }): MenuService;
   page(pagination: Pagination): MenuService;
-  setPriceRange(range: PriceRange): MenuService;
-  setPagination(pagination: Pagination): MenuService;
+  findByPriceRange(range: PriceRange): MenuService;
   reset(): MenuService;
   execute(): Promise<FindOneResult | FindManyResult | null>;
 }
@@ -105,12 +92,7 @@ export type FindManyResult = Pagination & {
   totalCount: number;
   totalPages: number;
 };
-
 export type MenuServiceFactory = (
   repository: MenuRepository,
-  state: MenuStateManager,
+  state?: MenuState,
 ) => MenuService;
-
-export type MenuStateManagerFactory = (
-  initialState?: MenuState,
-) => MenuStateManager;

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import {db} from "@/server/db";
+import { db } from "@/server/db";
 import { menuCategories, menuItems } from "@/server/db/schema";
 import { eq } from "drizzle-orm";
 import type {
@@ -9,7 +9,7 @@ import type {
 } from "@/server/services/lib/types";
 import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
 import { NotFoundError } from "@/shared/errors";
-import menuService from "@/server/services/menu/service";
+import menuService from "@/server/services/menu/menu.service";
 
 const TEST_TIMEOUT = 10000
 
@@ -57,7 +57,7 @@ describe("Menu Service Integration Tests (database)", () => {
       await expect(service.findById(nonExistentId).execute()).rejects.toThrow(
         NotFoundError,
       );
-    },TEST_TIMEOUT);
+    }, TEST_TIMEOUT);
   });
 
   describe("findMany", () => {
@@ -115,7 +115,7 @@ describe("Menu Service Integration Tests (database)", () => {
 
       const query = item.title.split(" ")[0] ?? item.title;
 
-      const result = (await service.search(query).execute()) as FindManyResult;
+      const result = (await service.searchTerm({ query }).execute()) as FindManyResult;
 
       expect(result.items.length).toBeGreaterThanOrEqual(1);
     }, TEST_TIMEOUT);
@@ -143,8 +143,8 @@ describe("Menu Service Integration Tests (database)", () => {
 
       const result = (await service
         .findByCategoryId(category.id)
-        .setPriceRange(range)
-        .setPagination(pagination)
+        .findByPriceRange(range)
+        .page(pagination)
         .execute()) as FindManyResult;
 
       expect(result.items.length).toBeLessThanOrEqual(pagination.perPage);
@@ -163,7 +163,7 @@ describe("Menu Service Integration Tests (database)", () => {
       const pagination = { page: 1, perPage: 10 };
 
       const result = (await service
-        .search(query)
+        .searchTerm({ query })
         .page(pagination)
         .execute()) as FindManyResult;
 

@@ -2,7 +2,7 @@ import { db } from "@/server/db";
 import { menuCategories } from "@/server/db/schema";
 import type { CategoryRepository } from "@/server/services/lib/types";
 import type { MenuCategory } from "@/shared/types";
-import { eq } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 
 class Repository implements CategoryRepository {
   private readonly SELECT = {
@@ -22,8 +22,15 @@ class Repository implements CategoryRepository {
     return res ?? null;
   }
 
-  async findMany(): Promise<MenuCategory[]> {
-    return await db.select(this.SELECT).from(menuCategories);
+  async findMany(ids?: MenuCategory["id"][]): Promise<MenuCategory[]> {
+    if (!ids) {
+      return await db.select(this.SELECT).from(menuCategories);
+    }
+    if (ids.length > 0) {
+      return await db.select(this.SELECT).from(menuCategories).where(inArray(menuCategories.id, ids));
+    }
+
+    return [];
   }
 }
 
