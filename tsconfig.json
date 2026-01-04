@@ -38,6 +38,9 @@
       "@/services/*": [
         "./src/server/services/*"
       ],
+      "@/services-lib/*": [
+        "./src/server/services/lib/*"
+      ],
     },
   },
   "include": [

@@ -1,4 +1,4 @@
-import type { MenuCategory, MenuItem, MenuVariant } from "@/shared/types";
+import type { MenuCategory, MenuItem, MenuVariant, NavigationItems } from "@/shared/types";
 import type { SQL } from "drizzle-orm";
 import type { SelectedFields } from "drizzle-orm/pg-core";
 
@@ -39,6 +39,14 @@ export interface MenuBuilder {
       perPage: number;
     };
   };
+}
+
+export interface NavigationRepository {
+  getAll(): Promise<NavigationItems[]>;
+}
+
+export interface NavigationService {
+  getNavigationItems(): Promise<NavigationItems[]>;
 }
 
 export type MenuState = {
