@@ -10,6 +10,7 @@ export interface CategoryRepository {
 export interface CategoryService {
   findById(id: MenuCategory["id"]): Promise<MenuCategory>;
   allCategories(): Promise<MenuCategory[]>;
+  findMany(categoryIds: MenuCategory["id"][]): Promise<MenuCategory[]>;
 }
 
 export interface MenuService {

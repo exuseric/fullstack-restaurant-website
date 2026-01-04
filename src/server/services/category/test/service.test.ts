@@ -3,7 +3,6 @@ import { db } from "@/server/db";
 import { menuCategories } from "@/server/db/schema";
 import { NotFoundError, ValidationError, InternalServerError } from "@/shared/errors";
 import categoryService from "@/server/services/category/category.service";
-import categoryRepository from "@/server/services/category/category.repository";
 
 const TEST_TIMEOUT = 10000;
 
@@ -39,7 +38,6 @@ describe("Category Service Integration Tests (database)", () => {
 
         it("should throw ValidationError when id is invalid", async () => {
             // validateId treats falsy values as invalid
-            // @ts-expect-error - testing runtime validation
             await expect(service.findById(0)).rejects.toThrow(ValidationError);
         }, TEST_TIMEOUT);
 
@@ -62,7 +60,6 @@ describe("Category Service Integration Tests (database)", () => {
         }, TEST_TIMEOUT);
 
         it("should validate ids inside the array", async () => {
-            // @ts-expect-error - testing runtime validation
             await expect(service.findMany([0])).rejects.toThrow(ValidationError);
         }, TEST_TIMEOUT);
 
