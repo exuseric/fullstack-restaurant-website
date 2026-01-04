@@ -68,7 +68,7 @@ describe("Category Service Integration Tests (database)", () => {
             if (!one) throw new Error("Test DB must contain at least one category");
             const res = await service.findMany([one.id]);
             expect(res.length).toBeGreaterThanOrEqual(1);
-            expect(res[0].id).toBe(one.id);
+            expect(res[0]?.id).toBe(one.id);
         }, TEST_TIMEOUT);
     });
 });

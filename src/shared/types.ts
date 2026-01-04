@@ -1,4 +1,4 @@
-import type { menuCategories, menuItems, variants } from "@/server/db/schema";
+import type { categoryGroups, menuCategories, menuItems, navigationItems, variants } from "@/server/db/schema";
 import { type InferSelectModel, type InferInsertModel } from "drizzle-orm";
 
 export type MenuCategory = Omit<
@@ -10,6 +10,5 @@ export type MenuVariant = Omit<
   InferSelectModel<typeof variants>,
   "searchVector"
 >;
-export type MenuCategoryInsert = InferInsertModel<typeof menuCategories>;
-export type MenuItemInsert = InferInsertModel<typeof menuItems>;
-export type MenuVariantInsert = InferInsertModel<typeof variants>;
+export type NavigationItems = InferSelectModel<typeof navigationItems>
+export type CategoryGroups = InferSelectModel<typeof categoryGroups>
