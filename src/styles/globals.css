@@ -1,54 +1,57 @@
 @import "tailwindcss";
+@import "./tokens.css";
+@import "./theme.css";
 
 @theme inline {
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    
+
   /* ============================================
      SURFACE COLORS
      ============================================ */
-  
+
   /* Base Surfaces */
   --color-surface-background: var(--gray-50);
   --color-surface-background-hover: var(--gray-100);
   --color-surface-background-active: var(--gray-200);
   --color-surface-background-disabled: var(--gray-100);
-  
+
   /* Elevated Surfaces */
   --color-surface-elevated-1: var(--gray-100);
   --color-surface-elevated-2: var(--gray-200);
   --color-surface-elevated-3: var(--gray-300);
-  
+
   /* Overlay Surfaces */
   --color-surface-overlay: rgba(0, 0, 0, 0.5);
   --color-surface-overlay-light: rgba(0, 0, 0, 0.3);
   --color-surface-overlay-heavy: rgba(0, 0, 0, 0.7);
-  
+
   /* Inverse Surfaces */
   --color-surface-inverse: var(--gray-900);
   --color-surface-inverse-elevated: var(--gray-800);
-  
+
   /* ============================================
      TEXT COLORS
      ============================================ */
-  
+
   /* Base Text */
-  --color-text-foreground: var(--gray-900);
-  --color-text-foreground-secondary: var(--gray-700);
-  --color-text-foreground-tertiary: var(--gray-500);
-  --color-text-foreground-quaternary: var(--gray-400);
-  --color-text-foreground-disabled: var(--gray-300);
-  
-  --color-text-inverse: var(--gray-50);
-  --color-text-inverse-secondary: var(--gray-200);
-  
-  --color-text-placeholder: var(--gray-400);
-  --color-text-muted: var(--gray-500);
-  
+  --color-foreground: var(--gray-900);
+  --color-foreground-secondary: var(--gray-700);
+  --color-foreground-tertiary: var(--gray-500);
+  --color-foreground-quaternary: var(--gray-400);
+  --color-foreground-disabled: var(--gray-300);
+
+  --color-inverse: var(--gray-50);
+  --color-inverse-secondary: var(--gray-200);
+
+  --color-placeholder: var(--gray-400);
+  --color-muted: var(--gray-500);
+
   /* ============================================
      PRIMARY
      ============================================ */
-  
+
   /* Primary Surfaces */
   --color-surface-primary: var(--primary-500);
   --color-surface-primary-hover: var(--primary-600);
@@ -58,24 +61,24 @@
   --color-surface-primary-subtle-hover: var(--primary-100);
   --color-surface-primary-elevated-1: var(--primary-100);
   --color-surface-primary-elevated-2: var(--primary-200);
-  
+
   /* Primary Text */
-  --color-text-primary: var(--primary-500);
-  --color-text-primary-hover: var(--primary-600);
-  --color-text-primary-active: var(--primary-700);
-  --color-text-primary-disabled: var(--primary-300);
-  --color-text-on-primary: var(--primary-50);
-  --color-text-on-primary-subtle: var(--primary-100);
-  
+  --color-primary: var(--primary-500);
+  --color-primary-hover: var(--primary-600);
+  --color-primary-active: var(--primary-700);
+  --color-primary-disabled: var(--primary-300);
+  --color-on-primary: var(--primary-50);
+  --color-on-primary-subtle: var(--primary-100);
+
   /* Primary Borders */
   --color-border-primary: var(--primary-500);
   --color-border-primary-hover: var(--primary-600);
   --color-border-primary-subtle: var(--primary-200);
-  
+
   /* ============================================
      SECONDARY
      ============================================ */
-  
+
   /* Secondary Surfaces */
   --color-surface-secondary: var(--secondary-500);
   --color-surface-secondary-hover: var(--secondary-600);
@@ -85,24 +88,24 @@
   --color-surface-secondary-subtle-hover: var(--secondary-100);
   --color-surface-secondary-elevated-1: var(--secondary-100);
   --color-surface-secondary-elevated-2: var(--secondary-200);
-  
+
   /* Secondary Text */
-  --color-text-secondary: var(--secondary-500);
-  --color-text-secondary-hover: var(--secondary-600);
-  --color-text-secondary-active: var(--secondary-700);
-  --color-text-secondary-disabled: var(--secondary-300);
-  --color-text-on-secondary: var(--secondary-50);
-  --color-text-on-secondary-subtle: var(--secondary-100);
-  
+  --color-secondary: var(--secondary-500);
+  --color-secondary-hover: var(--secondary-600);
+  --color-secondary-active: var(--secondary-700);
+  --color-secondary-disabled: var(--secondary-300);
+  --color-on-secondary: var(--secondary-50);
+  --color-on-secondary-subtle: var(--secondary-100);
+
   /* Secondary Borders */
   --color-border-secondary: var(--secondary-500);
   --color-border-secondary-hover: var(--secondary-600);
   --color-border-secondary-subtle: var(--secondary-200);
-  
+
   /* ============================================
      ACCENT
      ============================================ */
-  
+
   /* Accent Surfaces */
   --color-surface-accent: var(--accent-500);
   --color-surface-accent-hover: var(--accent-600);
@@ -110,125 +113,125 @@
   --color-surface-accent-disabled: var(--accent-300);
   --color-surface-accent-subtle: var(--accent-50);
   --color-surface-accent-subtle-hover: var(--accent-100);
-  
+
   /* Accent Text */
-  --color-text-accent: var(--accent-500);
-  --color-text-accent-hover: var(--accent-600);
-  --color-text-accent-active: var(--accent-700);
-  --color-text-on-accent: var(--accent-50);
-  
+  --color-accent: var(--accent-500);
+  --color-accent-hover: var(--accent-600);
+  --color-accent-active: var(--accent-700);
+  --color-on-accent: var(--accent-50);
+
   /* ============================================
      SUCCESS
      ============================================ */
-  
+
   /* Success Surfaces */
   --color-surface-success: var(--success-500);
   --color-surface-success-hover: var(--success-600);
   --color-surface-success-active: var(--success-700);
   --color-surface-success-subtle: var(--success-50);
   --color-surface-success-subtle-hover: var(--success-100);
-  
+
   /* Success Text */
-  --color-text-success: var(--success-600);
-  --color-text-success-hover: var(--success-700);
-  --color-text-on-success: var(--success-50);
-  
+  --color-success: var(--success-600);
+  --color-success-hover: var(--success-700);
+  --color-on-success: var(--success-50);
+
   /* Success Borders */
   --color-border-success: var(--success-500);
   --color-border-success-subtle: var(--success-200);
-  
+
   /* ============================================
      WARNING
      ============================================ */
-  
+
   /* Warning Surfaces */
   --color-surface-warning: var(--warning-500);
   --color-surface-warning-hover: var(--warning-600);
   --color-surface-warning-active: var(--warning-700);
   --color-surface-warning-subtle: var(--warning-50);
   --color-surface-warning-subtle-hover: var(--warning-100);
-  
+
   /* Warning Text */
-  --color-text-warning: var(--warning-700);
-  --color-text-warning-hover: var(--warning-800);
-  --color-text-on-warning: var(--warning-900);
-  
+  --color-warning: var(--warning-700);
+  --color-warning-hover: var(--warning-800);
+  --color-on-warning: var(--warning-900);
+
   /* Warning Borders */
   --color-border-warning: var(--warning-500);
   --color-border-warning-subtle: var(--warning-200);
-  
+
   /* ============================================
      ERROR
      ============================================ */
-  
+
   /* Error Surfaces */
   --color-surface-error: var(--error-500);
   --color-surface-error-hover: var(--error-600);
   --color-surface-error-active: var(--error-700);
   --color-surface-error-subtle: var(--error-50);
   --color-surface-error-subtle-hover: var(--error-100);
-  
+
   /* Error Text */
-  --color-text-error: var(--error-600);
-  --color-text-error-hover: var(--error-700);
-  --color-text-on-error: var(--error-50);
-  
+  --color-error: var(--error-600);
+  --color-error-hover: var(--error-700);
+  --color-on-error: var(--error-50);
+
   /* Error Borders */
   --color-border-error: var(--error-500);
   --color-border-error-subtle: var(--error-200);
-  
+
   /* ============================================
      INFO
      ============================================ */
-  
+
   /* Info Surfaces */
   --color-surface-info: var(--info-500);
   --color-surface-info-hover: var(--info-600);
   --color-surface-info-active: var(--info-700);
   --color-surface-info-subtle: var(--info-50);
   --color-surface-info-subtle-hover: var(--info-100);
-  
+
   /* Info Text */
-  --color-text-info: var(--info-600);
-  --color-text-info-hover: var(--info-700);
-  --color-text-on-info: var(--info-50);
-  
+  --color-info: var(--info-600);
+  --color-info-hover: var(--info-700);
+  --color-on-info: var(--info-50);
+
   /* Info Borders */
   --color-border-info: var(--info-500);
   --color-border-info-subtle: var(--info-200);
-  
+
   /* ============================================
      BASE BORDERS
      ============================================ */
-  
+
   --color-border-base: var(--gray-300);
   --color-border-base-hover: var(--gray-400);
   --color-border-base-active: var(--gray-500);
   --color-border-base-disabled: var(--gray-200);
-  
+
   --color-border-subtle: var(--gray-200);
   --color-border-strong: var(--gray-400);
   --color-border-inverse: var(--gray-700);
-  
+
   /* Focus States */
   --color-border-focus: var(--primary-500);
   --color-border-focus-ring: var(--primary-500);
   --color-border-focus-offset: #ffffff;
-  
+
   /* ============================================
      LINKS
      ============================================ */
-  
+
   --color-link: var(--primary-600);
   --color-link-hover: var(--primary-700);
   --color-link-active: var(--primary-800);
   --color-link-visited: var(--primary-900);
   --color-link-disabled: var(--gray-400);
-  
+
   /* ============================================
      BUTTONS
      ============================================ */
-  
+
   /* Primary Button */
   --color-button-primary-bg: var(--surface-primary);
   --color-button-primary-bg-hover: var(--surface-primary-hover);
@@ -237,7 +240,7 @@
   --color-button-primary-text: var(--text-on-surface-primary);
   --color-button-primary-text-disabled: var(--primary-100);
   --color-button-primary-border: var(--border-primary);
-  
+
   /* Secondary Button */
   --color-button-secondary-bg: var(--surface-secondary);
   --color-button-secondary-bg-hover: var(--surface-secondary-hover);
@@ -246,7 +249,7 @@
   --color-button-secondary-text: var(--text-on-surface-secondary);
   --color-button-secondary-text-disabled: var(--secondary-100);
   --color-button-secondary-border: var(--border-secondary);
-  
+
   /* Outline Button */
   --color-button-outline-bg: transparent;
   --color-button-outline-bg-hover: var(--surface-primary-subtle);
@@ -254,30 +257,177 @@
   --color-button-outline-text: var(--text-primary);
   --color-button-outline-text-hover: var(--text-primary-hover);
   --color-button-outline-border: var(--border-primary);
-  
+
   /* Ghost Button */
   --color-button-ghost-bg: transparent;
   --color-button-ghost-bg-hover: var(--gray-100);
   --color-button-ghost-bg-active: var(--gray-200);
   --color-button-ghost-text: var(--text-foreground);
   --color-button-ghost-text-hover: var(--text-primary);
-  
+
   /* Destructive Button */
   --color-button-destructive-bg: var(--surface-error);
   --color-button-destructive-bg-hover: var(--surface-error-hover);
   --color-button-destructive-bg-active: var(--surface-error-active);
   --color-button-destructive-text: var(--text-on-surface-error);
-  
+
   /* ============================================
      UTILITY
      ============================================ */
-  
+
   /* Skeleton/Loading */
   --color-skeleton: var(--gray-200);
   --color-skeleton-highlight: var(--gray-300);
-  
+
   /* Dividers */
   --color-divider-light: var(--gray-200);
   --color-divider: var(--gray-300);
   --color-divider-strong: var(--gray-400);
+}
+
+:root {
+  interpolate-size: allow-keywords;
+  --container-padding: clamp(1rem, 4vw, 2rem);
+  --container-max-width: 80rem; /* 1280px */
+
+  --content-width: min(
+    100% - (var(--container-padding) * 2),
+    var(--container-max-width)
+  );
+}
+
+body,
+html {
+  @apply scroll-smooth antialiased;
+}
+
+body {
+  @apply bg-surface-background text-foreground;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  ul,
+  ol {
+    @apply mb-5;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-foreground leading-none font-bold tracking-tight text-balance;
+  }
+
+  h1 {
+    font-size: var(--text-3xl);
+  }
+  h2 {
+    font-size: var(--text-2xl);
+    @apply mt-9;
+  }
+  h3 {
+    font-size: var(--text-xl);
+    @apply mt-8;
+  }
+  h4 {
+    font-size: var(--text-lg);
+  }
+
+  p {
+    font-size: var(--text-base);
+    @apply text-foreground leading-normal text-pretty;
+  }
+
+  small {
+    font-size: var(--text-xs);
+    @apply text-muted-foreground;
+  }
+
+  a {
+    @apply decoration-primary/30 underline underline-offset-4 transition-colors;
+    &:hover {
+      @apply decoration-primary text-primary;
+    }
+  }
+
+  ul,
+  ol {
+    list-style-position: outside;
+    @apply pl-6;
+  }
+
+  ul {
+    @apply list-disc;
+  }
+  ol {
+    @apply list-decimal;
+  }
+
+  li {
+    @apply mb-2;
+  }
+
+  h1:last-child,
+  h2:last-child,
+  h3:last-child,
+  p:last-child,
+  ul:last-child {
+    @apply mb-0;
+  }
+}
+
+@utility width-transition {
+  transition: width var(--container-transition, 0.3s ease-in-out);
+}
+
+@utility scroll-container {
+  scrollbar-gutter: stable;
+  @apply width-transition overflow-y-auto overscroll-contain;
+}
+
+@utility container {
+  @apply width-transition mx-auto w-(--content-width);
+}
+
+@utility content-container {
+  & > * + * {
+    @apply mt-5;
+  }
+  @apply width-transition mx-auto max-w-[75ch] px-6 leading-normal;
+}
+
+@utility layout-grid {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--container-padding), 1fr)
+    [popout-start] 2rem
+    [content-start] var(--content-width) [content-end]
+    2rem [popout-end]
+    minmax(var(--container-padding), 1fr) [full-end];
+
+  & > :not(.full-bleed, .popout) {
+    grid-column: content;
+  }
+
+  & > .full-bleed {
+    grid-column: full;
+    @apply block w-full;
+  }
+
+  & > .popout {
+    grid-column: popout;
+  }
+
+  @apply width-transition;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --container-transition: none;
+  }
 }
