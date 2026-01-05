@@ -1,0 +1,97 @@
+:root {
+  /* Primary Colors */
+  --primary-50: #d9fff4;
+  --primary-100: #a8d5c8;
+  --primary-200: #7fab9f;
+  --primary-300: #588377;
+  --primary-400: #335c52;
+  --primary-500: #06392f;
+  --primary-600: #002820;
+  --primary-700: #00120e;
+  --primary-800: #000201;
+  --primary-900: #000000;
+
+  /* Gray Scale */
+  --gray-50: #e1e1e1;
+  --gray-100: #c3c3c3;
+  --gray-200: #a7a7a7;
+  --gray-300: #8b8b8b;
+  --gray-400: #707070;
+  --gray-500: #565656;
+  --gray-600: #3e3e3e;
+  --gray-700: #272727;
+  --gray-800: #121212;
+  --gray-900: #020202;
+
+  /* Secondary Colors */
+  --secondary-50: #fff4d9;
+  --secondary-100: #ffe8a8;
+  --secondary-200: #ffdb7f;
+  --secondary-300: #ffce58;
+  --secondary-400: #ffc133;
+  --secondary-500: #ffb406;
+  --secondary-600: #cc9000;
+  --secondary-700: #996c00;
+  --secondary-800: #664800;
+  --secondary-900: #332400;
+
+  /* Accent Colors */
+  --accent-50: #ffe4f4;
+  --accent-100: #ffb3d9;
+  --accent-200: #ff82be;
+  --accent-300: #ff51a3;
+  --accent-400: #ff2088;
+  --accent-500: #ee006d;
+  --accent-600: #bb0057;
+  --accent-700: #880041;
+  --accent-800: #55002b;
+  --accent-900: #220015;
+
+  /* Success Colors */
+  --success-50: #e8f9f0;
+  --success-100: #c2eed4;
+  --success-200: #9ce3b8;
+  --success-300: #76d89c;
+  --success-400: #50cd80;
+  --success-500: #2ac264;
+  --success-600: #229b50;
+  --success-700: #19743c;
+  --success-800: #114d28;
+  --success-900: #082614;
+
+  /* Warning Colors */
+  --warning-50: #fff8e1;
+  --warning-100: #ffecb3;
+  --warning-200: #ffe082;
+  --warning-300: #ffd54f;
+  --warning-400: #ffca28;
+  --warning-500: #ffc107;
+  --warning-600: #ffb300;
+  --warning-700: #ffa000;
+  --warning-800: #ff8f00;
+  --warning-900: #ff6f00;
+
+  /* Error Colors */
+  --error-50: #ffebee;
+  --error-100: #ffcdd2;
+  --error-200: #ef9a9a;
+  --error-300: #e57373;
+  --error-400: #ef5350;
+  --error-500: #f44336;
+  --error-600: #e53935;
+  --error-700: #d32f2f;
+  --error-800: #c62828;
+  --error-900: #b71c1c;
+
+  /* Info Colors */
+  --info-50: #e3f2fd;
+  --info-100: #bbdefb;
+  --info-200: #90caf9;
+  --info-300: #64b5f6;
+  --info-400: #42a5f5;
+  --info-500: #2196f3;
+  --info-600: #1e88e5;
+  --info-700: #1976d2;
+  --info-800: #1565c0;
+  --info-900: #0d47a1;
+}
