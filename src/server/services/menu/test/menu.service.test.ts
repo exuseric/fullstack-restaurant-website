@@ -5,7 +5,6 @@ import type {
   FindManyResult,
   FindOneResult,
 } from "@/server/services/lib/types";
-import type { MenuItem } from "@/shared/types";
 import menuService from "@/server/services/menu/menu.service";
 import { NotFoundError } from "@/shared/errors";
 import { eq } from "drizzle-orm";

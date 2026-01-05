@@ -1,5 +1,4 @@
-// // @ts-expect-error no types for this plugin
-// import drizzle from "eslint-plugin-drizzle"
+// import drizzle from "eslint-plugin-drizzle";
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
@@ -15,16 +14,20 @@ const eslintConfig = defineConfig([
     "next-env.d.ts",
     "drizzle/**",
     "postcss.config.js",
+    "prettier.config.js",
   ]),
+  ...tseslint.configs.recommended,
+  ...tseslint.configs.recommendedTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
   {
-    // plugins: {
-    //     drizzle
-    // },
-    extends: [
-      ...tseslint.configs.recommended,
-      ...tseslint.configs.recommendedTypeChecked,
-      ...tseslint.configs.stylisticTypeChecked,
-    ],
+    plugins: {
+      // drizzle,
+    },
+    rules: {
+      // ...drizzle.configs.recommended.rules,
+    },
+  },
+  {
     files: ["**/*.ts", "**/*.tsx"],
     rules: {
       "@typescript-eslint/array-type": "off",
@@ -44,8 +47,6 @@ const eslintConfig = defineConfig([
         "error",
         { checksVoidReturn: { attributes: false } },
       ],
-      // "drizzle/enforce-delete-with-where": ["error", { drizzleObjectName: ["db", "ctx.db"] }],
-      // "drizzle/enforce-update-with-where": ["error", { drizzleObjectName: ["db", "ctx.db"] }],
       "@typescript-eslint/no-empty-function": "warn",
       "react-hooks/purity": "warn",
     },

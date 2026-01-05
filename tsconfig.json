@@ -50,6 +50,7 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
+    "vite.config.mts"
   ],
   "exclude": [
     "node_modules",
