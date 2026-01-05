@@ -8,8 +8,8 @@ import type {
 } from "@/server/services/lib/types";
 import { ValidationError } from "@/shared/errors";
 import { asc, eq, sql } from "drizzle-orm";
-import mapToResult from "./utils/map-to-result";
-import menuBuilder from "./builder";
+import mapToResult from "@/services/menu/utils/map-to-result";
+import menuBuilder from "@/services/menu/menu.builder";
 
 class Repository implements MenuRepository {
   constructor(private readonly builder: (state: MenuState) => MenuBuilder) {}

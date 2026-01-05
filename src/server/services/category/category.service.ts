@@ -1,15 +1,18 @@
-import type { MenuCategory } from "@/shared/types";
 import type {
   CategoryRepository,
   CategoryService,
 } from "@/server/services/lib/types";
-import categoryRepository from "./category.repository";
-import { InternalServerError, NotFoundError, ValidationError } from "@/shared/errors";
 import { validateId } from "@/server/services/lib/validate-inputs";
-import { id } from "zod/v4/locales";
+import {
+  InternalServerError,
+  NotFoundError,
+  ValidationError,
+} from "@/shared/errors";
+import type { MenuCategory } from "@/shared/types";
+import categoryRepository from "@/services/category/category.repository";
 
 class Service implements CategoryService {
-  constructor(private readonly repository: CategoryRepository) { }
+  constructor(private readonly repository: CategoryRepository) {}
 
   async allCategories(): Promise<MenuCategory[]> {
     try {
@@ -17,9 +20,7 @@ class Service implements CategoryService {
       return data;
     } catch (err) {
       console.error("[CategoryService.allCategories] Error:", err);
-      throw new InternalServerError(
-        `Failed to retrieve categories.`,
-      );
+      throw new InternalServerError(`Failed to retrieve categories.`);
     }
   }
 
@@ -52,9 +53,7 @@ class Service implements CategoryService {
       return data;
     } catch (err) {
       console.error("[CategoryService.findMany] Error:", err);
-      throw new InternalServerError(
-        `Failed to retrieve categories.`,
-      );
+      throw new InternalServerError(`Failed to retrieve categories.`);
     }
   }
 }

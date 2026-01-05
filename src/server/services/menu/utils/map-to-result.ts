@@ -1,4 +1,4 @@
-import type { FindOneResult, MenuRow } from "@/server/services/lib/types";
+import type { FindOneResult, MenuRow } from "@/services-lib/types";
 
 export default function mapToResult(row: MenuRow): FindOneResult {
   return {
@@ -12,6 +12,8 @@ export default function mapToResult(row: MenuRow): FindOneResult {
     category: {
       id: row.category_id,
       title: row.category_title,
+      groupId: row.category_group,
+      slug: row.category_slug,
     },
     variants: row.variants ?? [],
   };

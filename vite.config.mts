@@ -17,6 +17,8 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": resolve(__dirname, "src"),
+      "@/services/": resolve(__dirname, "src/server/services/"),
+      "@/services-lib/": resolve(__dirname, "src/server/services/lib/"),
     },
   },
 });

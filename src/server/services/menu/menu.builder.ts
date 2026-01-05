@@ -1,12 +1,8 @@
-import type {
-  MenuBuilder,
-  MenuState,
-  Pagination,
-} from "@/server/services/lib/types";
-import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
 import { menuCategories, menuItems } from "@/server/db/schema";
-import { and, eq, gte, lte, type SQL, sql } from "drizzle-orm";
+import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
+import type { MenuBuilder, MenuState } from "@/server/services/lib/types";
 import type { MenuVariant } from "@/shared/types";
+import { and, eq, gte, lte, type SQL, sql } from "drizzle-orm";
 import type { SelectedFields } from "drizzle-orm/pg-core";
 
 class Builder implements MenuBuilder {

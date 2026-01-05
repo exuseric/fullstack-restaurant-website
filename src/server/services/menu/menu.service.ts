@@ -9,16 +9,23 @@ import type {
   PriceRange,
 } from "@/server/services/lib/types";
 import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
-import { InternalServerError, NotFoundError, ValidationError } from "@/shared/errors";
+import {
+  InternalServerError,
+  NotFoundError,
+  ValidationError,
+} from "@/shared/errors";
 import type { MenuItem } from "@/shared/types";
-import menuRepository from "./menu.repository";
-import { validateId, validatePriceRange } from "@/server/services/lib/validate-inputs";
+import menuRepository from "@/services/menu/menu.repository";
+import {
+  validateId,
+  validatePriceRange,
+} from "@/server/services/lib/validate-inputs";
 
 class Service implements MenuService {
   constructor(
     private readonly repository: MenuRepository,
     private readonly state: MenuState = DEFAULT_MENU_STATE,
-  ) { }
+  ) {}
 
   findMany() {
     return new Service(this.repository, {
@@ -29,35 +36,47 @@ class Service implements MenuService {
 
   findById(id: MenuItem["id"]) {
     validateId(id);
-    return new Service(this.repository, this.updateState({
-      id,
-      categoryId: null,
-      searchQuery: null
-    }));
+    return new Service(
+      this.repository,
+      this.updateState({
+        id,
+        categoryId: null,
+        searchQuery: null,
+      }),
+    );
   }
 
   findByCategoryId(categoryId: MenuItem["categoryId"]) {
     if (this.state.id) {
       throw new ValidationError(
-        'Cannot call findByCategoryId after findById - use reset() first'
+        "Cannot call findByCategoryId after findById - use reset() first",
       );
     }
     validateId(categoryId);
     return new Service(this.repository, this.updateState({ categoryId }));
   }
 
-  searchTerm(args: { query: string, orderBy?: OrderBy }) {
+  searchTerm(args: { query: string; orderBy?: OrderBy }) {
     if (this.state.id) {
       throw new ValidationError(
-        'Cannot perform search after findById - use reset() first'
+        "Cannot perform search after findById - use reset() first",
       );
     }
-    return new Service(this.repository, this.updateState({ searchQuery: args.query, orderBy: args.orderBy ?? "rank" }));
+    return new Service(
+      this.repository,
+      this.updateState({
+        searchQuery: args.query,
+        orderBy: args.orderBy ?? "rank",
+      }),
+    );
   }
 
   findByPriceRange(range: PriceRange) {
     validatePriceRange(range);
-    return new Service(this.repository, this.updateState({ priceRange: range }));
+    return new Service(
+      this.repository,
+      this.updateState({ priceRange: range }),
+    );
   }
 
   page(pagination: Pagination) {
@@ -72,9 +91,7 @@ class Service implements MenuService {
     return { ...this.state, ...updates };
   }
 
-  private async repositoryFindOne(
-    state: MenuState,
-  ): Promise<FindOneResult> {
+  private async repositoryFindOne(state: MenuState): Promise<FindOneResult> {
     try {
       const res = await this.repository.findOne(state);
       if (!res) {
@@ -85,7 +102,7 @@ class Service implements MenuService {
       if (err instanceof InternalServerError || err instanceof NotFoundError) {
         throw err;
       }
-      console.error('[MenuService.repositoryFindOne] Error:', err);
+      console.error("[MenuService.repositoryFindOne] Error:", err);
       throw new InternalServerError("Failed to fetch menu item");
     }
   }
@@ -94,14 +111,14 @@ class Service implements MenuService {
     try {
       const result = await this.repository.findMany(state);
       if (!result) {
-        return { items: [], totalCount: 0, totalPages: 0, page: 1, perPage: 0 }
+        return { items: [], totalCount: 0, totalPages: 0, page: 1, perPage: 0 };
       }
-      return result
+      return result;
     } catch (err) {
       if (err instanceof InternalServerError || err instanceof NotFoundError) {
         throw err;
       }
-      console.error('[MenuService.repositoryFindMany] Error:', err);
+      console.error("[MenuService.repositoryFindMany] Error:", err);
       throw new InternalServerError("Failed to fetch menu items");
     }
   }
@@ -120,19 +137,18 @@ class Service implements MenuService {
   }
 }
 
-
 /**
  * Query builder for menu items. Methods are chainable and immutable.
- * 
+ *
  * **State Merging:**
  * - Calling findById() clears category and search filters
  * - Other methods accumulate (AND logic)
  * - Use reset() to start fresh
- * 
+ *
  * @example
  * // Find specific item
  * await menuService().findById('item-123').execute();
- * 
+ *
  * @example
  * // Find multiple with filters
  * await menuService()

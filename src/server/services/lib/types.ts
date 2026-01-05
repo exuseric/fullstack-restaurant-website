@@ -1,4 +1,9 @@
-import type { MenuCategory, MenuItem, MenuVariant, NavigationItems } from "@/shared/types";
+import type {
+  MenuCategory,
+  MenuItem,
+  MenuVariant,
+  NavigationItems,
+} from "@/shared/types";
 import type { SQL } from "drizzle-orm";
 import type { SelectedFields } from "drizzle-orm/pg-core";
 
@@ -17,7 +22,7 @@ export interface MenuService {
   findById(id: MenuItem["id"]): MenuService;
   findMany(): MenuService;
   findByCategoryId(categoryId: MenuItem["categoryId"]): MenuService;
-  searchTerm(args: { query: string, orderBy?: OrderBy }): MenuService;
+  searchTerm(args: { query: string; orderBy?: OrderBy }): MenuService;
   page(pagination: Pagination): MenuService;
   findByPriceRange(range: PriceRange): MenuService;
   reset(): MenuService;
@@ -85,6 +90,8 @@ export type MenuRow = {
   category_id: MenuCategory["id"];
   category_title: MenuCategory["title"];
   category_description: MenuCategory["description"];
+  category_group: MenuCategory["groupId"];
+  category_slug: MenuCategory["slug"];
   variants: MenuVariant[];
   rank?: number;
   matchSource?: string;

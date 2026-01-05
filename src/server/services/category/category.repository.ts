@@ -10,6 +10,8 @@ class Repository implements CategoryRepository {
     title: menuCategories.title,
     description: menuCategories.description,
     showcase: menuCategories.showcase,
+    groupId: menuCategories.groupId,
+    slug: menuCategories.slug,
   } as const;
 
   async findOne(id: MenuCategory["id"]): Promise<MenuCategory | null> {
@@ -27,7 +29,10 @@ class Repository implements CategoryRepository {
       return await db.select(this.SELECT).from(menuCategories);
     }
     if (ids.length > 0) {
-      return await db.select(this.SELECT).from(menuCategories).where(inArray(menuCategories.id, ids));
+      return await db
+        .select(this.SELECT)
+        .from(menuCategories)
+        .where(inArray(menuCategories.id, ids));
     }
 
     return [];
