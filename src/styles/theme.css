@@ -151,12 +151,12 @@
   --border-inverse: var(--gray-700);
 
   --border-primary: var(--primary-500);
-  --border-primary-hover: var(--primary-600);
-  --border-primary-subtle: var(--primary-200);
+  --border-primary-hover: var(--accent-600);
+  --border-primary-subtle: var(--accent-200);
 
   --border-secondary: var(--secondary-500);
-  --border-secondary-hover: var(--secondary-600);
-  --border-secondary-subtle: var(--secondary-200);
+  --border-secondary-hover: var(--accent-600);
+  --border-secondary-subtle: var(--accent-200);
 
   --border-success: var(--success-500);
   --border-success-subtle: var(--success-200);
@@ -171,8 +171,8 @@
   --border-info-subtle: var(--info-200);
 
   /* Focus States */
-  --border-focus: var(--primary-500);
-  --border-focus-ring: var(--primary-500);
+  --border-focus: var(--accent-500);
+  --border-focus-ring: var(--accent-500);
   --border-focus-ring-offset: #ffffff;
 
   /* ============================================
