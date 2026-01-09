@@ -1,6 +1,9 @@
 import { db } from "@/server/db";
 import { menuCategories } from "@/server/db/schema";
-import type { CategoryRepository } from "@/server/services/lib/types";
+import type {
+  CategoryRepository,
+  FindByGroupIdParams,
+} from "@/server/services/lib/types";
 import type { MenuCategory } from "@/shared/types";
 import { eq, inArray } from "drizzle-orm";
 
@@ -14,7 +17,7 @@ class Repository implements CategoryRepository {
     slug: menuCategories.slug,
   } as const;
 
-  async findOne(id: MenuCategory["id"]): Promise<MenuCategory | null> {
+  async findOne(id: MenuCategory["id"]) {
     const [res] = await db
       .select(this.SELECT)
       .from(menuCategories)
@@ -24,7 +27,17 @@ class Repository implements CategoryRepository {
     return res ?? null;
   }
 
-  async findMany(ids?: MenuCategory["id"][]): Promise<MenuCategory[]> {
+  async findByGroupId(args: FindByGroupIdParams) {
+    if (!args.groupId) return [];
+
+    return await db
+      .select(this.SELECT)
+      .from(menuCategories)
+      .where(eq(menuCategories.groupId, args.groupId))
+      .limit(args.limit ?? 5);
+  }
+
+  async findMany(ids?: MenuCategory["id"][]) {
     if (!ids) {
       return await db.select(this.SELECT).from(menuCategories);
     }
@@ -39,8 +52,6 @@ class Repository implements CategoryRepository {
   }
 }
 
-let instance: Repository | null = null;
-
-export default function categoryRepository() {
-  return (instance ??= new Repository());
+export default function createCategoryRepository() {
+  return new Repository();
 }

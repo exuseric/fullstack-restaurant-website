@@ -15,7 +15,7 @@ import {
   ValidationError,
 } from "@/shared/errors";
 import type { MenuItem } from "@/shared/types";
-import menuRepository from "@/services/menu/menu.repository";
+import createMenuRepository from "@/services/menu/menu.repository";
 import {
   validateId,
   validatePriceRange,
@@ -129,7 +129,7 @@ class Service implements MenuService {
    * @throws {NotFoundError} if a single item is not found
    * @throws {InternalServerError} if the database query fails
    */
-  async execute(): Promise<FindOneResult | FindManyResult> {
+  async execute() {
     const state = this.state;
     return state.id
       ? await this.repositoryFindOne(state)
@@ -157,9 +157,12 @@ class Service implements MenuService {
  *   .page({ limit: 10, offset: 0 })
  *   .execute();
  */
-export default function menuService(
-  repository: MenuRepository = menuRepository(),
-  state: MenuState = DEFAULT_MENU_STATE,
-): MenuService {
+export default function menuService({
+  repository = createMenuRepository(),
+  state = DEFAULT_MENU_STATE,
+}: {
+  repository?: MenuRepository;
+  state?: MenuState;
+} = {}): MenuService {
   return new Service(repository, state);
 }

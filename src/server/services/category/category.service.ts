@@ -1,6 +1,7 @@
 import type {
   CategoryRepository,
   CategoryService,
+  FindByGroupIdParams,
 } from "@/server/services/lib/types";
 import { validateId } from "@/server/services/lib/validate-inputs";
 import {
@@ -9,12 +10,12 @@ import {
   ValidationError,
 } from "@/shared/errors";
 import type { MenuCategory } from "@/shared/types";
-import categoryRepository from "@/services/category/category.repository";
+import createCategoryRepository from "@/services/category/category.repository";
 
 class Service implements CategoryService {
   constructor(private readonly repository: CategoryRepository) {}
 
-  async allCategories(): Promise<MenuCategory[]> {
+  async allCategories() {
     try {
       const data = await this.repository.findMany();
       return data;
@@ -24,7 +25,7 @@ class Service implements CategoryService {
     }
   }
 
-  async findById(id: MenuCategory["id"]): Promise<MenuCategory> {
+  async findById(id: MenuCategory["id"]) {
     validateId(id);
     try {
       const category = await this.repository.findOne(id);
@@ -44,7 +45,22 @@ class Service implements CategoryService {
     }
   }
 
-  async findMany(categoryIds: MenuCategory["id"][]): Promise<MenuCategory[]> {
+  async findByGroupId(args: FindByGroupIdParams) {
+    try {
+      const categories = await this.repository.findByGroupId({
+        groupId: args.groupId,
+        limit: args.limit,
+      });
+      return categories;
+    } catch (err) {
+      console.error("[CategoryService.findByGroupId] Error:", err);
+      throw new InternalServerError(
+        `Failed to retrieve categories by group id: ${args.groupId}`,
+      );
+    }
+  }
+
+  async findMany(categoryIds: MenuCategory["id"][]) {
     if (!categoryIds.length) return [];
     categoryIds.forEach((id) => validateId(id));
 
@@ -58,8 +74,10 @@ class Service implements CategoryService {
   }
 }
 
-export default function categoryService(
-  repository: CategoryRepository = categoryRepository(),
-): CategoryService {
-  return new Service(repository);
+export default function categoryService({
+  categoryRepository = createCategoryRepository(),
+}: {
+  categoryRepository?: CategoryRepository;
+} = {}) {
+  return new Service(categoryRepository);
 }

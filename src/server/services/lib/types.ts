@@ -2,7 +2,8 @@ import type {
   MenuCategory,
   MenuItem,
   MenuVariant,
-  NavigationItems,
+  Navigation,
+  NavigationItem,
 } from "@/shared/types";
 import type { SQL } from "drizzle-orm";
 import type { SelectedFields } from "drizzle-orm/pg-core";
@@ -10,11 +11,13 @@ import type { SelectedFields } from "drizzle-orm/pg-core";
 export interface CategoryRepository {
   findOne(id: MenuCategory["id"]): Promise<MenuCategory | null>;
   findMany(): Promise<MenuCategory[]>;
+  findByGroupId(args: FindByGroupIdParams): Promise<MenuCategory[]>;
 }
 
 export interface CategoryService {
-  findById(id: MenuCategory["id"]): Promise<MenuCategory>;
   allCategories(): Promise<MenuCategory[]>;
+  findById(id: MenuCategory["id"]): Promise<MenuCategory>;
+  findByGroupId(args: FindByGroupIdParams): Promise<MenuCategory[]>;
   findMany(categoryIds: MenuCategory["id"][]): Promise<MenuCategory[]>;
 }
 
@@ -47,12 +50,17 @@ export interface MenuBuilder {
 }
 
 export interface NavigationRepository {
-  getAll(): Promise<NavigationItems[]>;
+  getAll(): Promise<NavigationResults[]>;
 }
 
 export interface NavigationService {
-  getNavigationItems(): Promise<NavigationItems[]>;
+  getNavigationItems(): Promise<Navigation[]>;
 }
+
+export type FindByGroupIdParams = {
+  groupId: MenuCategory["groupId"];
+  limit?: number;
+};
 
 export type MenuState = {
   id: MenuItem["id"] | null;
@@ -112,3 +120,17 @@ export type MenuServiceFactory = (
   repository: MenuRepository,
   state?: MenuState,
 ) => MenuService;
+
+export type NavigationResults = {
+  id: NavigationItem["id"];
+  title: NavigationItem["title"];
+  slug: NavigationItem["slug"];
+  url: NavigationItem["url"];
+  parentId: NavigationItem["parentId"] | null;
+  categoryId: NavigationItem["categoryId"] | null;
+  groupId: NavigationItem["groupId"] | null;
+  catId: MenuCategory["id"] | null;
+  catTitle: MenuCategory["title"] | null;
+  catSlug: MenuCategory["slug"] | null;
+  catGroupId: MenuCategory["groupId"] | null;
+};

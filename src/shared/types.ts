@@ -1,4 +1,10 @@
-import type { categoryGroups, menuCategories, menuItems, navigationItems, variants } from "@/server/db/schema";
+import type {
+  categoryGroups,
+  menuCategories,
+  menuItems,
+  navigationItems,
+  variants,
+} from "@/server/db/schema";
 import { type InferSelectModel } from "drizzle-orm";
 
 export type MenuCategory = Omit<
@@ -10,5 +16,32 @@ export type MenuVariant = Omit<
   InferSelectModel<typeof variants>,
   "searchVector"
 >;
-export type NavigationItems = InferSelectModel<typeof navigationItems> & { children?: NavigationItems[] };
-export type CategoryGroups = InferSelectModel<typeof categoryGroups>
+export type NavigationItem = InferSelectModel<typeof navigationItems> & {
+  children?: NavigationItem[];
+};
+export type CategoryGroups = InferSelectModel<typeof categoryGroups>;
+
+export type NavigationMenuItem = {
+  id: NavigationItem["id"];
+  title: NavigationItem["title"];
+  slug: NavigationItem["slug"];
+  url: NavigationItem["url"];
+  children?: NavigationSubMenuItem[];
+};
+
+export type NavigationSubMenuItem = {
+  id: NavigationItem["id"];
+  title: NavigationItem["title"];
+  slug: NavigationItem["slug"];
+  url: NavigationItem["url"];
+  groupId: NavigationItem["groupId"];
+  parentId: NavigationItem["parentId"];
+};
+
+export type Navigation = {
+  id: NavigationItem["id"];
+  title: NavigationItem["title"];
+  slug: NavigationItem["slug"];
+  url: NavigationItem["url"];
+  children?: NavigationSubMenuItem[];
+};

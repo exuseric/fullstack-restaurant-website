@@ -1,4 +1,4 @@
-import type { NavigationItems } from "@/shared/types";
+import type { NavigationItem } from "@/shared/types";
 import type { MenuState } from "@/services-lib/types";
 
 export const DEFAULT_MENU_STATE: MenuState = {
@@ -16,7 +16,7 @@ export const DEFAULT_MENU_STATE: MenuState = {
   orderBy: "id_asc",
 } as const;
 
-export const DEFAULT_NAVIGATION_MENU_STATE: NavigationItems[] = [
+export const DEFAULT_NAVIGATION_MENU_STATE: NavigationItem[] = [
   {
     id: 1,
     title: "Home",

@@ -72,6 +72,6 @@ class Repository implements MenuRepository {
   }
 }
 
-export default function menuRepository() {
+export default function createMenuRepository() {
   return new Repository(menuBuilder);
 }

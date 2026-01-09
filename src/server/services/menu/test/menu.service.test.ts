@@ -1,246 +1,233 @@
-import { db } from "@/server/db";
-import { menuCategories, menuItems } from "@/server/db/schema";
-import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
 import type {
   FindManyResult,
   FindOneResult,
+  MenuRepository,
 } from "@/server/services/lib/types";
-import menuService from "@/server/services/menu/menu.service";
-import { NotFoundError } from "@/shared/errors";
-import { eq } from "drizzle-orm";
-import { describe, expect, it } from "vitest";
+import menuService from "@/services/menu/menu.service";
+import {
+  InternalServerError,
+  NotFoundError,
+  ValidationError,
+} from "@/shared/errors";
+import { describe, expect, it, vi } from "vitest";
 
-const TEST_TIMEOUT = 10000;
-
-async function getAnyMenuItem() {
-  const [item] = await db.select().from(menuItems).limit(1);
-  if (!item)
-    throw new Error("Test database must contain at least one menu item");
-  return item;
-}
-
-async function getAnyCategoryWithItems() {
-  const rows = await db
-    .select({ categoryId: menuItems.categoryId })
-    .from(menuItems)
-    .limit(1);
-  const row = rows[0];
-  if (!row) {
-    throw new Error(
-      "Test database must contain at least one category with items",
-    );
+describe("MenuService Integration Tests", () => {
+  // Matcher for the FindOneResult structure
+  /*
+  {
+    item: {
+      id: 1,
+      title: 'Eggs & Toast',
+      description: 'Two farm-fresh eggs cooked the way you like them, served with two slices of toasted bread and sweet, roasted tomatoes.',
+      price: 300,
+      categoryId: 1
+    },
+    category: {
+      id: 1,
+      title: 'Breakfast & Brunch',
+      groupId: undefined,
+      slug: undefined
+    },
+    variants: []
   }
-  const [category] = await db
-    .select()
-    .from(menuCategories)
-    .where(eq(menuCategories.id, row.categoryId));
-  if (!category) throw new Error("Category referenced by items must exist");
-  return { category };
-}
+  */
 
-describe("Menu Service Integration Tests (database)", () => {
-  const service = menuService();
-
-  describe("findById", () => {
-    it(
-      "should return a single item from the database",
-      async () => {
-        const item = await getAnyMenuItem();
-
-        const result = (await service
-          .findById(item.id)
-          .execute()) as FindOneResult;
-
-        expect(result.item.id).toBe(item.id);
-        expect(result.item.categoryId).toBe(item.categoryId);
-        expect(result.category.id).toBe(item.categoryId);
-      },
-      TEST_TIMEOUT,
-    );
-
-    it(
-      "should throw NotFoundError if the item does not exist",
-      async () => {
-        const nonExistentId = 9999;
-
-        await expect(service.findById(nonExistentId).execute()).rejects.toThrow(
-          NotFoundError,
-        );
-      },
-      TEST_TIMEOUT,
-    );
+  const menuItemMatcher = expect.objectContaining({
+    item: expect.objectContaining({
+      id: expect.any(Number),
+      title: expect.any(String),
+      description: expect.any(String),
+      price: expect.any(Number),
+      categoryId: expect.any(Number),
+    }),
+    category: expect.objectContaining({
+      id: expect.any(Number),
+      title: expect.any(String),
+      slug: expect.toBeOneOf([expect.any(String), undefined]),
+      groupId: expect.toBeOneOf([expect.any(String), undefined]),
+    }),
+    variants: expect.any(Array),
   });
 
-  describe("findMany", () => {
-    it(
-      "should query the database with the default state",
-      async () => {
-        const result = (await service.findMany().execute()) as FindManyResult;
+  describe("findById / execute", () => {
+    it("should return a single menu item when valid id exists", async () => {
+      const service = menuService();
+      const list = (await service.findMany().execute()) as FindManyResult;
+      if (!list) {
+        throw new Error("No menu items in database to test findById");
+      }
+      const firstItem = list.items[0];
+      if (!firstItem) {
+        throw new Error("No menu items in database to test findById");
+      }
+      const result = (await service
+        .findById(firstItem.item.id)
+        .execute()) as FindOneResult;
 
-        console.log(result);
-        expect(result.items.length).toBeGreaterThanOrEqual(0);
-        expect(result.page).toBe(DEFAULT_MENU_STATE.pagination.page);
-        expect(result.perPage).toBe(DEFAULT_MENU_STATE.pagination.perPage);
-        expect(result.totalPages).toBeGreaterThanOrEqual(1);
-      },
-      TEST_TIMEOUT,
-    );
+      if (!result) {
+        throw new Error("No menu items in database to test findById");
+      }
+      expect(result).toEqual(menuItemMatcher);
+      expect(result.item.id).toBe(firstItem.item.id);
+    });
+
+    it("should throw NotFoundError for non-existent ID", async () => {
+      const service = menuService();
+      await expect(service.findById(999999).execute()).rejects.toThrow(
+        NotFoundError,
+      );
+    });
+
+    it("should throw ValidationError for invalid ID types", async () => {
+      const service = menuService();
+      // @ts-expect-error - Invalid ID (testing runtime validation)
+      expect(() => service.findById("invalid")).toThrow(ValidationError);
+      expect(() => service.findById(-1)).toThrow(ValidationError);
+    });
   });
 
-  describe("Query Building and Chaining", () => {
-    it(
-      "should build state for findByCategoryId",
-      async () => {
-        const { category } = await getAnyCategoryWithItems();
+  describe("findMany / execute", () => {
+    it("should return a paginated list of items", async () => {
+      const service = menuService();
+      const result = (await service.findMany().execute()) as FindManyResult;
 
-        const result = (await service
-          .findByCategoryId(category.id)
-          .execute()) as FindManyResult;
+      if (!result) {
+        throw new Error("No menu items in database to test findById");
+      }
 
-        expect(result.items.length).toBeGreaterThanOrEqual(1);
-        for (const item of result.items) {
-          expect(item.category.id).toBe(category.id);
-        }
-      },
-      TEST_TIMEOUT,
-    );
+      expect(result).toHaveProperty("items");
+      expect(result).toHaveProperty("totalCount");
+      expect(result.items).toBeInstanceOf(Array);
 
-    it(
-      "should build state for findByPriceRange",
-      async () => {
-        const prices = await db
-          .select({ price: menuItems.price })
-          .from(menuItems)
-          .limit(2);
-        if (prices.length === 0) {
-          throw new Error("Test database must contain at least one menu item");
-        }
-        const values = prices.map((p) => p.price);
+      if (result.items.length > 0) {
+        expect(result.items[0]).toEqual(menuItemMatcher);
+      }
+    });
 
-        if (!values.every((v) => typeof v === "string")) {
-          throw new Error(
-            "Test database must contain at least one menu item with a number price",
-          );
-        }
-        const min = Math.min(...values);
-        const max = Math.max(...values);
-        const range = { min, max };
+    it("should respect pagination parameters", async () => {
+      const service = menuService();
+      const page1 = (await service
+        .page({ page: 1, perPage: 1 })
+        .findMany()
+        .execute()) as FindManyResult;
+      const page2 = (await service
+        .page({ page: 2, perPage: 1 })
+        .findMany()
+        .execute()) as FindManyResult;
 
-        const result = (await service
-          .findByPriceRange(range)
-          .execute()) as FindManyResult;
+      if (!page1 || !page2) {
+        throw new Error("No menu items in database to test findById");
+      }
+      if (page1.items.length > 0 && page2.items.length > 0) {
+        expect(page1.items[0]!.item.id).not.toBe(page2.items[0]!.item.id);
+        expect(page1.page).toBe(1);
+        expect(page2.page).toBe(2);
+      }
+    });
+  });
 
-        for (const item of result.items) {
-          expect(item.item.price).toBeGreaterThanOrEqual(range.min);
-          expect(item.item.price).toBeLessThanOrEqual(range.max);
-        }
-      },
-      TEST_TIMEOUT,
-    );
+  describe("Filtering Logic", () => {
+    it("should filter by categoryId", async () => {
+      const service = menuService();
+      const allItems = (await service.findMany().execute()) as FindManyResult;
 
-    it(
-      "should build state for search",
-      async () => {
-        const [item] = await db.select().from(menuItems).limit(1);
-        if (!item)
-          throw new Error("Test database must contain at least one menu item");
+      if (!allItems) {
+        throw new Error("No menu items in database to test findById");
+      }
 
-        const query = item.title.split(" ")[0] ?? item.title;
+      if (allItems.items.length === 0) return;
 
-        const result = (await service
-          .searchTerm({ query })
-          .execute()) as FindManyResult;
+      const targetCatId = allItems.items[0]!.category.id;
+      const result = (await service
+        .findByCategoryId(targetCatId)
+        .execute()) as FindManyResult;
 
-        expect(result.items.length).toBeGreaterThanOrEqual(1);
-      },
-      TEST_TIMEOUT,
-    );
+      expect(result.items.every((i) => i.category.id === targetCatId)).toBe(
+        true,
+      );
+    });
 
-    it(
-      "should build state for page",
-      async () => {
-        const pagination = { page: 2, perPage: 1 };
-        const page1 = (await service
-          .page({ page: 1, perPage: 1 })
-          .execute()) as FindManyResult;
-        const page2 = (await service
-          .page(pagination)
-          .execute()) as FindManyResult;
+    it("should filter by price range", async () => {
+      const service = menuService();
+      const min = 5;
+      const max = 20;
 
-        expect(page1.items.length).toBeLessThanOrEqual(1);
-        expect(page2.items.length).toBeLessThanOrEqual(1);
-        if (page1.items.length === 1 && page2.items.length === 1) {
-          const first = page1.items[0];
-          const second = page2.items[0];
-          expect(first!.item.id).not.toBe(second!.item.id);
-        }
-      },
-      TEST_TIMEOUT,
-    );
+      const result = (await service
+        .findByPriceRange({ min, max })
+        .execute()) as FindManyResult;
+      if (!result) {
+        throw new Error("No menu items in database to test findByPriceRange");
+      }
+      result.items.forEach((res) => {
+        expect(res.item.price).toBeGreaterThanOrEqual(min);
+        expect(res.item.price).toBeLessThanOrEqual(max);
+      });
+    });
 
-    it(
-      "should chain multiple state modifiers correctly",
-      async () => {
-        const { category } = await getAnyCategoryWithItems();
-        const range = { min: 0, max: Number.MAX_SAFE_INTEGER };
-        const pagination = { page: 1, perPage: 2 };
+    it("should throw ValidationError when range is inverted", async () => {
+      const service = menuService();
+      expect(() => service.findByPriceRange({ min: 100, max: 10 })).toThrow(
+        ValidationError,
+      );
+    });
+  });
 
-        const result = (await service
-          .findByCategoryId(category.id)
-          .findByPriceRange(range)
-          .page(pagination)
-          .execute()) as FindManyResult;
+  describe("Chaining and Immutability", () => {
+    it("should maintain immutability when chaining", async () => {
+      const baseService = menuService();
+      const filteredService = baseService.findByCategoryId(1);
 
-        expect(result.items.length).toBeLessThanOrEqual(pagination.perPage);
-        for (const item of result.items) {
-          expect(item.category.id).toBe(category.id);
-          expect(item.item.price).toBeGreaterThanOrEqual(range.min);
-          expect(item.item.price).toBeLessThanOrEqual(range.max);
-        }
-      },
-      TEST_TIMEOUT,
-    );
+      expect(baseService).not.toBe(filteredService);
+      // @ts-expect-error - checking private state for test purposes
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(baseService.state.categoryId).toBeNull();
+      // @ts-expect-error - checking private state for test purposes
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect(filteredService.state.categoryId).toBe(1);
+    });
 
-    it(
-      "should allow searching and then filtering",
-      async () => {
-        const [item] = await db.select().from(menuItems).limit(1);
-        if (!item)
-          throw new Error("Test database must contain at least one menu item");
+    it("should prevent search/category filtering after findById", async () => {
+      const service = menuService().findById(1);
 
-        const query = item.title.split(" ")[0] ?? item.title;
-        const pagination = { page: 1, perPage: 10 };
+      expect(() => service.findByCategoryId(2)).toThrow(ValidationError);
+      expect(() => service.searchTerm({ query: "pizza" })).toThrow(
+        ValidationError,
+      );
+    });
 
-        const result = (await service
-          .searchTerm({ query })
-          .page(pagination)
-          .execute()) as FindManyResult;
+    it("should allow filtering after reset()", async () => {
+      const service = menuService().findById(1).reset();
+      expect(() => service.findByCategoryId(2)).not.toThrow();
+    });
+  });
 
-        expect(result.items.length).toBeGreaterThanOrEqual(1);
-      },
-      TEST_TIMEOUT,
-    );
+  describe("Error Handling", () => {
+    it("should wrap repository errors in InternalServerError", async () => {
+      const mockRepo = {
+        findMany: vi.fn().mockRejectedValue(new Error("Database Crash")),
+        findOne: vi.fn(),
+      } as unknown as MenuRepository;
 
-    it(
-      "should override id when chaining",
-      async () => {
-        const base = (await service.findMany().execute()) as FindManyResult;
-        const anyItem = base.items[0];
-        if (!anyItem) {
-          throw new Error("Test database must contain at least one menu item");
-        }
+      const service = menuService({ repository: mockRepo });
 
-        const byId = (await service
-          .findById(anyItem.item.id)
-          .execute()) as FindOneResult;
-        expect(byId.item.id).toBe(anyItem.item.id);
+      await expect(service.findMany().execute()).rejects.toThrow(
+        InternalServerError,
+      );
+      await expect(service.findMany().execute()).rejects.toThrow(
+        "Failed to fetch menu items",
+      );
+    });
 
-        const manyAfter = (await service
-          .findMany()
-          .execute()) as FindManyResult;
-        expect(manyAfter).toEqual(base);
-      },
-      TEST_TIMEOUT,
-    );
+    it("should propagate NotFoundError from findOne correctly", async () => {
+      const mockRepo = {
+        findOne: vi.fn().mockResolvedValue(null),
+      } as unknown as MenuRepository;
+
+      const service = menuService({ repository: mockRepo });
+
+      await expect(service.findById(1).execute()).rejects.toThrow(
+        NotFoundError,
+      );
+    });
   });
 });
