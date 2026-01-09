@@ -278,6 +278,8 @@
   --color-button-destructive-bg-hover: var(--button-destructive-bg-hover);
   --color-button-destructive-bg-active: var(--button-destructive-bg-active);
   --color-button-destructive-text: var(--button-destructive-text);
+
+  --spacing-nav-height: 5rem;
 }
 
 :root {
@@ -423,6 +425,34 @@ body {
 
 @utility button--pressed {
   @apply scale-[.98];
+}
+
+/* GLASSMORPHISM UTILITY */
+
+@utility glass {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  @supports (backdrop-filter: blur(12px)) {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(12px);
+  }
+
+  @supports not (backdrop-filter: blur(12px)) {
+    background: rgba(255, 255, 255, 0.8);
+  }
+}
+
+@utility glass-frosted {
+  border: 1px solid rgba(255, 255, 255, 0.4);
+
+  @supports (backdrop-filter: blur(20px) saturate(180%)) {
+    background: rgba(255, 255, 255, 0.4);
+    backdrop-filter: blur(20px) saturate(180%);
+  }
+
+  @supports not ((backdrop-filter: blur(20px) saturate(180%))) {
+    background: rgba(255, 255, 255, 0.95);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

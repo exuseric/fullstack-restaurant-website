@@ -1,6 +1,6 @@
 :root {
   /* Base Surfaces */
-  --surface-background: var(--gray-50);
+  --surface-background: var(--secondary-50);
   --surface-background-hover: var(--gray-100);
   --surface-background-active: var(--gray-200);
   --surface-background-disabled: var(--gray-100);
