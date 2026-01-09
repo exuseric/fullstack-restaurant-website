@@ -5,6 +5,7 @@ import { Cambo, IBM_Plex_Sans } from "next/font/google";
 import Providers from "@/app/providers/providers";
 import { Button } from "@/components/shared/button";
 import Link from "next/link";
+import Navigation from "@/features/navigation/navigation";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -34,13 +35,12 @@ export default function RootLayout({
         <body>
           <Button
             asChild
-            className="absolute top-2 left-2 z-999 -translate-y-[120%] focus-visible:translate-y-0"
+            className="absolute top-2 left-2 z-999 -translate-y-[150%] focus-visible:translate-y-0"
           >
             <Link href="#main-content">Skip to main content</Link>
           </Button>
-          <main className="layout-grid" id="main-content">
-            {children}
-          </main>
+          <Navigation />
+          <main id="main-content">{children}</main>
         </body>
       </Providers>
     </html>

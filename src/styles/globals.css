@@ -455,6 +455,32 @@ body {
   }
 }
 
+@utility desktop-nav-grid {
+  display: grid;
+  /*align-items: center;*/
+  grid-template-columns: auto 1fr auto;
+
+  grid-row: 1;
+  & > * {
+  }
+  /*
+
+  & > .grid-left {
+    grid-column: left;
+    justify-self: start;
+  }
+
+  & > .grid-center {
+    grid-column: center;
+    justify-self: center;
+  }
+
+  & > .grid-right {
+    grid-column: right;
+    justify-self: end;
+  }*/
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --container-transition: none;

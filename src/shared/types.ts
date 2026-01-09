@@ -36,6 +36,7 @@ export type NavigationSubMenuItem = {
   url: NavigationItem["url"];
   groupId: NavigationItem["groupId"];
   parentId: NavigationItem["parentId"];
+  children?: NavigationSubMenuItem[];
 };
 
 export type Navigation = {
