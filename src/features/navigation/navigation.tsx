@@ -1,8 +1,8 @@
 import { getNavigationLinks } from "@/use-cases/navigation/getNavigationLinks";
-import DesktopNavigation from "./desktop-navigation/desktop-navigation";
+import NavigationContainer from "./navigation-container";
 
 export default async function Navigation() {
   const links = await getNavigationLinks();
 
-  return <DesktopNavigation links={links} />;
+  return <NavigationContainer links={links} />;
 }
