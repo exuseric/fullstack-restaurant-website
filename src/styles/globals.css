@@ -3,6 +3,9 @@
 @import "./theme.css";
 @import "tw-animate-css";
 
+@plugin "tailwindcss-react-aria-components";
+@plugin "tailwindcss-animate";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {

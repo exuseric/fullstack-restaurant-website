@@ -18,5 +18,7 @@
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
-  "registries": {}
+  "registries": {
+    "@react-aria": "https://react-aria.adobe.com/registry/{name}.json"
+  }
 }

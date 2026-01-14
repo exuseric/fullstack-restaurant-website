@@ -35,10 +35,16 @@
     "drizzle-orm": "^0.41.0",
     "lucide-react": "^0.562.0",
     "next": "^15.2.3",
+    "nuqs": "^2.8.6",
     "postgres": "^3.4.4",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
+    "react": "^19.2.3",
+    "react-aria": "^3.45.0",
+    "react-aria-components": "^1.14.0",
+    "react-dom": "^19.2.3",
     "tailwind-merge": "^3.4.0",
+    "tailwind-variants": "^3.2.2",
+    "tailwindcss-animate": "^1.0.7",
+    "tailwindcss-react-aria-components": "^2.0.1",
     "zod": "^3.24.2"
   },
   "devDependencies": {

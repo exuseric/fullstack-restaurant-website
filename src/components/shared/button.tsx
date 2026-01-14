@@ -1,61 +1,98 @@
-import * as React from "react";
-import { Slot } from "@radix-ui/react-slot";
-import { cva, type VariantProps } from "class-variance-authority";
-import { cn } from "@/lib/utils";
+"use client";
+import React from "react";
+import {
+  composeRenderProps,
+  Button as RACButton,
+  type ButtonProps as RACButtonProps,
+} from "react-aria-components";
+import { tv } from "tailwind-variants";
+import { focusRing } from "@/lib/react-aria-utils";
 
-const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 w-full md:w-fit whitespace-nowrap rounded-none text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:ring-[3px] active:button--pressed no-underline cursor-pointer",
-  {
-    variants: {
-      variant: {
-        default:
-          "bg-button-primary-bg text-button-primary-text border border-button-primary-border hover:bg-button-primary-bg-hover focus-visible:border-border-focus focus-visible:ring-border-focus-ring/50 disabled:bg-button-primary-bg-disabled disabled:text-button-primary-text-disabled disabled:border-button-primary-bg-disabled",
-        secondary:
-          "bg-button-secondary-bg text-button-secondary-text border border-button-secondary-border hover:bg-button-secondary-bg-hover focus-visible:border-border-focus focus-visible:ring-border-focus-ring/50 disabled:bg-button-secondary-bg-disabled disabled:text-button-secondary-text-disabled disabled:border-button-secondary-bg-disabled",
-        destructive:
-          "bg-button-destructive-bg text-button-destructive-text border border-button-destructive-bg hover:bg-button-destructive-bg-hover focus-visible:border-border-focus focus-visible:ring-border-focus-ring/50 disabled:opacity-50",
-        outline:
-          "bg-button-outline-bg text-button-outline-text border border-button-outline-border hover:bg-button-outline-bg-hover hover:text-button-outline-text-hover focus-visible:border-border-focus focus-visible:ring-border-focus-ring/50 disabled:opacity-50",
-        ghost:
-          "bg-button-ghost-bg text-button-ghost-text hover:bg-button-ghost-bg-hover hover:text-button-ghost-text-hover focus-visible:ring-border-focus-ring/50 disabled:opacity-50",
-        link: "text-link-base underline-offset-4 hover:underline hover:text-link-hover active:text-link-active disabled:text-link-disabled",
-      },
-      size: {
-        default: "h-9 px-4 py-2 has-[>svg]:px-3",
-        sm: "h-8 gap-1.5 px-3 has-[>svg]:px-2.5",
-        lg: "h-10 px-6 has-[>svg]:px-4",
-        icon: "size-9",
-        "icon-sm": "size-8",
-        "icon-lg": "size-10",
-      },
-    },
-    defaultVariants: {
-      variant: "default",
-      size: "default",
-    },
-  },
-);
-
-function Button({
-  className,
-  variant = "default",
-  size = "default",
-  asChild = false,
-  ...props
-}: React.ComponentProps<"button"> &
-  VariantProps<typeof buttonVariants> & {
-    asChild?: boolean;
-  }) {
-  const Comp = asChild ? Slot : "button";
-  return (
-    <Comp
-      data-slot="button"
-      data-variant={variant}
-      data-size={size}
-      className={cn(buttonVariants({ variant, size, className }))}
-      {...props}
-    />
-  );
+export interface ButtonProps extends RACButtonProps {
+  /** @default 'primary' */
+  variant?: "primary" | "secondary" | "destructive" | "quiet";
 }
 
-export { Button, buttonVariants };
+const button = tv({
+  extend: focusRing,
+  base: "relative inline-flex items-center justify-center gap-2 border border-neutral-200 border-transparent dark:border-white/10 h-9 box-border px-3.5 py-0 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 font-sans text-sm text-center transition rounded-lg cursor-default [-webkit-tap-highlight-color:transparent] dark:border-neutral-800",
+  variants: {
+    variant: {
+      primary: "bg-blue-600 hover:bg-blue-700 pressed:bg-blue-800 text-white",
+      secondary:
+        "border-black/10 bg-neutral-50 hover:bg-neutral-100 pressed:bg-neutral-200 text-neutral-800 dark:bg-neutral-700 dark:hover:bg-neutral-600 dark:pressed:bg-neutral-500 dark:text-neutral-100",
+      destructive: "bg-red-700 hover:bg-red-800 pressed:bg-red-900 text-white",
+      quiet:
+        "border-0 bg-transparent hover:bg-neutral-200 pressed:bg-neutral-300 text-neutral-800 dark:hover:bg-neutral-700 dark:pressed:bg-neutral-600 dark:text-neutral-100",
+    },
+    isDisabled: {
+      true: "border-transparent dark:border-transparent bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",
+    },
+    isPending: {
+      true: "text-transparent",
+    },
+  },
+  defaultVariants: {
+    variant: "primary",
+  },
+  compoundVariants: [
+    {
+      variant: "quiet",
+      isDisabled: true,
+      class: "bg-transparent dark:bg-transparent",
+    },
+  ],
+});
+
+export function Button(props: ButtonProps) {
+  return (
+    <RACButton
+      {...props}
+      className={composeRenderProps(props.className, (className, renderProps) =>
+        button({ ...renderProps, variant: props.variant, className }),
+      )}
+    >
+      {composeRenderProps(props.children, (children, { isPending }) => (
+        <>
+          {children}
+          {isPending && (
+            <span
+              aria-hidden
+              className="absolute inset-0 flex items-center justify-center"
+            >
+              <svg
+                className="h-4 w-4 animate-spin text-white"
+                viewBox="0 24"
+                stroke={
+                  props.variant === "secondary" || props.variant === "quiet"
+                    ? "light-dark(black, white)"
+                    : "white"
+                }
+              >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  strokeWidth="4"
+                  fill="none"
+                  className="opacity-25"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  strokeWidth="4"
+                  strokeLinecap="round"
+                  fill="none"
+                  pathLength="100"
+                  strokeDasharray="60 140"
+                  strokeDashoffset="0"
+                />
+              </svg>
+            </span>
+          )}
+        </>
+      ))}
+    </RACButton>
+  );
+}
