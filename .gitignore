@@ -47,4 +47,4 @@ yarn-error.log*
 
 #drizzle
 /drizzle/
-/project.config/
+src/project.config/

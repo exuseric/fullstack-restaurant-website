@@ -22,7 +22,7 @@
     "noEmit": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "plugins": [
       {
         "name": "next"
@@ -40,8 +40,8 @@
       ],
       "@/services-lib/*": [
         "./src/server/services/lib/*"
-      ],
-    },
+      ]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -50,11 +50,12 @@
     "**/*.cjs",
     "**/*.js",
     ".next/types/**/*.ts",
-    "vite.config.mts"
+    "vite.config.mts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules",
     "generated",
-    "drizzle"
-  ],
+    "node_modules/drizzle"
+  ]
 }
