@@ -5,6 +5,7 @@ export default function mapToResult(row: MenuRow): FindOneResult {
     item: {
       id: row.id,
       title: row.title,
+      slug: row?.slug,
       description: row.description,
       price: row.price,
       categoryId: row.category_id,

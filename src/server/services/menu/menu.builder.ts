@@ -23,6 +23,7 @@ class Builder implements MenuBuilder {
     return {
       id: menuItems.id,
       title: menuItems.title,
+      slug: menuItems.slug,
       description: sql<string | null>`${menuItems.description}`,
       price: sql<number>`${menuItems.price}::int`,
       categoryId: menuItems.categoryId,

@@ -187,7 +187,7 @@ describe("CategoryService Integration Tests", () => {
       expect(emptyString).toEqual([]);
 
       const nullValue = await service.findByGroupId({
-        groupId: null,
+        groupId: undefined,
       });
       expect(nullValue).toEqual([]);
     });

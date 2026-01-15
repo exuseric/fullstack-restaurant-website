@@ -17,6 +17,23 @@ class Repository implements CategoryRepository {
     slug: menuCategories.slug,
   } as const;
 
+  private mapToResult(row: {
+    readonly id: number;
+    readonly title: string;
+    readonly description: string | null;
+    readonly showcase: boolean | null;
+    readonly groupId: number | null;
+    readonly slug: string | null;
+  }): MenuCategory {
+    return {
+      id: row.id,
+      title: row.title,
+      description: row.description,
+      groupId: row.groupId!,
+      slug: row.slug,
+    };
+  }
+
   async findOne(id: MenuCategory["id"]) {
     const [res] = await db
       .select(this.SELECT)
@@ -24,28 +41,37 @@ class Repository implements CategoryRepository {
       .where(eq(menuCategories.id, id))
       .limit(1);
 
-    return res ?? null;
+    if (res != undefined) {
+      return this.mapToResult(res);
+    }
+
+    return null;
   }
 
   async findByGroupId(args: FindByGroupIdParams) {
     if (!args.groupId) return [];
-
-    return await db
+    const res = await db
       .select(this.SELECT)
       .from(menuCategories)
       .where(eq(menuCategories.groupId, args.groupId))
       .limit(args.limit ?? 5);
+
+    return res.map((res) => this.mapToResult(res));
   }
 
   async findMany(ids?: MenuCategory["id"][]) {
     if (!ids) {
-      return await db.select(this.SELECT).from(menuCategories);
+      const res = await db.select(this.SELECT).from(menuCategories);
+
+      return res.map((res) => this.mapToResult(res));
     }
     if (ids.length > 0) {
-      return await db
+      const res = await db
         .select(this.SELECT)
         .from(menuCategories)
         .where(inArray(menuCategories.id, ids));
+
+      return res.map((res) => this.mapToResult(res));
     }
 
     return [];

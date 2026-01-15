@@ -1,6 +1,6 @@
-'use client';
-import { Check, ChevronRight } from 'lucide-react';
-import React from 'react';
+"use client";
+import { Check, ChevronRight } from "lucide-react";
+import React from "react";
 import {
   Menu as AriaMenu,
   MenuItem as AriaMenuItem,
@@ -16,78 +16,106 @@ import {
   Header,
   Collection,
   type SubmenuTriggerProps,
-  type MenuTriggerProps as AriaMenuTriggerProps
-} from 'react-aria-components';
-import { dropdownItemStyles } from '@/components/shared/ListBox';
-import { Popover, type PopoverProps } from '@/components/shared/Popover';
+  type MenuTriggerProps as AriaMenuTriggerProps,
+} from "react-aria-components";
+import { dropdownItemStyles } from "@/components/shared/ListBox";
+import { Popover, type PopoverProps } from "@/components/shared/Popover";
 
 export function Menu<T extends object>(props: MenuProps<T>) {
   return (
-    <AriaMenu {...props} className="font-sans p-1 outline outline-0 max-h-[inherit] overflow-auto [clip-path:inset(0_0_0_0_round_.75rem)] empty:text-center empty:pb-2" />
+    <AriaMenu
+      {...props}
+      className="max-h-[inherit] overflow-auto p-1 font-sans outline-0 [clip-path:inset(0_0_0_0_round_.75rem)] empty:pb-2 empty:text-center"
+    />
   );
 }
 
 export function MenuItem(props: MenuItemProps) {
-  const textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
+  const textValue =
+    props.textValue ??
+    (typeof props.children === "string" ? props.children : undefined);
   return (
-    <AriaMenuItem textValue={textValue} {...props} className={dropdownItemStyles}>
-      {composeRenderProps(props.children, (children, {selectionMode, isSelected, hasSubmenu}) => <>
-        {selectionMode !== 'none' && (
-          <span className="flex items-center w-4">
-            {isSelected && <Check aria-hidden className="w-4 h-4" />}
-          </span>
-        )}
-        <span className="flex items-center flex-1 gap-2 font-normal truncate group-selected:font-semibold">
-          {children}
-        </span>
-        {hasSubmenu && (
-          <ChevronRight aria-hidden className="absolute w-4 h-4 right-2" />
-        )}
-      </>)}
+    <AriaMenuItem
+      textValue={textValue}
+      {...props}
+      className={dropdownItemStyles}
+    >
+      {composeRenderProps(
+        props.children,
+        (children, { selectionMode, isSelected, hasSubmenu }) => (
+          <>
+            {selectionMode !== "none" && (
+              <span className="flex w-4 items-center">
+                {isSelected && <Check aria-hidden className="h-4 w-4" />}
+              </span>
+            )}
+            <span className="group-selected:font-semibold flex flex-1 items-center gap-2 truncate font-normal">
+              {children}
+            </span>
+            {hasSubmenu && (
+              <ChevronRight aria-hidden className="absolute right-2 h-4 w-4" />
+            )}
+          </>
+        ),
+      )}
     </AriaMenuItem>
   );
 }
 
 export function MenuSeparator(props: SeparatorProps) {
-  return <Separator {...props} className="mx-3 my-1 border-b border-neutral-300 dark:border-neutral-700" />
+  return (
+    <Separator
+      {...props}
+      className="mx-3 my-1 border-b border-neutral-300 dark:border-neutral-700"
+    />
+  );
 }
 
 export interface MenuSectionProps<T> extends AriaMenuSectionProps<T> {
-  title?: string
-  items?: any
+  title?: string;
+  items?: any;
 }
 
 export function MenuSection<T extends object>(props: MenuSectionProps<T>) {
   return (
-    <AriaMenuSection {...props} className="first:-mt-[5px] after:content-[''] after:block after:h-[5px]">
-      {props.title && <Header className="text-sm font-semibold text-neutral-500 dark:text-neutral-300 px-4 py-1 truncate sticky -top-[5px] -mt-px -mx-1 z-10 bg-neutral-100/60 dark:bg-neutral-700/60 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 border-y border-y-neutral-200 dark:border-y-neutral-700 [&+*]:mt-1">{props.title}</Header>}
-      <Collection items={props.items}>
-        {props.children}
-      </Collection>
+    <AriaMenuSection
+      {...props}
+      className="after:block after:h-1.25 after:content-[''] first:-mt-1.25"
+    >
+      {props.title && (
+        <Header className="sticky -top-1.25 z-10 -mx-1 -mt-px truncate border-y border-y-neutral-200 bg-neutral-100/60 px-4 py-1 text-sm font-semibold text-neutral-500 backdrop-blur-md supports-[-moz-appearance:none]:bg-neutral-100 dark:border-y-neutral-700 dark:bg-neutral-700/60 dark:text-neutral-300 [&+*]:mt-1">
+          {props.title}
+        </Header>
+      )}
+      <Collection items={props.items}>{props.children}</Collection>
     </AriaMenuSection>
-  )
+  );
 }
 
 interface MenuTriggerProps extends AriaMenuTriggerProps {
-  placement?: PopoverProps['placement']
+  placement?: PopoverProps["placement"];
 }
 
 export function MenuTrigger(props: MenuTriggerProps) {
-  const [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
+  const [trigger, menu] = React.Children.toArray(props.children) as [
+    React.ReactElement,
+    React.ReactElement,
+  ];
   return (
     <AriaMenuTrigger {...props}>
       {trigger}
-      <Popover placement={props.placement} className="min-w-[150px]">
+      <Popover placement={props.placement} className="min-w-37.5">
         {menu}
       </Popover>
     </AriaMenuTrigger>
   );
 }
 
-export function SubmenuTrigger(
-  props: SubmenuTriggerProps
-) {
-  const [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
+export function SubmenuTrigger(props: SubmenuTriggerProps) {
+  const [trigger, menu] = React.Children.toArray(props.children) as [
+    React.ReactElement,
+    React.ReactElement,
+  ];
   return (
     <AriaSubmenuTrigger {...props}>
       {trigger}

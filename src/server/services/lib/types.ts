@@ -103,6 +103,7 @@ export type MenuRow = {
   id: MenuItem["id"];
   title: MenuItem["title"];
   description: MenuItem["description"];
+  slug: MenuItem["slug"];
   price: MenuItem["price"];
   category_id: MenuCategory["id"];
   category_title: MenuCategory["title"];
@@ -137,9 +138,9 @@ export type NavigationResults = {
   url: NavigationItem["url"];
   parentId: NavigationItem["parentId"] | null;
   categoryId: NavigationItem["categoryId"] | null;
-  groupId: NavigationItem["groupId"] | null;
+  groupId: NavigationItem["groupId"];
   catId: MenuCategory["id"] | null;
   catTitle: MenuCategory["title"] | null;
   catSlug: MenuCategory["slug"] | null;
-  catGroupId: MenuCategory["groupId"] | null;
+  catGroupId: NavigationItem["groupId"];
 };
