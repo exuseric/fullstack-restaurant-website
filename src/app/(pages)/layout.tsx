@@ -5,7 +5,7 @@ import { Cambo, IBM_Plex_Sans } from "next/font/google";
 import Providers from "@/app/providers/providers";
 import { Button } from "@/components/shared/button";
 import Link from "next/link";
-import Navigation from "@/features/navigation/navigation";
+import Navigation from "@/components/features/navigation/navigation";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -33,10 +33,7 @@ export default function RootLayout({
     <html lang="en" className={`${headings.variable} ${content.variable}`}>
       <Providers>
         <body>
-          <Button
-            asChild
-            className="absolute top-2 left-2 z-999 -translate-y-[150%] focus-visible:translate-y-0"
-          >
+          <Button className="absolute top-2 left-2 z-999 -translate-y-[150%] focus-visible:translate-y-0">
             <Link href="#main-content">Skip to main content</Link>
           </Button>
           <Navigation />

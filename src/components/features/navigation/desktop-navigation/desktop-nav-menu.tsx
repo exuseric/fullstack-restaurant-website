@@ -1,9 +1,10 @@
-import { Button } from "@/components/shared/button";
+"use client";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
-} from "@/features/navigation/desktop-navigation/dropdown-menu";
+} from "@/components/features/navigation/desktop-navigation/dropdown-menu";
 import type { Navigation } from "@/shared/types";
 import { ChevronDown } from "lucide-react";
 import Image from "next/image";
@@ -34,12 +35,13 @@ function NavigationDropdown({ link }: { link: Navigation }) {
       <DropdownMenu>
         <>
           <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="p-0" asChild>
-              <Link href={{ pathname: link.url }} className="no-underline">
-                {link.title}
-                <ChevronDown className="size-4" />
-              </Link>
-            </Button>
+            <Link
+              href={{ pathname: link.url }}
+              className="flex flex-row items-center gap-x-1 no-underline"
+            >
+              {link.title}
+              <ChevronDown className="size-4" />
+            </Link>
           </DropdownMenuTrigger>
         </>
         <DropdownMenuContent
@@ -93,34 +95,5 @@ function NavigationDropdown({ link }: { link: Navigation }) {
         </DropdownMenuContent>
       </DropdownMenu>
     </div>
-  );
-}
-
-function NestedDropdown({ link }: { link: Navigation }) {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="w-full justify-between">
-          {link.title}
-          <ChevronDown className="size-4 -rotate-90" aria-hidden="true" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent
-        className="glass-frosted flex max-h-92 w-full min-w-48 flex-col gap-y-2 p-2 shadow"
-        side="right"
-        sideOffset={4}
-      >
-        {link.children?.map((child) => (
-          <Button
-            key={child.id}
-            asChild
-            variant="ghost"
-            className="justify-start"
-          >
-            <Link href={{ pathname: child.url }}>{child.title}</Link>
-          </Button>
-        ))}
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }

@@ -2,7 +2,7 @@
 
 import { useMobile } from "@/hooks/use-mobile";
 import type { Navigation } from "@/shared/types";
-import DesktopNavigation from "./desktop-navigation/desktop-navigation";
+import DesktopNavigation from "@/components/features/navigation/desktop-navigation/desktop-navigation";
 
 export default function NavigationContainer({
   links,
