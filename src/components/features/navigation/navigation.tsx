@@ -1,4 +1,4 @@
-import { getNavigationLinks } from "@/use-cases/navigation/getNavigationLinks";
+import { getNavigationLinks } from "@/use-cases/navigation";
 import NavigationContainer from "./navigation-container";
 
 export default async function Navigation() {

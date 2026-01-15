@@ -1,14 +1,20 @@
-'use client';
-import { SearchIcon, XIcon } from 'lucide-react';
-import React from 'react';
+"use client";
+import { SearchIcon, XIcon } from "lucide-react";
+import React from "react";
 import {
   SearchField as AriaSearchField,
-  SearchFieldProps as AriaSearchFieldProps,
-  ValidationResult
-} from 'react-aria-components';
-import { Description, FieldError, FieldGroup, Input, Label } from '@/components/shared/Field';
-import { composeTailwindRenderProps } from '@/lib/react-aria-utils';
-import { FieldButton } from '@/components/shared/FieldButton';
+  type SearchFieldProps as AriaSearchFieldProps,
+  type ValidationResult,
+} from "react-aria-components";
+import {
+  Description,
+  FieldError,
+  FieldGroup,
+  Input,
+  Label,
+} from "@/components/shared/Field";
+import { composeTailwindRenderProps } from "@/lib/react-aria-utils";
+import { FieldButton } from "@/components/shared/FieldButton";
 
 export interface SearchFieldProps extends AriaSearchFieldProps {
   label?: string;
@@ -17,17 +23,33 @@ export interface SearchFieldProps extends AriaSearchFieldProps {
   placeholder?: string;
 }
 
-export function SearchField(
-  { label, description, errorMessage, placeholder, ...props }: SearchFieldProps
-) {
+export function SearchField({
+  label,
+  description,
+  errorMessage,
+  placeholder,
+  ...props
+}: SearchFieldProps) {
   return (
-    <AriaSearchField {...props} className={composeTailwindRenderProps(props.className, 'group flex flex-col gap-1 min-w-[40px] font-sans max-w-full')}>
+    <AriaSearchField
+      {...props}
+      className={composeTailwindRenderProps(
+        props.className,
+        "group flex max-w-full min-w-10 flex-col gap-1 font-sans",
+      )}
+    >
       {label && <Label>{label}</Label>}
-      <FieldGroup>
-        <SearchIcon aria-hidden className="w-4 h-4 ml-2 text-neutral-500 dark:text-neutral-400 forced-colors:text-[ButtonText] group-disabled:text-neutral-200 dark:group-disabled:text-neutral-600 forced-colors:group-disabled:text-[GrayText]" />
-        <Input placeholder={placeholder} className="pl-2 [&::-webkit-search-cancel-button]:hidden" />
+      <FieldGroup className="bg-surface-secondary-subtle rounded-none">
+        <SearchIcon
+          aria-hidden
+          className="text-secondary group-disabled:text-foreground-disabled ml-2 h-4 w-4 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+        />
+        <Input
+          placeholder={placeholder}
+          className="rounded-none bg-transparent pl-2 [&::-webkit-search-cancel-button]:hidden"
+        />
         <FieldButton className="mr-1 w-6 group-empty:invisible">
-          <XIcon aria-hidden className="w-4 h-4" />
+          <XIcon aria-hidden className="h-4 w-4" />
         </FieldButton>
       </FieldGroup>
       {description && <Description>{description}</Description>}

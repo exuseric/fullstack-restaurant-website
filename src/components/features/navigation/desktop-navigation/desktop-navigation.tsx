@@ -5,8 +5,7 @@ import type { Navigation } from "@/shared/types";
 import { ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
 import DesktopNavMenu from "./desktop-nav-menu";
-import { SearchProvider } from "@/components/features/search/search-context";
-import { SearchPresenter } from "@/components/features/search/search-presenter";
+import { Search } from "@/components/features/search";
 
 export default function DesktopNavigation({ links }: { links: Navigation[] }) {
   return (
@@ -26,9 +25,7 @@ export default function DesktopNavigation({ links }: { links: Navigation[] }) {
             <DesktopNavMenu links={links} />
           </div>
           <div className="flex w-fit items-center justify-end">
-            <SearchProvider>
-              <SearchPresenter />
-            </SearchProvider>
+            <Search />
             <ShoppingCartIcon className="size-6" />
           </div>
         </div>

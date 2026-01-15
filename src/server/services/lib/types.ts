@@ -1,4 +1,5 @@
 import type {
+  GroupedSearchResults,
   MenuCategory,
   MenuItem,
   MenuVariant,
@@ -55,6 +56,14 @@ export interface NavigationRepository {
 
 export interface NavigationService {
   getNavigationItems(): Promise<Navigation[]>;
+}
+
+export interface SearchRepository {
+  search(query: string): Promise<GroupedSearchResults>;
+}
+
+export interface SearchService {
+  search(query: string): Promise<GroupedSearchResults>;
 }
 
 export type FindByGroupIdParams = {

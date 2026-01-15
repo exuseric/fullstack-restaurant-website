@@ -9,8 +9,12 @@ import { type InferSelectModel } from "drizzle-orm";
 
 export type MenuCategory = Omit<
   InferSelectModel<typeof menuCategories>,
-  "searchVector"
->;
+  "searchVector" | "groupId" | "showcase"
+> & {
+  groupId?: number;
+  showcase?: boolean;
+};
+
 export type MenuItem = Omit<InferSelectModel<typeof menuItems>, "searchVector">;
 export type MenuVariant = Omit<
   InferSelectModel<typeof variants>,
@@ -45,4 +49,16 @@ export type Navigation = {
   slug: NavigationItem["slug"];
   url: NavigationItem["url"];
   children?: NavigationSubMenuItem[];
+};
+
+export type MenuItemSearchResult = MenuItem & {
+  type: "menu_item";
+};
+export type MenuCategorySearchResult = MenuCategory & {
+  type: "category";
+};
+
+export type GroupedSearchResults = {
+  menuItems: MenuItemSearchResult[];
+  categories: MenuCategorySearchResult[];
 };
