@@ -2,8 +2,8 @@
 import React from 'react';
 import {
   TextField as AriaTextField,
-  TextFieldProps as AriaTextFieldProps,
-  ValidationResult
+  type TextFieldProps as AriaTextFieldProps,
+  type ValidationResult
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 import { Description, FieldError, Input, Label, fieldBorderStyles } from '@/components/shared/Field';

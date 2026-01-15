@@ -4,12 +4,12 @@ import React from 'react';
 import {
   ListBox as AriaListBox,
   ListBoxItem as AriaListBoxItem,
-  ListBoxProps as AriaListBoxProps,
+  type ListBoxProps as AriaListBoxProps,
   Collection,
   Header,
-  ListBoxItemProps,
+  type ListBoxItemProps,
   ListBoxSection,
-  SectionProps,
+  type SectionProps,
   composeRenderProps
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
@@ -42,7 +42,7 @@ export const itemStyles = tv({
 });
 
 export function ListBoxItem(props: ListBoxItemProps) {
-  let textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
+  const textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
   return (
     <AriaListBoxItem {...props} textValue={textValue} className={itemStyles}>
       {composeRenderProps(props.children, children => <>
@@ -77,7 +77,7 @@ export const dropdownItemStyles = tv({
 });
 
 export function DropdownItem(props: ListBoxItemProps) {
-  let textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
+  const textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
   return (
     <AriaListBoxItem {...props} textValue={textValue} className={dropdownItemStyles}>
       {composeRenderProps(props.children, (children, {isSelected}) => <>

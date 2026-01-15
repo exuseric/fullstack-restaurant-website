@@ -3,9 +3,9 @@ import { CalendarIcon } from 'lucide-react';
 import React from 'react';
 import {
   DateRangePicker as AriaDateRangePicker,
-  DateRangePickerProps as AriaDateRangePickerProps,
-  DateValue,
-  ValidationResult
+  type DateRangePickerProps as AriaDateRangePickerProps,
+  type DateValue,
+  type ValidationResult
 } from 'react-aria-components';
 import { DateInput } from '@/components/shared/DateField';
 import { Description, FieldError, FieldGroup, Label } from '@/components/shared/Field';

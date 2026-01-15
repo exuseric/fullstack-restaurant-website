@@ -1,6 +1,6 @@
 'use client';
-import React, { ReactNode } from 'react';
-import { CheckboxGroup as AriaCheckboxGroup, CheckboxGroupProps as AriaCheckboxGroupProps, ValidationResult } from 'react-aria-components';
+import React, { type ReactNode } from 'react';
+import { CheckboxGroup as AriaCheckboxGroup, type CheckboxGroupProps as AriaCheckboxGroupProps, type ValidationResult } from 'react-aria-components';
 import { Description, FieldError, Label } from '@/components/shared/Field';
 import { composeTailwindRenderProps } from '@/lib/react-aria-utils';
 

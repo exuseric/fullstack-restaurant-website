@@ -5,8 +5,8 @@ import {
   TreeItem as AriaTreeItem,
   TreeItemContent as AriaTreeItemContent,
   Button,
-  TreeItemProps as AriaTreeItemProps,
-  TreeProps
+  type TreeItemProps as AriaTreeItemProps,
+  type TreeProps
 } from 'react-aria-components';
 import { ChevronRight } from "lucide-react";
 import { tv } from 'tailwind-variants';

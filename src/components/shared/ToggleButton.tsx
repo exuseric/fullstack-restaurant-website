@@ -1,10 +1,10 @@
 'use client';
 import React from 'react';
-import { ToggleButton as RACToggleButton, ToggleButtonProps, composeRenderProps } from 'react-aria-components';
+import { ToggleButton as RACToggleButton, type ToggleButtonProps, composeRenderProps } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 import { focusRing } from '@/lib/react-aria-utils';
 
-let styles = tv({
+const styles = tv({
   extend: focusRing,
   base: 'relative inline-flex items-center justify-center gap-2 border border-neutral-200 border-black/10 dark:border-white/10 h-9 box-border px-3.5 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:aspect-square font-sans text-sm text-center transition rounded-lg cursor-default forced-color-adjust-none [-webkit-tap-highlight-color:transparent] dark:border-neutral-800',
   variants: {

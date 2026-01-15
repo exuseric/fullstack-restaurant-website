@@ -2,7 +2,7 @@
 import React from 'react';
 import {
   ColorArea as AriaColorArea,
-  ColorAreaProps as AriaColorAreaProps
+  type ColorAreaProps as AriaColorAreaProps
 } from 'react-aria-components';
 import { composeTailwindRenderProps } from '@/lib/react-aria-utils';
 import { ColorThumb } from '@/components/shared/ColorThumb';

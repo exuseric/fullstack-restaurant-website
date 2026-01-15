@@ -5,8 +5,8 @@ import {
   GridListItem as AriaGridListItem,
   Button,
   composeRenderProps,
-  GridListItemProps,
-  GridListProps
+  type GridListItemProps,
+  type GridListProps
 } from 'react-aria-components';
 import { tv } from 'tailwind-variants';
 import { Checkbox } from '@/components/shared/Checkbox';
@@ -37,7 +37,7 @@ const itemStyles = tv({
 });
 
 export function GridListItem({ children, ...props }: GridListItemProps) {
-  let textValue = typeof children === 'string' ? children : undefined;
+  const textValue = typeof children === 'string' ? children : undefined;
   return (
     <AriaGridListItem textValue={textValue} {...props} className={itemStyles}>
       {composeRenderProps(children, (children, {selectionMode, selectionBehavior, allowsDragging}) => (

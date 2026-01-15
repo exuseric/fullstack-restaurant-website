@@ -2,9 +2,9 @@
 import React, { useContext } from "react";
 import {
   Disclosure as AriaDisclosure,
-  DisclosureProps as AriaDisclosureProps,
+  type DisclosureProps as AriaDisclosureProps,
   DisclosurePanel as AriaDisclosurePanel,
-  DisclosurePanelProps as AriaDisclosurePanelProps,
+  type DisclosurePanelProps as AriaDisclosurePanelProps,
   composeRenderProps,
   Heading,
   DisclosureStateContext,
@@ -50,7 +50,7 @@ export interface DisclosureHeaderProps {
 }
 
 export function DisclosureHeader({ children }: DisclosureHeaderProps) {
-  let { isExpanded } = useContext(DisclosureStateContext)!;
+  const { isExpanded } = useContext(DisclosureStateContext)!;
   return (
     <Heading className="text-lg font-semibold m-0">
       <Button

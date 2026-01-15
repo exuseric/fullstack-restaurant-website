@@ -4,11 +4,11 @@ import React, { createContext, useContext } from 'react';
 import {
   Tag as AriaTag,
   TagGroup as AriaTagGroup,
-  TagGroupProps as AriaTagGroupProps,
-  TagProps as AriaTagProps,
+  type TagGroupProps as AriaTagGroupProps,
+  type TagProps as AriaTagProps,
   Button,
   TagList,
-  TagListProps,
+  type TagListProps,
   Text,
   composeRenderProps
 } from 'react-aria-components';
@@ -97,8 +97,8 @@ const removeButtonStyles = tv({
 });
 
 export function Tag({ children, color, ...props }: TagProps) {
-  let textValue = typeof children === 'string' ? children : undefined;
-  let groupColor = useContext(ColorContext);
+  const textValue = typeof children === 'string' ? children : undefined;
+  const groupColor = useContext(ColorContext);
   return (
     <AriaTag
       textValue={textValue}

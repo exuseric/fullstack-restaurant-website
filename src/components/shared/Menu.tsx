@@ -4,22 +4,22 @@ import React from 'react';
 import {
   Menu as AriaMenu,
   MenuItem as AriaMenuItem,
-  MenuProps,
-  MenuItemProps,
+  type MenuProps,
+  type MenuItemProps,
   MenuSection as AriaMenuSection,
-  MenuSectionProps as AriaMenuSectionProps,
+  type MenuSectionProps as AriaMenuSectionProps,
   MenuTrigger as AriaMenuTrigger,
   SubmenuTrigger as AriaSubmenuTrigger,
   Separator,
-  SeparatorProps,
+  type SeparatorProps,
   composeRenderProps,
   Header,
   Collection,
-  SubmenuTriggerProps,
-  MenuTriggerProps as AriaMenuTriggerProps
+  type SubmenuTriggerProps,
+  type MenuTriggerProps as AriaMenuTriggerProps
 } from 'react-aria-components';
 import { dropdownItemStyles } from '@/components/shared/ListBox';
-import { Popover, PopoverProps } from '@/components/shared/Popover';
+import { Popover, type PopoverProps } from '@/components/shared/Popover';
 
 export function Menu<T extends object>(props: MenuProps<T>) {
   return (
@@ -28,7 +28,7 @@ export function Menu<T extends object>(props: MenuProps<T>) {
 }
 
 export function MenuItem(props: MenuItemProps) {
-  let textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
+  const textValue = props.textValue || (typeof props.children === 'string' ? props.children : undefined);
   return (
     <AriaMenuItem textValue={textValue} {...props} className={dropdownItemStyles}>
       {composeRenderProps(props.children, (children, {selectionMode, isSelected, hasSubmenu}) => <>
@@ -73,7 +73,7 @@ interface MenuTriggerProps extends AriaMenuTriggerProps {
 }
 
 export function MenuTrigger(props: MenuTriggerProps) {
-  let [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
+  const [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
   return (
     <AriaMenuTrigger {...props}>
       {trigger}
@@ -87,7 +87,7 @@ export function MenuTrigger(props: MenuTriggerProps) {
 export function SubmenuTrigger(
   props: SubmenuTriggerProps
 ) {
-  let [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
+  const [trigger, menu] = React.Children.toArray(props.children) as [React.ReactElement, React.ReactElement];
   return (
     <AriaSubmenuTrigger {...props}>
       {trigger}

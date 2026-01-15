@@ -1,8 +1,8 @@
 'use client';
 import {
   Autocomplete as AriaAutocomplete,
-  AutocompleteProps as AriaAutocompleteProps,
-  MenuProps as AriaMenuProps,
+  type AutocompleteProps as AriaAutocompleteProps,
+  type MenuProps as AriaMenuProps,
   useFilter,
   Dialog
 } from 'react-aria-components';
@@ -17,11 +17,11 @@ export interface CommandPaletteProps<T extends object> extends Omit<AriaAutocomp
 }
 
 export function CommandPalette<T extends object>(props: CommandPaletteProps<T>) {
-  let {isOpen, onOpenChange} = props;
-  let {contains} = useFilter({sensitivity: 'base'});
+  const {isOpen, onOpenChange} = props;
+  const {contains} = useFilter({sensitivity: 'base'});
 
   useEffect(() => {
-    let isMacUA = /mac(os|intosh)/i.test(navigator.userAgent);
+    const isMacUA = /mac(os|intosh)/i.test(navigator.userAgent);
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'j' && (isMacUA ? e.metaKey : e.ctrlKey)) {
         e.preventDefault();
