@@ -12,6 +12,7 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxSection,
+  Separator,
   Text,
 } from "react-aria-components";
 
@@ -30,18 +31,18 @@ export function SearchResultsList({
       className="-mx-4 flex flex-col gap-y-2 overflow-auto px-4 pt-4 outline-none"
       selectionMode="single"
     >
-      {results.categories.length > 0 && (
-        <SearchResultsSection
-          results={results.categories}
-          heading="Categories"
-          onClose={onClose}
-        />
-      )}
-
       {results.menuItems.length > 0 && (
         <SearchResultsSection
           results={results.menuItems}
           heading="Menu"
+          onClose={onClose}
+        />
+      )}
+
+      {results.categories.length > 0 && (
+        <SearchResultsSection
+          results={results.categories}
+          heading="Categories"
           onClose={onClose}
         />
       )}
