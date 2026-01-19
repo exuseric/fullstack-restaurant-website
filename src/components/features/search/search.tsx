@@ -1,16 +1,12 @@
 "use client";
 
-import { useMobile } from "@/hooks/use-mobile";
-import { SearchPresenterDesktop } from "./components/presenter-desktop";
-import { SearchPresenterMobile } from "./components/presenter-mobile";
 import { SearchProvider } from "@/components/features/search";
+import SearchModal from "./components/modal";
 
 export function Search() {
-  const isMobile = useMobile();
-
   return (
     <SearchProvider>
-      {isMobile ? <SearchPresenterMobile /> : <SearchPresenterDesktop />}
+      <SearchModal />
     </SearchProvider>
   );
 }

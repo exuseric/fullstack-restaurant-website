@@ -283,6 +283,7 @@
   --color-button-destructive-text: var(--button-destructive-text);
 
   --spacing-nav-height: 5rem;
+  --spacing-safe-bottom: calc(env(safe-area-inset-bottom) + 1em);
 }
 
 :root {

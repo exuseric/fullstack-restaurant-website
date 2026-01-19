@@ -12,7 +12,6 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxSection,
-  Separator,
   Text,
 } from "react-aria-components";
 

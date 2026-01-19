@@ -8,7 +8,7 @@ import { Search } from "@/components/features/search";
 
 export default function DesktopNavigation() {
   return (
-    <header className="text-foreground h-nav-height glass fixed inset-x-0 top-0 z-50">
+    <header className="text-foreground h-nav-height glass fixed inset-x-0 top-0 z-50 hidden md:block">
       <div className="container h-full">
         <div className="grid h-full w-full grid-cols-[auto_1fr_auto] gap-x-2">
           <Link
