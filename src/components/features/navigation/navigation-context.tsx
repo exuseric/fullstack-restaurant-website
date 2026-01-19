@@ -5,7 +5,7 @@ import { getNavigationLinks } from "@/use-cases/navigation";
 import { useQuery } from "@tanstack/react-query";
 import { createContext, useContext, type ReactNode } from "react";
 
-interface NavigationContextValue {
+export interface NavigationContextValue {
   result: Navigation[];
   isMobile: boolean;
   isFetching: boolean;
@@ -14,7 +14,7 @@ const NavigationContext = createContext<NavigationContextValue | undefined>(
   undefined,
 );
 
-export function useNavigation() {
+export function useNavigation(): NavigationContextValue {
   const context = useContext(NavigationContext);
   if (!context) {
     throw new Error("useNavigation must be used within a SearchProvider");

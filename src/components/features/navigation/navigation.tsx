@@ -1,8 +1,10 @@
-import { getNavigationLinks } from "@/use-cases/navigation";
 import NavigationContainer from "./navigation-container";
+import NavigationProvider from "./navigation-context";
 
-export default async function Navigation() {
-  const links = await getNavigationLinks();
-
-  return <NavigationContainer links={links} />;
+export default function Navigation() {
+  return (
+    <NavigationProvider>
+      <NavigationContainer />
+    </NavigationProvider>
+  );
 }

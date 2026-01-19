@@ -1,14 +1,9 @@
 "use client";
 
 import { useMobile } from "@/hooks/use-mobile";
-import type { Navigation } from "@/shared/types";
 import DesktopNavigation from "@/components/features/navigation/desktop-navigation/desktop-navigation";
 
-export default function NavigationContainer({
-  links,
-}: {
-  links: Navigation[];
-}) {
+export default function NavigationContainer() {
   const isMobile = useMobile();
 
   if (isMobile === undefined) return null;
@@ -18,5 +13,5 @@ export default function NavigationContainer({
     return <></>;
   }
 
-  return <DesktopNavigation links={links} />;
+  return <DesktopNavigation />;
 }

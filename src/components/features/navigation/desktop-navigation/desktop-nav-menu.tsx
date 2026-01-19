@@ -1,5 +1,6 @@
 "use client";
 
+import { useNavigationMenu } from "../hooks/use-navigation-menu";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,7 +12,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Fragment } from "react";
 
-export default function DesktopNavMenu({ links }: { links: Navigation[] }) {
+export default function DesktopNavMenu() {
+  const { result: links }: { result: Navigation[] } = useNavigationMenu();
   return (
     <nav className="flex items-center gap-x-4" aria-label="Main navigation">
       {links.map((link: Navigation) => (
