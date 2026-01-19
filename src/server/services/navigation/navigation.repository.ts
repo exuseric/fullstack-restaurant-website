@@ -29,7 +29,6 @@ class Repository implements NavigationRepository {
         eq(navigationItems.groupId, menuCategories.groupId),
       )
       .orderBy(navigationItems.id, menuCategories.id);
-
     return results;
   }
 }

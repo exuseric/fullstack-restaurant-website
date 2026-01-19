@@ -1,11 +1,12 @@
 "use client";
 
-import { Button } from "@/components/shared/button";
+import { Button } from "@/components/shared/Button";
 import { useMobile } from "@/hooks/use-mobile";
 import { SearchIcon } from "lucide-react";
 import { Modal, ModalOverlay } from "react-aria-components";
 import { useSearchModal } from "../hooks/use-search-modal";
 import { SearchModalContent } from "./shared/modal-content";
+import Sheet from "@/components/shared/Sheet";
 
 export default function SearchModal() {
   const {
@@ -30,24 +31,17 @@ export default function SearchModal() {
         </span>
       </Button>
 
-      <ModalOverlay
-        isOpen={isOpen}
-        onOpenChange={setIsOpen}
-        isDismissable
-        className="entering:animate-in exiting:animate-out entering:fade-in-0 exiting:fade-out-0 glass-frosted fixed inset-0 z-50"
-      >
-        <Modal className="entering:animate-in exiting:animate-out entering:slide-in-from-bottom exiting:slide-out-to-bottom md:entering:slide-in-from-right-full md:exiting:slide-out-to-right-full bg-surface-background fixed bottom-0 z-50 h-[70vh] w-full pt-4 duration-300 md:inset-y-0 md:right-0 md:h-full md:max-w-md">
-          <SearchModalContent
-            query={query}
-            setQuery={setQuery}
-            results={results}
-            hasResults={hasResults}
-            shouldShowLoading={shouldShowLoading}
-            shouldShowEmptyState={shouldShowEmptyState}
-            onClose={() => setIsOpen(false)}
-          />
-        </Modal>
-      </ModalOverlay>
+      <Sheet isOpen={isOpen} setIsOpen={setIsOpen}>
+        <SearchModalContent
+          query={query}
+          setQuery={setQuery}
+          results={results}
+          hasResults={hasResults}
+          shouldShowLoading={shouldShowLoading}
+          shouldShowEmptyState={shouldShowEmptyState}
+          onClose={() => setIsOpen(false)}
+        />
+      </Sheet>
     </>
   );
 }

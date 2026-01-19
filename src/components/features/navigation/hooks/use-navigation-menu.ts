@@ -8,7 +8,5 @@ import {
 export function useNavigationMenu(): NavigationContextValue {
   const navigationContext = useNavigation();
 
-  return {
-    ...navigationContext,
-  };
+  return navigationContext;
 }

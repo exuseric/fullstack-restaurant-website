@@ -1,8 +1,9 @@
+import { Search } from "@/components/features/search";
+import { Button } from "@/components/shared/Button";
 import { Link } from "@/components/shared/Link";
 import LogoSvg from "@/components/shared/logo-svg";
-import { BookOpenIcon, MapPinIcon, ShoppingCartIcon } from "lucide-react";
-import { Button } from "@/components/shared/button";
-import { Search } from "@/components/features/search";
+import { MapPinIcon, ShoppingCartIcon } from "lucide-react";
+import MobileMenu from "./menu";
 
 export default function MobileNavigation() {
   return (
@@ -18,12 +19,7 @@ export default function MobileNavigation() {
             </span>
           </Link>
 
-          <Button variant="quiet">
-            <span className="flex flex-col items-center justify-center gap-y-2">
-              <BookOpenIcon className="size-5" />
-              Menu
-            </span>
-          </Button>
+          <MobileMenu />
 
           <Search />
 

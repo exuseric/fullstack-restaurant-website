@@ -1,11 +1,8 @@
-"use client";
+import { getNavigationLinks } from "@/use-cases/navigation";
 import NavigationContainer from "./navigation-container";
-import NavigationProvider from "./navigation-context";
 
-export default function Navigation() {
-  return (
-    <NavigationProvider>
-      <NavigationContainer />
-    </NavigationProvider>
-  );
+export default async function Navigation() {
+  const navigationLinks = await getNavigationLinks();
+
+  return <NavigationContainer initialLinks={navigationLinks} />;
 }

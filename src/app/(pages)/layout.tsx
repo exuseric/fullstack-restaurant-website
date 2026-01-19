@@ -3,7 +3,7 @@ import "@/styles/globals.css";
 import { type Metadata } from "next";
 import { Cambo, IBM_Plex_Sans } from "next/font/google";
 import Providers from "@/app/providers/providers";
-import { Button } from "@/components/shared/button";
+import { Button } from "@/components/shared/Button";
 import Link from "next/link";
 import Navigation from "@/components/features/navigation/navigation";
 

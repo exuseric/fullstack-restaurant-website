@@ -1,15 +1,16 @@
 "use client";
+
 import { useMobile } from "@/hooks/use-mobile";
 import type { Navigation } from "@/shared/types";
-import { getNavigationLinks } from "@/use-cases/navigation";
-import { useQuery } from "@tanstack/react-query";
-import { createContext, useContext, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 export interface NavigationContextValue {
   result: Navigation[];
   isMobile: boolean;
-  isFetching: boolean;
+  isOpen: boolean;
+  setIsOpen: (open: boolean) => void;
 }
+
 const NavigationContext = createContext<NavigationContextValue | undefined>(
   undefined,
 );
@@ -17,29 +18,30 @@ const NavigationContext = createContext<NavigationContextValue | undefined>(
 export function useNavigation(): NavigationContextValue {
   const context = useContext(NavigationContext);
   if (!context) {
-    throw new Error("useNavigation must be used within a SearchProvider");
+    throw new Error("useNavigation must be used within a NavigationProvider");
   }
   return context;
 }
 
+interface NavigationProviderProps {
+  children: ReactNode;
+  initialLinks: Navigation[];
+}
+
 export default function NavigationProvider({
   children,
-}: {
-  children: ReactNode;
-}) {
+  initialLinks,
+}: NavigationProviderProps) {
+  const [isOpen, setIsOpen] = useState(false);
   const isMobile = useMobile();
-
-  const { data, isFetching } = useQuery<Navigation[]>({
-    queryKey: ["navigation"],
-    queryFn: async () => await getNavigationLinks(),
-  });
 
   return (
     <NavigationContext.Provider
       value={{
-        result: data ?? [],
+        result: initialLinks,
         isMobile,
-        isFetching,
+        isOpen,
+        setIsOpen,
       }}
     >
       {children}

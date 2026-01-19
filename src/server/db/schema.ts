@@ -134,7 +134,6 @@ export const variants = pgTable(
     sizeMl: integer("size_ml"),
     price: numeric({ precision: 10, scale: 2 }),
     isDefault: boolean("is_default").default(false),
-    // TODO: failed to parse database type 'tsvector'
     searchVector: tsvector("search_vector").generatedAlwaysAs(
       sql`(setweight(to_tsvector('english'::regconfig, COALESCE(title)), 'A'::"char") || setweight(to_tsvector('english'::regconfig, COALESCE(description)), 'B'::"char"))`,
     ),
