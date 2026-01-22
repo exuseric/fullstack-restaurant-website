@@ -1,11 +1,10 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/shared/button";
+import LargeScreenSheet from "@/components/shared/LargeScreenSheet";
 import { useSearch } from "@/contexts/search-context";
 import { SearchIcon } from "lucide-react";
-import { Modal, ModalOverlay } from "react-aria-components";
 import { SearchModalContent } from "./modal/ModalContent";
-import LargeScreenSheet from "@/components/shared/LargeScreenSheet";
 
 export function LargeScreenPresenter() {
   const { isOpen, setIsOpen } = useSearch();

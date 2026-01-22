@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/shared/button";
 import { useSearch } from "@/contexts/search-context";
 import { Dialog, Heading } from "react-aria-components";
 import { SearchField } from "../search-field/SearchField";

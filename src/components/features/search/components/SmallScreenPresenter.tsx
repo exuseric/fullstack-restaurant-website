@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/shared/button";
 import SmallScreenSheet from "@/components/shared/SmallScreenSheet";
 import { useSearch } from "@/contexts/search-context";
 import { SearchIcon } from "lucide-react";

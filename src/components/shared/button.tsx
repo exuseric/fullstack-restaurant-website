@@ -22,7 +22,7 @@ const button = tv({
         "bg-surface hover:bg-surface-variant text-on-surface hover:text-on-surface-variant border-scrim",
       primary: "bg-primary hover:bg-primary-inverse text-on-primary",
       secondary:
-        "border-scrim/10 bg-secondary hover:bg-secondary-variant text-on-secondary hover:text-on-secondary-variant",
+        "border-outline/10 bg-secondary hover:bg-secondary-variant text-on-secondary hover:text-on-secondary-variant",
       destructive:
         "bg-error hover:bg-error-container pressed:bg-red-900 text-on-error",
       quiet: "border-0 bg-transparent hover:bg-surface-variant text-on-surface",

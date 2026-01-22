@@ -2,7 +2,7 @@ import "@/styles/globals.css";
 
 import Providers from "@/app/providers/providers";
 import MainNavigation from "@/components/features/main-navigation/Navigation";
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/shared/button";
 import { type Metadata } from "next";
 import { Cambo, IBM_Plex_Sans } from "next/font/google";
 import Link from "next/link";

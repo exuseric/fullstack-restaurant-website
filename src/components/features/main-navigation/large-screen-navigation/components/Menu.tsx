@@ -3,7 +3,7 @@ import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import { Fragment } from "react";
 import DropdownMenu from "./DropdownMenu";
-import { Button } from "@/components/shared/Button";
+import { Button } from "@/components/shared/button";
 
 export default function Menu() {
   const { links, setDropdownOpen, dropdownOpen } = useNavigation();
