@@ -240,29 +240,27 @@ body {
 /* GLASSMORPHISM UTILITY */
 
 @utility glass {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-
   @supports (backdrop-filter: blur(12px)) {
-    background: rgba(255, 255, 255, 0.2);
-    backdrop-filter: blur(12px);
+    @apply bg-surface/20 backdrop-blur-md backdrop-saturate-180;
   }
 
   @supports not (backdrop-filter: blur(12px)) {
-    background: rgba(255, 255, 255, 0.8);
+    @apply bg-surface;
   }
+
+  @apply border-outline/20 border;
 }
 
 @utility glass-frosted {
-  border: 1px solid rgba(255, 255, 255, 0.4);
-
-  @supports (backdrop-filter: blur(20px)) {
-    background: rgba(255, 255, 255, 0.6);
-    backdrop-filter: blur(20px) saturate(180%);
+  @supports (backdrop-filter: blur(24px)) {
+    @apply bg-surface/60 backdrop-blur-xl backdrop-saturate-180;
   }
 
-  @supports not ((backdrop-filter: blur(20px))) {
-    background: rgba(255, 255, 255, 0.95);
+  @supports not ((backdrop-filter: blur(24px))) {
+    @apply bg-surface;
   }
+
+  @apply border-outline/40 border;
 }
 
 @utility desktop-nav-grid {
@@ -276,9 +274,17 @@ body {
 }
 
 @utility flex-row-between {
-  @apply flex flex-row items-center justify-between;
+  @apply flex flex-row justify-between;
 }
-
+@utility flex-row-start {
+  @apply flex flex-row justify-start;
+}
+@utility flex-center {
+  @apply flex flex-row items-center justify-center;
+}
+@utility inline-flex-center {
+  @apply inline-flex flex-row items-center justify-center;
+}
 @media (prefers-reduced-motion: reduce) {
   :root {
     --container-transition: none;

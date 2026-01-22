@@ -1,11 +1,11 @@
 import "@/styles/globals.css";
 
+import Providers from "@/app/providers/providers";
+import MainNavigation from "@/components/features/main-navigation/Navigation";
+import { Button } from "@/components/shared/Button";
 import { type Metadata } from "next";
 import { Cambo, IBM_Plex_Sans } from "next/font/google";
-import Providers from "@/app/providers/providers";
-import { Button } from "@/components/shared/button";
 import Link from "next/link";
-import Navigation from "@/components/features/navigation/navigation";
 
 export const metadata: Metadata = {
   title: "Restaurant",
@@ -36,7 +36,7 @@ export default function RootLayout({
           <Button className="absolute top-2 left-2 z-999 -translate-y-[150%] focus-visible:translate-y-0">
             <Link href="#main-content">Skip to main content</Link>
           </Button>
-          <Navigation />
+          <MainNavigation />
           <main id="main-content">{children}</main>
         </body>
       </Providers>
