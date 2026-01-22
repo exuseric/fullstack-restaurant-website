@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/button";
+import { Button } from "@/components/shared/Button";
 import { SearchField } from "@/components/shared/SearchField";
 import type { GroupedSearchResults } from "@/shared/types";
 import { Dialog, Heading } from "react-aria-components";

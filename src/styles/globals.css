@@ -8,281 +8,88 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@import "tailwindcss";
+
 @theme inline {
-  --font-sans:
-    var(--font-content), ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
-    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-    "Segoe UI Symbol", "Noto Color Emoji";
-
-  --font-heading:
-    var(--font-display), ui-serif, Georgia, Cambria, "Times New Roman", Times,
-    serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji";
   /* ============================================
-     SURFACE COLORS
+     TYPOGRAPHY
      ============================================ */
-  /* Base Surfaces */
-  --color-surface-background: var(--surface-background);
-  --color-surface-background-hover: var(--surface-background-hover);
-  --color-surface-background-active: var(--surface-background-active);
-  --color-surface-background-disabled: var(--surface-background-disabled);
-
-  /* Elevated Surfaces */
-  --color-surface-elevated-1: var(--surface-background-elevated-1);
-  --color-surface-elevated-2: var(--surface-background-elevated-2);
-  --color-surface-elevated-3: var(--surface-background-elevated-3);
-
-  /* Overlay Surfaces */
-  --color-surface-overlay: var(--surface-overlay);
-  --color-surface-overlay-light: var(--surface-overlay-light);
-  --color-surface-overlay-heavy: var(--surface-overlay-heavy);
-
-  /* Inverse Surfaces */
-  --color-surface-inverse: var(--surface-inverse);
-  --color-surface-inverse-elevated: var(--surface-inverse-elevated);
+  --font-sans: var(--font-content), ui-sans-serif, system-ui, sans-serif;
+  --font-heading: var(--font-display), ui-serif, Georgia, serif;
 
   /* ============================================
-     TEXT COLORS
+     SURFACES (Material System)
      ============================================ */
+  --color-surface: var(--md-sys-color-surface);
+  --color-on-surface: var(--md-sys-color-on-surface);
+  --color-surface-variant: var(--md-sys-color-surface-variant);
+  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
 
-  /* Base Text */
-  --color-foreground: var(--text-foreground);
-  --color-foreground-secondary: var(--text-foreground-secondary);
-  --color-foreground-tertiary: var(--text-foreground-tertiary);
-  --color-foreground-quaternary: var(--text-foreground-quaternary);
-  --color-foreground-disabled: var(--text-foreground-disabled);
+  /* Surface Containers (M3 Hierarchy) */
+  --color-surface-container-lowest: var(
+    --md-sys-color-surface-container-lowest
+  );
+  --color-surface-container-low: var(--md-sys-color-surface-container-low);
+  --color-surface-container: var(--md-sys-color-surface-container);
+  --color-surface-container-high: var(--md-sys-color-surface-container-high);
+  --color-surface-container-highest: var(
+    --md-sys-color-surface-container-highest
+  );
 
-  --color-inverse: var(--text-on-inverse);
-  --color-inverse-secondary: var(--text-on-inverse-secondary);
-
-  --color-placeholder: var(--text-placeholder);
-  --color-muted: var(--text-muted);
+  /* Special Surfaces */
+  --color-surface-dim: var(--md-sys-color-surface-dim);
+  --color-surface-bright: var(--md-sys-color-surface-bright);
+  --color-surface-inverse: var(--md-sys-color-inverse-surface);
+  --color-on-surface-inverse: var(--md-sys-color-inverse-on-surface);
 
   /* ============================================
-     PRIMARY
+     BRAND & STATE COLORS
      ============================================ */
 
-  /* Primary Surfaces */
-  --color-surface-primary: var(--surface-primary);
-  --color-surface-primary-hover: var(--surface-primary-hover);
-  --color-surface-primary-active: var(--surface-primary-active);
-  --color-surface-primary-disabled: var(--surface-primary-disabled);
-  --color-surface-primary-subtle: var(--surface-primary-subtle);
-  --color-surface-primary-subtle-hover: var(--surface-primary-subtle-hover);
-  --color-surface-primary-elevated-1: var(--surface-primary-elevated-1);
-  --color-surface-primary-elevated-2: var(--surface-primary-elevated-2);
+  /* Primary */
+  --color-primary: var(--md-sys-color-primary);
+  --color-on-primary: var(--md-sys-color-on-primary);
+  --color-primary-container: var(--md-sys-color-primary-container);
+  --color-on-primary-container: var(--md-sys-color-on-primary-container);
+  --color-primary-inverse: var(--md-sys-color-inverse-primary);
 
-  /* Primary Text */
-  --color-primary: var(--text-primary);
-  --color-primary-hover: var(--text-primary-hover);
-  --color-primary-active: var(--text-primary-active);
-  --color-primary-disabled: var(--text-primary-disabled);
-  --color-on-primary: var(--text-on-surface-primary);
-  --color-on-primary-subtle: var(--text-on-surface-primary-subtle);
+  /* Secondary */
+  --color-secondary: var(--md-sys-color-secondary);
+  --color-on-secondary: var(--md-sys-color-on-secondary);
+  --color-secondary-container: var(--md-sys-color-secondary-container);
+  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
 
-  /* Primary Borders */
-  --color-border-primary: var(--border-primary);
-  --color-border-primary-hover: var(--border-primary-hover);
-  --color-border-primary-subtle: var(--border-primary-subtle);
+  /* Tertiary */
+  --color-tertiary: var(--md-sys-color-tertiary);
+  --color-on-tertiary: var(--md-sys-color-on-tertiary);
+  --color-tertiary-container: var(--md-sys-color-tertiary-container);
+  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+
+  /* Error */
+  --color-error: var(--md-sys-color-error);
+  --color-on-error: var(--md-sys-color-on-error);
+  --color-error-container: var(--md-sys-color-error-container);
+  --color-on-error-container: var(--md-sys-color-on-error-container);
 
   /* ============================================
-     SECONDARY
+     BORDERS & UTILS
      ============================================ */
+  --color-outline: var(--md-sys-color-outline);
+  --color-outline-variant: var(--md-sys-color-outline-variant);
 
-  /* Secondary Surfaces */
-  --color-surface-secondary: var(--surface-secondary);
-  --color-surface-secondary-hover: var(--surface-secondary-hover);
-  --color-surface-secondary-active: var(--surface-secondary-active);
-  --color-surface-secondary-disabled: var(--surface-secondary-disabled);
-  --color-surface-secondary-subtle: var(--surface-secondary-subtle);
-  --color-surface-secondary-subtle-hover: var(--surface-secondary-subtle-hover);
-  --color-surface-secondary-elevated-1: var(--surface-secondary-elevated-1);
-  --color-surface-secondary-elevated-2: var(--surface-secondary-elevated-2);
+  --color-scrim: var(--md-sys-color-scrim);
+  --color-shadow: var(--md-sys-color-shadow);
 
-  /* Secondary Text */
-  --color-secondary: var(--text-secondary);
-  --color-secondary-hover: var(--text-secondary-hover);
-  --color-secondary-active: var(--text-secondary-active);
-  --color-secondary-disabled: var(--text-secondary-disabled);
-  --color-on-secondary: var(--text-on-surface-secondary);
-  --color-on-secondary-subtle: var(--text-on-surface-secondary-subtle);
-
-  /* Secondary Borders */
-  --color-border-secondary: var(--border-secondary);
-  --color-border-secondary-hover: var(--border-secondary-hover);
-  --color-border-secondary-subtle: var(--border-secondary-subtle);
+  /* Fixed Colors (M3 specific for consistent look across themes) */
+  --color-primary-fixed: var(--md-sys-color-primary-fixed);
+  --color-secondary-fixed: var(--md-sys-color-secondary-fixed);
+  --color-tertiary-fixed: var(--md-sys-color-tertiary-fixed);
 
   /* ============================================
-     ACCENT
+     LAYOUT & SPACING
      ============================================ */
-
-  /* Accent Surfaces */
-  --color-surface-accent: var(--surface-accent);
-  --color-surface-accent-hover: var(--surface-accent-hover);
-  --color-surface-accent-active: var(--surface-accent-active);
-  --color-surface-accent-disabled: var(--surface-accent-disabled);
-  --color-surface-accent-subtle: var(--surface-accent-subtle);
-  --color-surface-accent-subtle-hover: var(--surface-accent-subtle-hover);
-
-  /* Accent Text */
-  --color-accent: var(--text-accent);
-  --color-accent-hover: var(--text-accent-hover);
-  --color-accent-active: var(--text-accent-active);
-  --color-on-accent: var(--text-on-surface-accent);
-
-  /* ============================================
-     SUCCESS
-     ============================================ */
-
-  /* Success Surfaces */
-  --color-surface-success: var(--surface-success);
-  --color-surface-success-hover: var(--surface-success-hover);
-  --color-surface-success-active: var(--surface-success-active);
-  --color-surface-success-subtle: var(--surface-success-subtle);
-  --color-surface-success-subtle-hover: var(--surface-success-subtle-hover);
-
-  /* Success Text */
-  --color-success: var(--text-success);
-  --color-success-hover: var(--text-success-hover);
-  --color-on-success: var(--text-on-surface-success);
-
-  /* Success Borders */
-  --color-border-success: var(--border-success);
-  --color-border-success-subtle: var(--border-success-subtle);
-
-  /* ============================================
-     WARNING
-     ============================================ */
-
-  /* Warning Surfaces */
-  --color-surface-warning: var(--surface-warning);
-  --color-surface-warning-hover: var(--surface-warning-hover);
-  --color-surface-warning-active: var(--surface-warning-active);
-  --color-surface-warning-subtle: var(--surface-warning-subtle);
-  --color-surface-warning-subtle-hover: var(--surface-warning-subtle-hover);
-
-  /* Warning Text */
-  --color-warning: var(--text-warning);
-  --color-warning-hover: var(--text-warning-hover);
-  --color-on-warning: var(--text-on-surface-warning);
-
-  /* Warning Borders */
-  --color-border-warning: var(--border-warning);
-  --color-border-warning-subtle: var(--border-warning-subtle);
-
-  /* ============================================
-     ERROR
-     ============================================ */
-
-  /* Error Surfaces */
-  --color-surface-error: var(--surface-error);
-  --color-surface-error-hover: var(--surface-error-hover);
-  --color-surface-error-active: var(--surface-error-active);
-  --color-surface-error-subtle: var(--surface-error-subtle);
-  --color-surface-error-subtle-hover: var(--surface-error-subtle-hover);
-
-  /* Error Text */
-  --color-error: var(--text-error);
-  --color-error-hover: var(--text-error-hover);
-  --color-on-error: var(--text-on-surface-error);
-
-  /* Error Borders */
-  --color-border-error: var(--border-error);
-  --color-border-error-subtle: var(--border-error-subtle);
-
-  /* ============================================
-     INFO
-     ============================================ */
-
-  /* Info Surfaces */
-  --color-surface-info: var(--surface-info);
-  --color-surface-info-hover: var(--surface-info-hover);
-  --color-surface-info-active: var(--surface-info-active);
-  --color-surface-info-subtle: var(--surface-info-subtle);
-  --color-surface-info-subtle-hover: var(--surface-info-subtle-hover);
-
-  /* Info Text */
-  --color-info: var(--text-info);
-  --color-info-hover: var(--text-info-hover);
-  --color-on-info: var(--text-on-surface-info);
-
-  /* Info Borders */
-  --color-border-info: var(--border-info);
-  --color-border-info-subtle: var(--border-info-subtle);
-
-  /* ============================================
-     BASE BORDERS
-     ============================================ */
-
-  --color-border-base: var(--border-base);
-  --color-border-base-hover: var(--border-base-hover);
-  --color-border-base-active: var(--border-base-active);
-  --color-border-base-disabled: var(--border-base-disabled);
-
-  --color-border-subtle: var(--border-subtle);
-  --color-border-strong: var(--border-strong);
-  --color-border-inverse: var(--border-inverse);
-
-  /* Focus States */
-  --color-border-focus: var(--border-focus);
-  --color-border-focus-ring: var(--border-focus-ring);
-  --color-border-focus-offset: var(--border-focus-ring-offset);
-
-  /* ============================================
-     LINKS
-     ============================================ */
-
-  --color-link: var(--link-base);
-  --color-link-hover: var(--link-hover);
-  --color-link-active: var(--link-active);
-  --color-link-visited: var(--link-visited);
-  --color-link-disabled: var(--link-disabled);
-
-  /* ============================================
-     BUTTONS
-     ============================================ */
-
-  /* Primary Button */
-  --color-button-primary-bg: var(--button-primary-bg);
-  --color-button-primary-bg-hover: var(--button-primary-bg-hover);
-  --color-button-primary-bg-active: var(--button-primary-bg-active);
-  --color-button-primary-bg-disabled: var(--button-primary-bg-disabled);
-  --color-button-primary-text: var(--button-primary-text);
-  --color-button-primary-text-disabled: var(--button-primary-text-disabled);
-  --color-button-primary-border: var(--button-primary-border);
-
-  /* Secondary Button */
-  --color-button-secondary-bg: var(--button-secondary-bg);
-  --color-button-secondary-bg-hover: var(--button-secondary-bg-hover);
-  --color-button-secondary-bg-active: var(--button-secondary-bg-active);
-  --color-button-secondary-bg-disabled: var(--button-secondary-bg-disabled);
-  --color-button-secondary-text: var(--button-secondary-text);
-  --color-button-secondary-text-disabled: var(--button-secondary-text-disabled);
-  --color-button-secondary-border: var(--button-secondary-border);
-
-  /* Outline Button */
-  --color-button-outline-bg: var(--button-outline-bg);
-  --color-button-outline-bg-hover: var(--button-outline-bg-hover);
-  --color-button-outline-bg-active: var(--button-outline-bg-active);
-  --color-button-outline-text: var(--button-outline-text);
-  --color-button-outline-text-hover: var(--button-outline-text-hover);
-  --color-button-outline-border: var(--button-outline-border);
-
-  /* Ghost Button */
-  --color-button-ghost-bg: var(--button-ghost-bg);
-  --color-button-ghost-bg-hover: var(--button-ghost-bg-hover);
-  --color-button-ghost-bg-active: var(--button-ghost-bg-active);
-  --color-button-ghost-text: var(--button-ghost-text);
-  --color-button-ghost-text-hover: var(--button-ghost-text-hover);
-
-  /* Destructive Button */
-  --color-button-destructive-bg: var(--button-destructive-bg);
-  --color-button-destructive-bg-hover: var(--button-destructive-bg-hover);
-  --color-button-destructive-bg-active: var(--button-destructive-bg-active);
-  --color-button-destructive-text: var(--button-destructive-text);
-
-  --spacing-nav-height: 5rem;
+  --spacing-nav-lg: 5rem;
+  --spacing-nav-sm: 2.5rem;
 }
 
 :root {
@@ -302,7 +109,7 @@ html {
 }
 
 body {
-  @apply bg-surface-background text-foreground;
+  @apply bg-surface text-on-surface;
 }
 
 @layer base {
@@ -320,7 +127,7 @@ body {
   h2,
   h3,
   h4 {
-    @apply text-foreground leading-none font-bold tracking-tight text-balance;
+    @apply text-on-surface leading-none font-bold tracking-tight text-balance;
   }
 
   h1 {
@@ -340,12 +147,12 @@ body {
 
   p {
     font-size: var(--text-base);
-    @apply text-foreground leading-normal text-pretty;
+    @apply text-on-surface leading-normal text-pretty;
   }
 
   small {
     font-size: var(--text-xs);
-    @apply text-muted;
+    @apply text-tertiary;
   }
 
   a {
@@ -436,7 +243,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 
   @supports (backdrop-filter: blur(12px)) {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(12px);
   }
 
@@ -449,7 +256,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.4);
 
   @supports (backdrop-filter: blur(20px)) {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.6);
     backdrop-filter: blur(20px) saturate(180%);
   }
 
@@ -466,22 +273,10 @@ body {
   grid-row: 1;
   & > * {
   }
-  /*
+}
 
-  & > .grid-left {
-    grid-column: left;
-    justify-self: start;
-  }
-
-  & > .grid-center {
-    grid-column: center;
-    justify-self: center;
-  }
-
-  & > .grid-right {
-    grid-column: right;
-    justify-self: end;
-  }*/
+@utility flex-row-between {
+  @apply flex flex-row items-center justify-between;
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -12,7 +12,6 @@ import {
   ListBox,
   ListBoxItem,
   ListBoxSection,
-  Separator,
   Text,
 } from "react-aria-components";
 
@@ -63,7 +62,7 @@ function SearchResultsSection<
 }) {
   return (
     <ListBoxSection>
-      <Header className="glass-frosted border-b-border-secondary text-foreground sticky top-0 z-10 border px-2 py-1 text-xs font-semibold uppercase">
+      <Header className="glass border-scrim text-on-surface sticky top-0 z-10 border px-2 py-1 text-xs font-semibold uppercase">
         {heading}
       </Header>
 
@@ -85,7 +84,7 @@ function SearchResultsSection<
                     hash: item.slug,
                   }
             }
-            className="hover:bg-button-primary-bg-hover hover:text-on-primary underline-none flex cursor-pointer flex-col rounded-md px-2 py-2 transition-colors"
+            className="hover:bg-primary hover:text-on-primary flex cursor-pointer flex-col rounded-md px-2 py-2 no-underline transition-colors"
             onClick={onClose}
           >
             <Text
@@ -101,7 +100,7 @@ function SearchResultsSection<
             </Text>
 
             {item.description && (
-              <Text slot="description" className="line-clamp-1 text-xs">
+              <Text slot="description" className="line-clamp-2 text-xs">
                 {item.description}
               </Text>
             )}

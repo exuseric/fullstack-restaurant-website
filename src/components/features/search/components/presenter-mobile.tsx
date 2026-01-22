@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/shared/button";
+import { Button } from "@/components/shared/Button";
 import { SearchIcon } from "lucide-react";
 import { Modal, ModalOverlay } from "react-aria-components";
 import { useSearchModal } from "../hooks/use-search-modal";
@@ -34,7 +34,7 @@ export function SearchPresenterMobile() {
         isDismissable
         className="entering:animate-in exiting:animate-out entering:fade-in-0 exiting:fade-out-0 glass-frosted fixed inset-0 z-50"
       >
-        <Modal className="entering:animate-in exiting:animate-out entering:slide-in-from-bottom exiting:slide-out-to-bottom bg-surface-background fixed right-0 bottom-0 left-0 z-50 h-[85vh] rounded-t-2xl shadow-lg duration-300">
+        <Modal className="entering:animate-in exiting:animate-out entering:slide-in-from-bottom exiting:slide-out-to-bottom bg-surface fixed right-0 bottom-0 left-0 z-50 h-[85vh] rounded-t-2xl shadow-lg duration-300">
           <SearchModalContent
             query={query}
             setQuery={setQuery}

@@ -42,7 +42,7 @@ export function SearchField({
       <FieldGroup className="bg-surface-secondary-subtle rounded-none">
         <SearchIcon
           aria-hidden
-          className="text-secondary group-disabled:text-foreground-disabled ml-2 h-4 w-4 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
+          className="text-secondary group-disabled:text-on-surface-disabled ml-2 h-4 w-4 forced-colors:text-[ButtonText] forced-colors:group-disabled:text-[GrayText]"
         />
         <Input
           placeholder={placeholder}

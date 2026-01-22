@@ -1,6 +1,6 @@
 "use client";
 
-import LogoSvg from "@/components/shared/logo-svg";
+import LogoSvg from "@/components/shared/LogoSvg";
 import type { Navigation } from "@/shared/types";
 import { ShoppingCartIcon } from "lucide-react";
 import Link from "next/link";
@@ -9,7 +9,7 @@ import { Search } from "@/components/features/search";
 
 export default function DesktopNavigation({ links }: { links: Navigation[] }) {
   return (
-    <header className="text-foreground h-nav-height glass fixed inset-x-0 top-0 z-50">
+    <header className="text-on-surface h-nav-height glass fixed inset-x-0 top-0 z-50">
       <div className="container h-full">
         <div className="grid h-full w-full grid-cols-[auto_1fr_auto] gap-x-2">
           <Link
