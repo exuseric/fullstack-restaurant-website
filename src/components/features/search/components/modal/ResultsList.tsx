@@ -1,12 +1,13 @@
 "use client";
 
+import { useSearch } from "@/contexts/search-context";
 import { formatPrice } from "@/lib/format-price";
 import type {
-  GroupedSearchResults,
   MenuCategorySearchResult,
   MenuItemSearchResult,
 } from "@/shared/types";
 import Link from "next/link";
+import { Activity } from "react";
 import {
   Header,
   ListBox,
@@ -15,51 +16,34 @@ import {
   Text,
 } from "react-aria-components";
 
-interface SearchResultsListProps {
-  results: GroupedSearchResults;
-  onClose: () => void;
-}
+export function SearchResultsList() {
+  const { results } = useSearch();
+  const hasMenuItemsResults = results.menuItems.length > 0;
+  const hasMenuCategoriesResults = results.categories.length > 0;
 
-export function SearchResultsList({
-  results,
-  onClose,
-}: SearchResultsListProps) {
   return (
     <ListBox
       aria-label="Search results"
       className="-mx-4 flex flex-col gap-y-2 overflow-auto px-4 pt-4 outline-none"
       selectionMode="single"
     >
-      {results.menuItems.length > 0 && (
-        <SearchResultsSection
-          results={results.menuItems}
-          heading="Menu"
-          onClose={onClose}
-        />
-      )}
-
-      {results.categories.length > 0 && (
+      <Activity mode={hasMenuItemsResults ? "visible" : "hidden"}>
+        <SearchResultsSection results={results.menuItems} heading="Menu" />
+      </Activity>
+      <Activity mode={hasMenuCategoriesResults ? "visible" : "hidden"}>
         <SearchResultsSection
           results={results.categories}
           heading="Categories"
-          onClose={onClose}
         />
-      )}
+      </Activity>
     </ListBox>
   );
 }
 
 function SearchResultsSection<
   T extends MenuItemSearchResult | MenuCategorySearchResult,
->({
-  results,
-  heading,
-  onClose,
-}: {
-  results: T[];
-  heading: string;
-  onClose: () => void;
-}) {
+>({ results, heading }: { results: T[]; heading: string }) {
+  const { setIsOpen } = useSearch();
   return (
     <ListBoxSection>
       <Header className="glass border-scrim text-on-surface sticky top-0 z-10 border px-2 py-1 text-xs font-semibold uppercase">
@@ -85,7 +69,7 @@ function SearchResultsSection<
                   }
             }
             className="hover:bg-primary hover:text-on-primary flex cursor-pointer flex-col rounded-md px-2 py-2 no-underline transition-colors"
-            onClick={onClose}
+            onClick={() => setIsOpen(false)}
           >
             <Text
               slot="label"

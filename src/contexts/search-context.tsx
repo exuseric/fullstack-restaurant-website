@@ -1,35 +1,30 @@
-"use client";
-
 import { searchAction } from "@/app/actions/search";
+import { searchConfig } from "@/components/features/search/lib/search.config";
+import type { GroupedSearchResults } from "@/shared/types";
+import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
-  type ReactNode,
   useContext,
   useEffect,
   useState,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
 } from "react";
-import { useQuery } from "@tanstack/react-query";
-import type { GroupedSearchResults } from "@/shared/types";
-import { searchConfig } from "@/components/features/search/lib/search.config";
 
-interface SearchContextValue {
+type SearchValue = {
   query: string;
-  setQuery: (q: string) => void;
+  setQuery: Dispatch<SetStateAction<string>>;
   results: GroupedSearchResults;
   isSearching: boolean;
   isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-}
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  hasResults: boolean;
+  shouldShowLoading: boolean;
+  shouldShowEmptyState: boolean;
+};
 
-const SearchContext = createContext<SearchContextValue | undefined>(undefined);
-
-export function useSearch() {
-  const context = useContext(SearchContext);
-  if (!context) {
-    throw new Error("useSearch must be used within a SearchProvider");
-  }
-  return context;
-}
+export const SearchContext = createContext<SearchValue | null>(null);
 
 export function SearchProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("");
@@ -63,9 +58,19 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     },
     // Only fetch if query is long enough
     enabled: debouncedQuery.length >= searchConfig.minQueryLength,
-    staleTime: 1 * 60 * 1000, // Cache data for 1 minute
-    gcTime: 5 * 60 * 1000, // Keep data in cache for 5 minutes
+    staleTime: 1 * 60 * 1000,
+    gcTime: 5 * 60 * 1000,
   });
+
+  const hasResults =
+    (data && (data.categories.length > 0 || data.menuItems.length > 0)) ??
+    false;
+
+  const shouldShowLoading =
+    isFetching && query.length >= searchConfig.minQueryLength;
+
+  const shouldShowEmptyState =
+    !hasResults && isFetching && query.length >= searchConfig.minQueryLength;
 
   return (
     <SearchContext.Provider
@@ -76,9 +81,18 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         isSearching: isFetching,
         isOpen,
         setIsOpen,
+        hasResults,
+        shouldShowLoading,
+        shouldShowEmptyState,
       }}
     >
       {children}
     </SearchContext.Provider>
   );
+}
+
+export function useSearch() {
+  const ctx = useContext(SearchContext);
+  if (!ctx) throw new Error("useSearch must be used within a SearchProvider");
+  return ctx;
 }

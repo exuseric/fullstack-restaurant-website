@@ -12,9 +12,9 @@ import {
   FieldGroup,
   Input,
   Label,
-} from "@/components/shared/Field";
+} from "@/components/features/search/components/search-field/Field";
 import { composeTailwindRenderProps } from "@/lib/react-aria-utils";
-import { FieldButton } from "@/components/shared/FieldButton";
+import { FieldButton } from "@/components/features/search/components/search-field/FieldButton";
 
 export interface SearchFieldProps extends AriaSearchFieldProps {
   label?: string;

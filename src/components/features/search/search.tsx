@@ -1,16 +1,16 @@
 "use client";
 
 import { useMobile } from "@/hooks/use-mobile";
-import { SearchPresenterDesktop } from "./components/presenter-desktop";
-import { SearchPresenterMobile } from "./components/presenter-mobile";
-import { SearchProvider } from "@/components/features/search";
+import { LargeScreenPresenter } from "./components/LargeScreenPresenter";
+import { SmallScreenPresenter } from "./components/SmallScreenPresenter";
+import { SearchProvider } from "@/contexts/search-context";
 
 export function Search() {
   const isMobile = useMobile();
 
   return (
     <SearchProvider>
-      {isMobile ? <SearchPresenterMobile /> : <SearchPresenterDesktop />}
+      {isMobile ? <SmallScreenPresenter /> : <LargeScreenPresenter />}
     </SearchProvider>
   );
 }

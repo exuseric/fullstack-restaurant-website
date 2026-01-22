@@ -25,6 +25,7 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
     >
       <ListBox
         items={links}
+        aria-label="Menu Items"
         className="container grid w-full grid-cols-3 items-start gap-4 p-8"
       >
         {(item) => (
@@ -40,7 +41,7 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
 
             <Collection items={item.children?.slice(0, 3)}>
               {(item) => (
-                <ListBoxItem>
+                <ListBoxItem textValue={item.title}>
                   <Link
                     href={{
                       pathname: "/menu",
