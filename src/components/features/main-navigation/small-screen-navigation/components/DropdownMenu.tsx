@@ -20,7 +20,7 @@ function DropdownMenu({ links }: { links: Navigation[] }) {
                         </Link>
                     </DisclosureHeader>
                     <DisclosurePanel className="max-h-60 overflow-y-scroll overscroll-y-contain bg-surface-container-low">
-                        {link.children!.map(child => (
+                        {link.children?.map(child => (
                             <Link
                                 href={{ pathname: "/menu", query: { category: child.slug } }}
                                 className="inline-flex-row-start items-center px-4 gap-x-1 no-underline text-xl min-h-12 w-full"

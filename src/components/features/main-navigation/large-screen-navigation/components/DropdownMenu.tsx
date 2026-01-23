@@ -12,15 +12,16 @@ import { useNavigation } from "@/contexts/navigation-context";
 
 interface DropdownMenuProps {
   links: Navigation[];
+  id: number;
 }
 
-export default function DropdownMenu({ links }: DropdownMenuProps) {
-  const { dropdownOpen, dropdownRef, setDropdownOpen } = useNavigation();
+export default function DropdownMenu({ links, id }: DropdownMenuProps) {
+  const { popoverOpen, dropdownRef, setPopoverOpen } = useNavigation();
   return (
     <Popover
       triggerRef={dropdownRef}
-      isOpen={dropdownOpen}
-      onOpenChange={() => setDropdownOpen(false)}
+      isOpen={id === popoverOpen.id && popoverOpen.state}
+      onOpenChange={() => setPopoverOpen({ id, state: false })}
       offset={4}
     >
       <ListBox
@@ -33,7 +34,7 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
             <Header className="mb-2">
               <Link
                 href={{ pathname: "/menu", query: { group: item.slug } }}
-                onClick={() => setDropdownOpen(false)}
+                onClick={() => setPopoverOpen({ id, state: false })}
               >
                 {item.title}
               </Link>
@@ -48,7 +49,7 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
                       query: { category: item.slug },
                     }}
                     className="no-underline"
-                    onClick={() => setDropdownOpen(false)}
+                    onClick={() => setPopoverOpen({ id, state: false })}
                   >
                     {item.title}
                   </Link>
@@ -58,11 +59,6 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
           </ListBoxSection>
         )}
       </ListBox>
-      {/*{links.map((link) => (
-        <Link key={link.id} href={{ pathname: link.url }}>
-          {link.title}
-        </Link>
-      ))}*/}
     </Popover>
   );
 }

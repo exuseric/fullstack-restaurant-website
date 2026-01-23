@@ -16,12 +16,16 @@ import {
 type NavigationValue = {
   links: Navigation[];
   isMobile: boolean;
-  dropdownOpen: boolean;
+  popoverOpen: {
+    id: number;
+    state: boolean
+  };
   mobileMenuOpen: boolean;
   dropdownRef: RefObject<HTMLDivElement | null>;
-  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
+  setPopoverOpen: Dispatch<SetStateAction<{ id: number, state: boolean }>>;
   setMobileMenuOpen: Dispatch<SetStateAction<boolean>>;
 };
+
 
 type Props = {
   children: ReactNode;
@@ -43,7 +47,7 @@ export const useNavigation = () => {
 
 export default function NavigationProvider({ children, initialLinks }: Props) {
   const isMobile = useMobile();
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [popoverOpen, setPopoverOpen] = useState({ id: -1, state: false });
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -52,11 +56,11 @@ export default function NavigationProvider({ children, initialLinks }: Props) {
       value={{
         isMobile,
         links: initialLinks ?? [],
-        dropdownOpen,
-        setDropdownOpen,
+        popoverOpen,
+        setPopoverOpen,
         dropdownRef,
         mobileMenuOpen,
-        setMobileMenuOpen
+        setMobileMenuOpen,
       }}
     >
       {children}
