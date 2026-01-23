@@ -50,7 +50,7 @@ export default function SmallScreenSheet({
             isOpen
             onOpenChange={setIsOpen}
             isDismissable
-            className="glass-frosted fixed inset-0 z-50"
+            className="glass-frosted fixed inset-0 z-50 block md:hidden"
           >
             <MotionModal
               className="glass absolute bottom-0 w-full shadow-lg will-change-transform"

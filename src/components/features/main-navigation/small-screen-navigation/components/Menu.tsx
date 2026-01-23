@@ -71,6 +71,7 @@ function DropdownMenu({ links }: { links: Navigation[] }) {
                                 href={{ pathname: "/menu", query: { category: child.slug } }}
                                 className="inline-flex-row-start items-center px-4 gap-x-1 no-underline text-xl min-h-12 w-full"
                                 onClick={() => setMobileMenuOpen(false)}
+                                key={child.id}
                             >
                                 {child.title}
                             </Link>

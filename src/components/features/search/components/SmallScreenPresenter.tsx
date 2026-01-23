@@ -1,9 +1,7 @@
 "use client";
 
-import { Button } from "@/components/shared/button";
 import SmallScreenSheet from "@/components/shared/SmallScreenSheet";
 import { useSearch } from "@/contexts/search-context";
-import { SearchIcon } from "lucide-react";
 import { SearchModalContent } from "./modal/ModalContent";
 
 export function SmallScreenPresenter() {
@@ -11,14 +9,6 @@ export function SmallScreenPresenter() {
 
   return (
     <>
-      <Button
-        variant="quiet"
-        onPress={() => setIsOpen(true)}
-        aria-label="Search menu"
-      >
-        <SearchIcon className="size-5" />
-      </Button>
-
       <SmallScreenSheet isOpen={isOpen} setIsOpen={setIsOpen} title="Search Our Menu">
         <SearchModalContent />
       </SmallScreenSheet>

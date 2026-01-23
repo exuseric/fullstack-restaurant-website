@@ -5,7 +5,7 @@ import {
   useMotionValue,
 } from "motion/react";
 import { type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { Modal, ModalOverlay } from "react-aria-components";
+import { Dialog, Heading, Modal, ModalOverlay } from "react-aria-components";
 
 // Wrap React Aria modal components so they support motion values.
 const MotionModal = motion.create(Modal);
@@ -23,11 +23,13 @@ export default function LargeScreenSheet({
   setIsOpen,
   children,
   position = "left",
+  title
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
   position?: "left" | "right";
+  title: string;
 }) {
   const w =
     typeof window !== "undefined" ? window.innerWidth - SHEET_MARGIN : 0;
@@ -43,7 +45,7 @@ export default function LargeScreenSheet({
             isOpen
             onOpenChange={setIsOpen}
             isDismissable
-            className="glass-frosted fixed inset-0 z-50"
+            className="glass-frosted fixed inset-0 z-50 hidden md:block"
           >
             <MotionModal
               className={`glass absolute ${pos} h-full w-full max-w-md shadow-lg will-change-transform`}
@@ -56,7 +58,12 @@ export default function LargeScreenSheet({
                 right: SHEET_MARGIN,
               }}
             >
-              {children}
+              <Dialog className="p-4 overflow-y-auto overscroll-y-contain pb-4">
+                <Heading slot="title" className="mt-0">
+                  {title}
+                </Heading>
+                {children}
+              </Dialog>
             </MotionModal>
           </MotionModalOverlay>
         )}
