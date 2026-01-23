@@ -60,31 +60,32 @@ function SearchResultsSection<
             href={
               item?.type === "category"
                 ? {
-                    pathname: "/menu",
-                    query: { category: item.slug },
-                  }
+                  pathname: "/menu",
+                  query: { category: item.slug },
+                }
                 : {
-                    pathname: "/menu",
-                    hash: item.slug,
-                  }
+                  pathname: "/menu",
+                  hash: item.slug,
+                }
             }
             className="hover:bg-primary hover:text-on-primary flex cursor-pointer flex-col rounded-md px-2 py-2 no-underline transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            <Text
-              slot="label"
-              className="mb-2 flex w-full flex-row items-center justify-between text-sm font-medium"
-            >
-              <span>{item.title}</span>
+            <div className="flex-row-between items-center font-medium mb-2 w-full">
+              <Text
+                slot="label"
+              >
+                {item.title}
+              </Text>
               <span>
                 {item?.type === "menu_item" &&
                   item.price &&
                   formatPrice(item.price)}
               </span>
-            </Text>
+            </div>
 
             {item.description && (
-              <Text slot="description" className="line-clamp-2 text-xs">
+              <Text slot="description" className="line-clamp-2 text-sm">
                 {item.description}
               </Text>
             )}

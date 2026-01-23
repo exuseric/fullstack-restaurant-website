@@ -17,8 +17,10 @@ type NavigationValue = {
   links: Navigation[];
   isMobile: boolean;
   dropdownOpen: boolean;
-  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
+  mobileMenuOpen: boolean;
   dropdownRef: RefObject<HTMLDivElement | null>;
+  setDropdownOpen: Dispatch<SetStateAction<boolean>>;
+  setMobileMenuOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 type Props = {
@@ -42,6 +44,7 @@ export const useNavigation = () => {
 export default function NavigationProvider({ children, initialLinks }: Props) {
   const isMobile = useMobile();
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   return (
@@ -52,6 +55,8 @@ export default function NavigationProvider({ children, initialLinks }: Props) {
         dropdownOpen,
         setDropdownOpen,
         dropdownRef,
+        mobileMenuOpen,
+        setMobileMenuOpen
       }}
     >
       {children}

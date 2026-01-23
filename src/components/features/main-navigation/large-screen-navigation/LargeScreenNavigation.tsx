@@ -7,7 +7,7 @@ export function LargeScreenNavigation() {
   const { dropdownRef } = useNavigation();
   return (
     <header
-      className="text-on-surface fixed inset-x-0 top-2 z-50"
+      className="text-on-surface fixed inset-x-0 top-2 z-50 hidden md:block"
       ref={dropdownRef}
     >
       <div className="glass-frosted flex-row-between min-h-nav-height-sm mx-auto items-center overflow-hidden p-1 md:max-w-1/2">

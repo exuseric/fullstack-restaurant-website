@@ -90,6 +90,8 @@
      ============================================ */
   --spacing-nav-lg: 5rem;
   --spacing-nav-sm: 2.5rem;
+  --spacing-safe-top: env(safe-area-inset-top, 1em);
+  --spacing-safe-bottom: env(safe-area-inset-bottom, 1em);
 }
 
 :root {
@@ -234,7 +236,7 @@ body {
 }
 
 @utility button--pressed {
-  @apply scale-[.98];
+  @apply scale-95 bg-primary text-on-primary;
 }
 
 /* GLASSMORPHISM UTILITY */
@@ -278,6 +280,9 @@ body {
 }
 @utility flex-row-start {
   @apply flex flex-row justify-start;
+}
+@utility inline-flex-row-start {
+  @apply inline-flex flex-row justify-start;
 }
 @utility flex-center {
   @apply flex flex-row items-center justify-center;

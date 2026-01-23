@@ -6,7 +6,7 @@ import {
   useMotionValue,
 } from "motion/react";
 import { type Dispatch, type ReactNode, type SetStateAction } from "react";
-import { Modal, ModalOverlay } from "react-aria-components";
+import { Dialog, Heading, Modal, ModalOverlay } from "react-aria-components";
 
 // Wrap React Aria modal components so they support motion values.
 const MotionModal = motion.create(Modal);
@@ -30,10 +30,12 @@ export default function SmallScreenSheet({
   isOpen,
   setIsOpen,
   children,
+  title,
 }: {
   isOpen: boolean;
   setIsOpen: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
+  title: string;
 }) {
   const h =
     typeof window !== "undefined" ? window.innerHeight - SHEET_MARGIN : 0;
@@ -57,25 +59,36 @@ export default function SmallScreenSheet({
               exit={{ y: h }}
               transition={staticTransition}
               style={{
-                y,
                 top: SHEET_MARGIN,
+                y,
+                // maxHeight: `calc(100vh - ${SHEET_MARGIN}px)`,
                 // Extra padding at the bottom to account for rubber band scrolling.
                 paddingBottom:
                   typeof window !== "undefined" ? window.screen.height : 0,
               }}
               drag="y"
-              dragConstraints={{ top: 0 }}
+              dragConstraints={{ top: -SHEET_MARGIN, bottom: 0 }}
+              dragElastic={{ top: 0.1, bottom: 0.2 }}
               onDragEnd={(e, { offset, velocity }) => {
-                if (offset.y > window.innerHeight * 0.75 || velocity.y > 10) {
+                if (offset.y > window.innerHeight * 0.5 || velocity.y > 500) {
+                  // Dragged down significantly - close the sheet
                   setIsOpen(false);
                 } else {
-                  animate(y, 0, { ...inertiaTransition, min: 0, max: 0 });
+                  // Snap back to position based on drag direction
+                  const target = offset.y < -100 ? -SHEET_MARGIN : 0;
+                  animate(y, target, { ...inertiaTransition, min: -SHEET_MARGIN, max: 0 });
                 }
               }}
             >
               {/* drag affordance */}
               <div className="bg-surface-inverse mx-auto mt-2 h-1.5 w-12 rounded-full" />
-              {children}
+              <Dialog className="p-4 overflow-y-auto overscroll-y-contain pb-4"
+                style={{ maxHeight: `calc(100vh - ${SHEET_MARGIN}px)` }}>
+                <Heading slot="title" className="mt-0">
+                  {title}
+                </Heading>
+                {children}
+              </Dialog>
             </MotionModal>
           </MotionModalOverlay>
         )}

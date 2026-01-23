@@ -26,7 +26,7 @@ export default function DropdownMenu({ links }: DropdownMenuProps) {
       <ListBox
         items={links}
         aria-label="Menu Items"
-        className="container grid w-full grid-cols-3 items-start gap-4 p-8"
+        className="container w-full grid grid-cols-3 items-start gap-4 p-8"
       >
         {(item) => (
           <ListBoxSection className="h-full w-full">

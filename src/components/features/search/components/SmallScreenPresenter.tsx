@@ -19,7 +19,7 @@ export function SmallScreenPresenter() {
         <SearchIcon className="size-5" />
       </Button>
 
-      <SmallScreenSheet isOpen={isOpen} setIsOpen={setIsOpen}>
+      <SmallScreenSheet isOpen={isOpen} setIsOpen={setIsOpen} title="Search Our Menu">
         <SearchModalContent />
       </SmallScreenSheet>
     </>
