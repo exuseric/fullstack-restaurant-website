@@ -4,7 +4,7 @@ import { Button } from "@/components/shared/button";
 import { MenuIcon } from "lucide-react";
 import { useNavigation } from "@/contexts/navigation-context";
 // import SmallScreenSheet from "@/components/shared/SmallScreenSheet";
-import MobileMenu from "./components/Menu";
+import MobileMenu from "./components/MobileMenu";
 import { lazy, Suspense } from "react";
 
 const SmallScreenSheet = lazy(() => import("../../../../components/shared/SmallScreenSheet"));
@@ -17,7 +17,7 @@ function SmallScreenNavigation() {
                 <LogoLink />
                 <div className="action-buttons flex-row-between items-center gap-x-1">
                     <Search />
-                    <Button variant="quiet" onPress={() => setMobileMenuOpen(true)}>
+                    <Button variant="quiet" onPress={() => setMobileMenuOpen(true)} aria-label="Open Menu">
                         <MenuIcon />
                     </Button>
                 </div>
