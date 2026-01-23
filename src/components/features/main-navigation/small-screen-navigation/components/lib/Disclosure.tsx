@@ -49,7 +49,7 @@ export interface DisclosureHeaderProps {
 }
 
 export function DisclosureHeader({ children }: DisclosureHeaderProps) {
-    let { isExpanded } = useContext(DisclosureStateContext)!;
+    const { isExpanded } = useContext(DisclosureStateContext)!;
     return (
         <div className="m-0 grid grid-cols-[1fr_auto] items-center">
             <span>{children}</span>

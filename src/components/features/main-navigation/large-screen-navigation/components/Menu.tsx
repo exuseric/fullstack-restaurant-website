@@ -27,7 +27,11 @@ export default function Menu() {
               >
                 {link.title}
               </Link>
-              <Button variant="quiet" onPress={() => setDropdownOpen(true)}>
+              <Button
+                variant="quiet"
+                onPress={() => setDropdownOpen(true)}
+                aria-label="Open dropdown menu"
+              >
                 <ChevronDown
                   className={`size-4 ${dropdownOpen ? "rotate-180" : "rotate-0"} ease`}
                 />

@@ -1,3 +1,5 @@
+"use client";
+
 import { Search } from "@/components/features/search";
 import LogoLink from "@/components/shared/LogoLink";
 import Menu from "./components/Menu";

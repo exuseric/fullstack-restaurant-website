@@ -70,7 +70,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     isFetching && query.length >= searchConfig.minQueryLength;
 
   const shouldShowEmptyState =
-    !hasResults && isFetching && query.length >= searchConfig.minQueryLength;
+    !hasResults && !isFetching && query.length >= searchConfig.minQueryLength;
 
   return (
     <SearchContext.Provider

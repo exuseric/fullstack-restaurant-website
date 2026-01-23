@@ -55,7 +55,7 @@ function DropdownMenu({ links }: { links: Navigation[] }) {
     return (
         <DisclosureGroup>
             {links.map((link, idx) => (
-                <Disclosure isExpanded={idx === 0 ? true : false} key={link.id}>
+                <Disclosure key={link.id}>
                     <DisclosureHeader>
                         <Link
                             href={{ pathname: "/menu", query: { group: link.slug } }}

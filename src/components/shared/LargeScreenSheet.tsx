@@ -1,3 +1,5 @@
+"use client";
+
 import {
   AnimatePresence,
   cubicBezier,
@@ -18,19 +20,21 @@ const staticTransition = {
 
 const SHEET_MARGIN = 0;
 
+type SheetProps = {
+  isOpen: boolean;
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  children: ReactNode;
+  position?: "left" | "right";
+  title: string;
+}
+
 export default function LargeScreenSheet({
   isOpen,
   setIsOpen,
   children,
   position = "left",
   title
-}: {
-  isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
-  children: ReactNode;
-  position?: "left" | "right";
-  title: string;
-}) {
+}: SheetProps) {
   const w =
     typeof window !== "undefined" ? window.innerWidth - SHEET_MARGIN : 0;
   const x = useMotionValue(w);
