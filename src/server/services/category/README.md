@@ -11,13 +11,13 @@ The category service is responsible for reading menu categories from the databas
 
 ### Key files
 
-- `service.ts`: Public category service API (what callers import).
-- `repository.ts`: Database access using Drizzle.
+- `category.service.ts`: Public category service API (what callers import).
+- `category.repository.ts`: Database access using Drizzle.
 
 ### Usage
 
 ```ts
-import categoryService from "@/server/services/category/service";
+import categoryService from "@/server/services/category/category.service";
 
 const service = categoryService();
 

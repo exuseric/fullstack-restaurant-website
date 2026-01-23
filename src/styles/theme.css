@@ -20,17 +20,17 @@
   --surface-inverse-elevated: var(--gray-800);
 
   /* Base Texts */
-  --text-foreground: var(--gray-900);
-  --text-foreground-secondary: var(--gray-700);
-  --text-foreground-tertiary: var(--gray-500);
-  --text-foreground-quaternary: var(--gray-400);
-  --text-foreground-disabled: var(--gray-300);
+  --text-on-surface: var(--gray-900);
+  --text-on-surface-secondary: var(--gray-700);
+  --text-on-surface-tertiary: var(--gray-500);
+  --text-on-surface-quaternary: var(--gray-400);
+  --text-on-surface-disabled: var(--gray-300);
 
   --text-on-inverse: var(--gray-50);
   --text-on-inverse-secondary: var(--gray-200);
 
   --text-placeholder: var(--gray-400);
-  --text-muted: var(--gray-500);
+  --text-tertiary: var(--gray-500);
 
   /* ============================================
      PRIMARY SURFACES & TEXT
@@ -216,7 +216,7 @@
   --button-ghost-bg: transparent;
   --button-ghost-bg-hover: var(--gray-100);
   --button-ghost-bg-active: var(--gray-200);
-  --button-ghost-text: var(--text-foreground);
+  --button-ghost-text: var(--text-on-surface);
   --button-ghost-text-hover: var(--text-primary);
 
   /* Buttons - Destructive */

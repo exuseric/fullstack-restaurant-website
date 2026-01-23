@@ -7,7 +7,7 @@ The Menu Service provides a fluent, chainable query builder interface for queryi
 ## Installation
 
 ```typescript
-import menuService from "@/server/services/menu";
+import menuService from "@/server/services/menu/menu.service";
 ```
 
 ## Basic Usage
@@ -583,7 +583,7 @@ const result = await s3.execute();
 
 ```typescript
 import { describe, it, expect, vi } from 'vitest';
-import menuService from './service';
+import menuService from '@/server/services/menu/menu.service';
 
 describe('MenuService', () => {
   it('should find item by id', async () => {

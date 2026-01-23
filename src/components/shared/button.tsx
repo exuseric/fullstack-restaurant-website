@@ -15,21 +15,20 @@ export interface ButtonProps extends RACButtonProps {
 
 const button = tv({
   extend: focusRing,
-  base: "relative inline-flex items-center justify-center gap-2 border border-transparent h-9 box-border px-3.5 py-0 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 font-sans text-sm text-center transition rounded-none cursor-pointer [-webkit-tap-highlight-color:transparent] pressed:button--pressed",
+  base: "relative inline-flex items-center justify-center gap-2 border border-transparent h-9 box-border px-3.5 py-0 [&:has(>svg:only-child)]:px-0 [&:has(>svg:only-child)]:h-8 [&:has(>svg:only-child)]:w-8 font-sans text-sm text-center transition rounded-none cursor-pointer [-webkit-tap-highlight-color:transparent] pressed:button--pressed min-w-fit",
   variants: {
     variant: {
       neutral:
-        "bg-surface-background hover:bg-surface-background-hover border-border-base",
-      primary:
-        "bg-button-primary-bg hover:button-primary-bg-hover text-button-primary-text",
+        "bg-surface hover:bg-surface-variant text-on-surface hover:text-on-surface-variant border-scrim",
+      primary: "bg-primary hover:bg-primary-inverse text-on-primary",
       secondary:
-        "border-black/10 bg-button-secondary-bg hover:bg-button-secondary-bg-hover text-button-secondary-text",
-      destructive: "bg-red-700 hover:bg-red-800 pressed:bg-red-900 text-white",
-      quiet:
-        "border-0 bg-transparent hover:bg-neutral-200 pressed:bg-neutral-300 text-neutral-800 dark:hover:bg-neutral-700 dark:pressed:bg-neutral-600 dark:text-neutral-100",
+        "border-outline/10 bg-secondary hover:bg-secondary-variant text-on-secondary hover:text-on-secondary-variant",
+      destructive:
+        "bg-error hover:bg-error-container pressed:bg-red-900 text-on-error",
+      quiet: "border-0 bg-transparent hover:bg-surface-variant text-on-surface",
     },
     isDisabled: {
-      true: "border-transparent dark:border-transparent bg-neutral-100 dark:bg-neutral-800 text-neutral-300 dark:text-neutral-600 forced-colors:text-[GrayText]",
+      true: "border-transparent bg-surface-dim text-on-surface",
     },
     isPending: {
       true: "text-transparent",
@@ -64,7 +63,7 @@ export function Button(props: ButtonProps) {
               className="absolute inset-0 flex items-center justify-center"
             >
               <svg
-                className="h-4 w-4 animate-spin text-white"
+                className="text-on-surface h-4 w-4 animate-spin"
                 viewBox="0 0 24 24"
                 stroke={
                   props.variant === "secondary" || props.variant === "quiet"
