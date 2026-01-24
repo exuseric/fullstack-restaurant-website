@@ -1,12 +1,14 @@
+import { EqualIcon } from "lucide-react";
 import {
   animate,
   AnimatePresence,
   cubicBezier,
   motion,
-  useMotionValue,
+  useMotionValue
 } from "motion/react";
 import { type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { Dialog, Heading, Modal, ModalOverlay } from "react-aria-components";
+import { Button } from "@/components/shared/button";
 
 // Wrap React Aria modal components so they support motion values.
 const MotionModal = motion.create(Modal);
@@ -24,7 +26,9 @@ const staticTransition = {
   ease: cubicBezier(0.32, 0.72, 0, 1),
 };
 
-const SHEET_MARGIN = 250;
+const SHEET_MARGIN = 100;
+const SHEET_RADIUS = 12;
+
 
 export default function SmallScreenSheet({
   isOpen,
@@ -59,31 +63,30 @@ export default function SmallScreenSheet({
               exit={{ y: h }}
               transition={staticTransition}
               style={{
-                top: SHEET_MARGIN,
                 y,
-                // maxHeight: `calc(100vh - ${SHEET_MARGIN}px)`,
-                // Extra padding at the bottom to account for rubber band scrolling.
-                paddingBottom:
-                  typeof window !== "undefined" ? window.screen.height : 0,
+                top: SHEET_MARGIN,
               }}
               drag="y"
-              dragConstraints={{ top: -SHEET_MARGIN, bottom: 0 }}
-              dragElastic={{ top: 0.1, bottom: 0.2 }}
+              dragConstraints={{ top: 0, bottom: 0 }}
               onDragEnd={(e, { offset, velocity }) => {
-                if (offset.y > window.innerHeight * 0.5 || velocity.y > 500) {
+                if (offset.y > window.innerHeight * 0.75 || velocity.y > 10) {
                   // Dragged down significantly - close the sheet
                   setIsOpen(false);
                 } else {
                   // Snap back to position based on drag direction
-                  const target = offset.y < -100 ? -SHEET_MARGIN : 0;
-                  animate(y, target, { ...inertiaTransition, min: -SHEET_MARGIN, max: 0 });
+                  // const target = offset.y < -100 ? -SHEET_MARGIN : 0;
+                  animate(y, 0, { ...inertiaTransition, min: 0, max: 0 });
                 }
               }}
             >
               {/* drag affordance */}
-              <div className="bg-surface-inverse mx-auto mt-2 h-1.5 w-12 rounded-full" />
-              <Dialog className="p-4 overflow-y-auto overscroll-y-contain pb-4"
-                style={{ maxHeight: `calc(100vh - ${SHEET_MARGIN}px)` }}>
+              {/* <div className="bg-surface-inverse mx-auto my-2 h-1.5 w-12 rounded-full" /> */}
+              <div className="flex-center">
+                <Button className="mx-auto!" variant="quiet">
+                  <EqualIcon />
+                </Button>
+              </div>
+              <Dialog className="p-4 pb-12 overflow-y-auto overscroll-y-contain max-h-full">
                 <Heading slot="title" className="mt-0">
                   {title}
                 </Heading>
