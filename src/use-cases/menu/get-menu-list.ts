@@ -5,6 +5,7 @@ import type {
     Pagination,
     OrderBy,
 } from "@/server/services/lib/types";
+import type { MenuCategory } from "@/shared/types";
 
 export type MenuListOptions = {
     categoryIds?: MenuCategory["id"][] | null;
@@ -24,6 +25,5 @@ export async function getMenuList(
     if (opts.query) svc = svc.searchTerm({ query: opts.query });
     if (opts.pagination) svc = svc.page(opts.pagination);
 
-    const result = (await svc.execute()) as FindManyResult;
-    return result;
+    return (await svc.execute()) as FindManyResult;
 }

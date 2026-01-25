@@ -1,7 +1,7 @@
 "use client";
 
 import { useSearch } from "@/contexts/search-context";
-import { formatPrice } from "@/lib/format-price";
+import { AmountWithCurrency } from "@/lib/format-price";
 import type {
   MenuCategorySearchResult,
   MenuItemSearchResult,
@@ -80,7 +80,7 @@ function SearchResultsSection<
               <span>
                 {item?.type === "menu_item" &&
                   item.price &&
-                  formatPrice(item.price)}
+                  AmountWithCurrency(item.price)}
               </span>
             </div>
 

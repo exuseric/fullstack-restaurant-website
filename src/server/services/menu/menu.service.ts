@@ -14,7 +14,7 @@ import {
   NotFoundError,
   ValidationError,
 } from "@/shared/errors";
-import type { MenuItem } from "@/shared/types";
+import type { MenuItem, MenuCategory } from "@/shared/types";
 import createMenuRepository from "@/services/menu/menu.repository";
 import {
   validateId,
