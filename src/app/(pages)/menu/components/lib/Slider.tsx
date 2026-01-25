@@ -4,7 +4,7 @@ import {
   SliderOutput,
   type SliderProps as AriaSliderProps,
   SliderThumb,
-  SliderTrack
+  SliderTrack,
 } from "react-aria-components";
 import { tv } from "tailwind-variants";
 import { composeTailwindRenderProps, focusRing } from "@/lib/react-aria-utils";
@@ -18,8 +18,7 @@ const trackStyles = tv({
       vertical: "h-full w-[6px] ml-[50%] -translate-x-[50%]",
     },
     isDisabled: {
-      false:
-        "bg-surface-dim forced-colors:bg-[ButtonBorder]",
+      false: "bg-surface-dim forced-colors:bg-[ButtonBorder]",
       true: "bg-surface-dim forced-colors:bg-[ButtonBorder]",
     },
   },
@@ -73,12 +72,11 @@ export function Slider<T extends number | number[]>({
     >
       {label && <Label>{label}</Label>}
       <SliderOutput className="orientation-vertical:hidden text-on-surface text-sm">
-        {({ state }) =>{
+        {({ state }) => {
           const min = AmountWithCurrency(state.values[0] ?? 0);
           const max = AmountWithCurrency(state.values[1] ?? 0);
           return min + " - " + max;
-        }
-        }
+        }}
       </SliderOutput>
       <SliderTrack className="group orientation-horizontal:h-5 orientation-vertical:w-5 orientation-vertical:h-38 col-span-2 flex items-center">
         {({ state, ...renderProps }) => (

@@ -1,5 +1,10 @@
 // "use client"
-import { createSearchParamsCache, parseAsArrayOf, parseAsInteger, parseAsString } from "nuqs/server";
+import {
+  createSearchParamsCache,
+  parseAsArrayOf,
+  parseAsInteger,
+  parseAsString,
+} from "nuqs/server";
 
 export const searchParamsParsers = {
   category: parseAsArrayOf(parseAsInteger).withDefault([]),
