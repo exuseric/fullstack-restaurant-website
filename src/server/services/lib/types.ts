@@ -25,7 +25,7 @@ export interface CategoryService {
 export interface MenuService {
   findById(id: MenuItem["id"]): MenuService;
   findMany(): MenuService;
-  findByCategoryId(categoryId: MenuItem["categoryId"]): MenuService;
+  findByCategoryIds(categoryIds: MenuCategory["id"][]): MenuService;
   searchTerm(args: { query: string; orderBy?: OrderBy }): MenuService;
   page(pagination: Pagination): MenuService;
   findByPriceRange(range: PriceRange): MenuService;
@@ -73,7 +73,7 @@ export type FindByGroupIdParams = {
 
 export type MenuState = {
   id: MenuItem["id"] | null;
-  categoryId: MenuItem["categoryId"] | null;
+  categoryIds: number[] | null;
   searchQuery: string | null;
   orderBy: OrderBy;
   pagination: Pagination;

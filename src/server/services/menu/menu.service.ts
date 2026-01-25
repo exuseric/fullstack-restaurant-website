@@ -40,20 +40,21 @@ class Service implements MenuService {
       this.repository,
       this.updateState({
         id,
-        categoryId: null,
+        categoryIds: null,
         searchQuery: null,
       }),
     );
   }
 
-  findByCategoryId(categoryId: MenuItem["categoryId"]) {
+  findByCategoryIds(categoryIds: MenuCategory["id"][]) {
     if (this.state.id) {
       throw new ValidationError(
-        "Cannot call findByCategoryId after findById - use reset() first",
+        "Cannot call findByCategoryIds after findById - use reset() first",
       );
     }
-    validateId(categoryId);
-    return new Service(this.repository, this.updateState({ categoryId }));
+    // Optional: Validate each ID
+    categoryIds.forEach(validateId);
+    return new Service(this.repository, this.updateState({ categoryIds }));
   }
 
   searchTerm(args: { query: string; orderBy?: OrderBy }) {

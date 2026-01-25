@@ -3,7 +3,7 @@ import type { MenuState } from "@/services-lib/types";
 
 export const DEFAULT_MENU_STATE: MenuState = {
   id: null,
-  categoryId: null,
+  categoryIds: null,
   priceRange: {
     min: null,
     max: null,
