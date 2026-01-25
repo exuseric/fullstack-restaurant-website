@@ -92,6 +92,8 @@
   --spacing-safe-bottom: env(safe-area-inset-bottom, 1em);
   --spacing-hero-lg: calc(5rem * 1.2);
   --spacing-hero-sm: calc(2.5rem * 1.2);
+  --spacing-container-block: calc(3rem);
+  --spacing-container-inline: calc(1rem);
 }
 
 :root {
@@ -259,6 +261,27 @@ body {
   & > .layout-grid {
     grid-column: full;
     --container-padding: 0;
+  }
+
+  @apply width-transition;
+}
+
+@utility layout-grid-sidebar {
+  display: grid;
+  gap: var(--grid-gap, 2rem);
+  grid-template-columns: minmax(min(250px, 100%), 1fr) minmax(0, 3fr);
+  align-items: start;
+
+  & > .sidebar {
+    grid-column: 1;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    
+    & > .sidebar {
+      grid-column: 1;
+    }
   }
 
   @apply width-transition;
