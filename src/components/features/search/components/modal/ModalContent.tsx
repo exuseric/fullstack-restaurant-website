@@ -2,7 +2,7 @@
 
 import { Button } from "@/components/shared/button";
 import { useSearch } from "@/contexts/search-context";
-import { SearchField } from "../search-field/SearchField";
+import { SearchField } from "../../../../shared/search-field/SearchField";
 import { SearchEmptyState } from "./EmptyState";
 import { SearchLoadingState } from "./LoadingState";
 import { SearchResultsList } from "./ResultsList";
@@ -26,6 +26,7 @@ export function SearchModalContent() {
           onChange={setQuery}
           className="w-full"
           autoFocus
+          isPending={shouldShowLoading}
         />
         <Button slot="close" onPress={() => setIsOpen(false)}>
           Cancel
