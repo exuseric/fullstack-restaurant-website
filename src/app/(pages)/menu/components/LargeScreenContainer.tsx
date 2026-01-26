@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import ProductSearch from "./features/ProductSearch";
 import { PriceFilter } from "./features/PriceFilter";
 import ProductFilter from "./features/ProductFilter";
+import { ResetFilters } from "./features/ResetFilters";
 
 interface LargeScreenContainerProps {
   categories: MenuCategory[];
@@ -17,8 +18,9 @@ function LargeScreenContainer({
   return (
     <div className="py-container-block md:layout-grid-sidebar relative isolate hidden">
       <aside className="sidebar bg-surface top-nav-lg sticky z-20 h-fit max-h-screen space-y-4 overflow-y-auto overscroll-y-contain p-4">
-        <div className="mb-4 flex items-center justify-between">
+        <div className="mb-4 flex-row-between items-center">
           <h3 className="text-lg font-semibold">Filters</h3>
+          <ResetFilters />
         </div>
         <ProductSearch />
 
