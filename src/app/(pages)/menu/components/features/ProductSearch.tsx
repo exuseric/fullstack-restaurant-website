@@ -20,10 +20,14 @@ function ProductSearch() {
     },
   );
 
-  const [localSearch, setLocalSearch] = useState("");
+  const [localSearch, setLocalSearch] = useState(params.query || "");
+  const [prevQuery, setPrevQuery] = useState(params.query);
   const [isPending, startTransition] = useTransition();
 
-  const value = localSearch !== "" ? localSearch : params.query || "";
+  if (params.query !== prevQuery) {
+    setPrevQuery(params.query);
+    setLocalSearch(params.query || "");
+  }
 
   const handleSearchChange = (value: string) => {
     setLocalSearch(value);
@@ -34,8 +38,6 @@ function ProductSearch() {
         minPrice: null,
         maxPrice: null,
         page: null,
-      }).then(() => {
-        setLocalSearch("");
       });
     });
   };
@@ -47,7 +49,7 @@ function ProductSearch() {
         type="search"
         placeholder="Search menu..."
         className="bg-surface-container focus:border-primary w-full rounded-md border-transparent py-2 pr-4 pl-9 transition-all outline-none focus:ring-0"
-        value={value}
+        value={localSearch}
         onChange={(e) => handleSearchChange(e.target.value)}
       />
       {isPending && (

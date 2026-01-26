@@ -1,32 +1,31 @@
-// hooks/useResetFilters.ts
-import { useQueryState } from "nuqs";
-import type { SearchParamsKeys } from "@/lib/url-params";
+import { useQueryStates } from "nuqs";
+import { type SearchParamsKeys, searchParamsParsers } from "@/lib/url-params";
 
 export function useResetFilters() {
-  const [, setCategory] = useQueryState("category");
-  const [, setQuery] = useQueryState("query");
-  const [, setMinPrice] = useQueryState("minPrice");
-  const [, setMaxPrice] = useQueryState("maxPrice");
-  const [, setPage] = useQueryState("page");
+  const [, setParams] = useQueryStates(searchParamsParsers, {
+    shallow: false,
+  });
 
-  const resetFilters = async (filter: SearchParamsKeys[] | null = null) => {
-    const resetFunctions: Record<
-      SearchParamsKeys,
-      () => Promise<URLSearchParams>
-    > = {
-      category: () => setCategory(null),
-      query: () => setQuery(null),
-      minPrice: () => setMinPrice(null),
-      maxPrice: () => setMaxPrice(null),
-      page: () => setPage(null),
-    };
-
-    if (!filter || filter.length === 0) {
+  const resetFilters = async (keys: SearchParamsKeys[] | null = null) => {
+    if (!keys || keys.length === 0) {
       // Reset all filters
-      await Promise.all(Object.values(resetFunctions).map((fn) => fn()));
+      await setParams({
+        category: null,
+        query: null,
+        minPrice: null,
+        maxPrice: null,
+        page: null,
+      });
     } else {
-      // Reset specific filters in the array
-      await Promise.all(filter.map((key) => resetFunctions[key]?.()));
+      // Reset specific filters
+      const resetObject = keys.reduce(
+        (acc, key) => {
+          acc[key] = null;
+          return acc;
+        },
+        {} as Partial<Record<SearchParamsKeys, null>>,
+      );
+      await setParams(resetObject);
     }
   };
 
