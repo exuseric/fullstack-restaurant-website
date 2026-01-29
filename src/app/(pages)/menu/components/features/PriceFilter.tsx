@@ -1,7 +1,8 @@
 "use client";
-import { useQueryStates } from "nuqs";
+import { throttle, useQueryStates } from "nuqs";
 import { searchParamsParsers } from "@/lib/url-params";
 import { Slider } from "../lib/Slider";
+import { searchConfig } from "../../../../../components/features/search/lib/search.config";
 
 export function PriceFilter() {
   const [prices, setPrices] = useQueryStates(
@@ -10,10 +11,12 @@ export function PriceFilter() {
       maxPrice: searchParamsParsers.maxPrice,
     },
     {
-      throttleMs: 500,
+      limitUrlUpdates: throttle(searchConfig.debounceMs),
       shallow: false,
     },
   );
+
+  const priceValue: number[] = [prices.minPrice ?? 0, prices.maxPrice ?? 2000];
 
   const handlePriceChange = async ([min, max]: number[]) => {
     await setPrices({ minPrice: min, maxPrice: max });
@@ -21,7 +24,7 @@ export function PriceFilter() {
 
   return (
     <Slider
-      defaultValue={[0, prices.maxPrice ?? 2000]}
+      value={priceValue}
       maxValue={2000}
       minValue={0}
       step={100}

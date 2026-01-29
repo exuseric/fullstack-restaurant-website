@@ -11,7 +11,7 @@ export const useMenuFilterStore = create<MenuFilterState>((set) => ({
     selectedCategories: [],
 
     setSelectedCategories: (categories) =>
-        set({ selectedCategories: categories }),
+        set({ selectedCategories: [...categories] }),
 
     toggleCategory: (categoryId) =>
         set((state) => ({

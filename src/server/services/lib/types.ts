@@ -73,7 +73,7 @@ export type FindByGroupIdParams = {
 
 export type MenuState = {
   id: MenuItem["id"] | null;
-  categoryIds: number[] | null;
+  categoryIds: MenuCategory["id"][] | null;
   searchQuery: string | null;
   orderBy: OrderBy;
   pagination: Pagination;

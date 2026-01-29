@@ -74,8 +74,9 @@ export function Slider<T extends number | number[]>({
       <SliderOutput className="orientation-vertical:hidden text-on-surface text-sm">
         {({ state }) => {
           const min = AmountWithCurrency(state.values[0] ?? 0);
+          if (state.values.length < 2) return min;
           const max = AmountWithCurrency(state.values[1] ?? 0);
-          return min + " - " + max;
+          return `${min} - ${max}`;
         }}
       </SliderOutput>
       <SliderTrack className="group orientation-horizontal:h-5 orientation-vertical:w-5 orientation-vertical:h-38 col-span-2 flex items-center">

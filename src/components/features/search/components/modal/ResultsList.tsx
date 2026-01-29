@@ -79,8 +79,7 @@ function SearchResultsSection<
               </Text>
               <span>
                 {item?.type === "menu_item" &&
-                  item.price &&
-                  AmountWithCurrency(item.price)}
+                  AmountWithCurrency(item.price ?? 0)}
               </span>
             </div>
 
