@@ -8,20 +8,21 @@ type MenuResultsProps = {
 }
 
 export async function MenuResultsContainer({ filters }: MenuResultsProps) {
-  const menuData = await getMenuList({
+  const initialData = await getMenuList({
     categoryIds: filters.category,
     query: filters.query,
     priceRange: { min: filters.minPrice, max: filters.maxPrice },
-    pagination: { page: filters.page, perPage: MENU_CONFIG.perPage },
+    pagination: { page: 1, perPage: MENU_CONFIG.perPage },
   });
 
-  const items = menuData.items;
-
-  console.log({page: menuData.page, totalPages: menuData.totalPages, totalCount: menuData.totalCount})
+  const dehydratedState = {
+    pages: [initialData],
+    pageParams: [1],
+  };
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {items.length === 0 ? (
+    <>
+      {initialData.items.length === 0 ? (
         <div className="col-span-full py-20 text-center">
           <p className="text-on-surface text-xl font-semibold">
             No items found
@@ -32,13 +33,10 @@ export async function MenuResultsContainer({ filters }: MenuResultsProps) {
         </div>
       ) : (
         <MenuResultsList
-          items={items}
           filters={filters}
-          page={menuData.page}
-          totalPages={menuData.totalPages}
-          totalCount={menuData.totalCount}
+          initialData={dehydratedState}
         />
       )}
-    </div>
+    </>
   );
 }
