@@ -1,8 +1,8 @@
-export const AmountWithCurrency = (price: number) => {
-  return new Intl.NumberFormat("en-KE", {
+export const AmountWithCurrency = (price: number, locale="en-KE", maxFractions = 2, currency="KES") => {
+  return new Intl.NumberFormat(locale, {
     style: "currency",
-    currency: "KES",
+    currency: currency,
     minimumFractionDigits: 0,
-    maximumFractionDigits: 2,
+    maximumFractionDigits: maxFractions,
   }).format(price);
 };

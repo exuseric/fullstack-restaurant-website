@@ -70,7 +70,7 @@ describe("Use-cases Integration Tests (database)", () => {
 
         it("getMenuList with category filter should return items from that category", async () => {
             const { category } = await getAnyCategoryWithItems();
-            const actual = await useCases.menuUseCases.getMenuList({ categoryId: category.id });
+            const actual = await useCases.menuUseCases.getMenuList({ categoryIds: [category.id] });
 
             expect(actual.items.length).toBeGreaterThanOrEqual(1);
             for (const item of actual.items) {
