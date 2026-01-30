@@ -1,24 +1,18 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useInView } from "react-intersection-observer";
 import { AmountWithCurrency } from "@/lib/format-price";
 import {
+  GridLayout,
   ListBox,
   ListBoxItem,
-  Virtualizer,
-  ListLayout,
-  GridLayout,
   Size,
-  GridList,
-  GridListItem,
+  Virtualizer,
 } from "react-aria-components";
 import type { URLFilters } from "@/components/features/menu/lib/types";
 import { useMenuInfiniteQuery } from "../../hooks/useMenuInfiniteQuery";
-import type { FindManyResult, FindOneResult } from "@/services/lib/types";
-import { useQueryState } from "nuqs";
-import { searchParamsParsers } from "@/lib/url-params";
-import { useUrlParams } from "@/components/features/menu/hooks/useUrlParams";
+import type { FindManyResult } from "@/services/lib/types";
 
 type MenuResultsListProps = {
   filters: URLFilters;
@@ -64,9 +58,11 @@ export function MenuResultsList({
             key={item.item.id}
             id={item.item.id}
             textValue={item.item.title}
-            className="border-outline-variant w-full h-full bg-surface-container-low hover:bg-surface-container-high border pt-5 p-4 transition-colors"
+            className="border-outline-variant bg-surface-container-low hover:bg-surface-container-high h-full w-full border p-4 pt-5 transition-colors"
           >
-            <h3 className="text-on-surface font-bold mt-0">{item.item.title}</h3>
+            <h3 className="text-on-surface mt-0 font-bold">
+              {item.item.title}
+            </h3>
             <p className="text-on-surface-variant mt-1 line-clamp-2 text-sm">
               {item.item.description}
             </p>

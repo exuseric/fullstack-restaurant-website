@@ -1,7 +1,6 @@
 "use client";
 import { throttle, useQueryStates } from "nuqs";
 import { searchParamsParsers } from "@/lib/url-params";
-import { Loader } from "lucide-react";
 import { searchConfig } from "@/components/features/search/lib/search.config";
 import { useState, useTransition } from "react";
 import { SearchField } from "@/components/shared/search-field/SearchField";
@@ -45,7 +44,12 @@ export function ProductSearch() {
 
   return (
     <div className="group relative">
-      <SearchField value={localSearch} onChange={handleSearchChange} className="w-full" isPending={isPending}/>
+      <SearchField
+        value={localSearch}
+        onChange={handleSearchChange}
+        className="w-full"
+        isPending={isPending}
+      />
     </div>
   );
 }

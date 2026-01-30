@@ -4,7 +4,7 @@ import {
   AnimatePresence,
   cubicBezier,
   motion,
-  useMotionValue
+  useMotionValue,
 } from "motion/react";
 import { type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { Dialog, Heading, Modal, ModalOverlay } from "react-aria-components";
@@ -28,7 +28,6 @@ const staticTransition = {
 
 const SHEET_MARGIN = 100;
 const SHEET_RADIUS = 12;
-
 
 export default function SmallScreenSheet({
   isOpen,
@@ -86,7 +85,7 @@ export default function SmallScreenSheet({
                   <EqualIcon />
                 </Button>
               </div>
-              <Dialog className="p-4 pb-12 overflow-y-auto overscroll-y-contain max-h-full">
+              <Dialog className="max-h-full overflow-y-auto overscroll-y-contain p-4 pb-12">
                 <Heading slot="title" className="mt-0">
                   {title}
                 </Heading>

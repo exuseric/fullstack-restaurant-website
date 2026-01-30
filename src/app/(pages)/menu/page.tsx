@@ -3,14 +3,12 @@ import { type SearchParams } from "nuqs/server";
 // import { ProductsList } from "@/components/features/menu";
 import { urlParamsCache } from "@/lib/url-params";
 import { getAllCategories } from "@/use-cases/category";
-import { Suspense } from "react";
 // import { MenuResultsContainer } from "@/components/features/menu";
 import { Menu } from "@/components/features/menu";
-import { LargeScreenContainer } from "@/components/features/menu/LargeScreenContainer";
 
 type PageProps = {
-  searchParams: Promise<SearchParams>
-}
+  searchParams: Promise<SearchParams>;
+};
 
 async function MenuPage({ searchParams }: PageProps) {
   const filters = urlParamsCache.parse(await searchParams);
@@ -38,4 +36,4 @@ async function MenuPage({ searchParams }: PageProps) {
     </section>
   );
 }
-export default MenuPage
+export default MenuPage;
