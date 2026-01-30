@@ -9,7 +9,7 @@ type CategoryFilterProps = {
   categories: MenuCategory[];
 };
 
-function CategoryFilter({ categories }: CategoryFilterProps) {
+export function CategoryFilter({ categories }: CategoryFilterProps) {
   const [selectedCategories, setSelectedCategories] = useQueryState(
     "category",
     {
@@ -43,5 +43,3 @@ function CategoryFilter({ categories }: CategoryFilterProps) {
     </CheckboxGroup>
   );
 }
-
-export default CategoryFilter;

@@ -6,7 +6,7 @@ import { searchConfig } from "@/components/features/search/lib/search.config";
 import { useState, useTransition } from "react";
 import { SearchField } from "@/components/shared/search-field/SearchField";
 
-function ProductSearch() {
+export function ProductSearch() {
   const [params, setParams] = useQueryStates(
     {
       query: searchParamsParsers.query,
@@ -49,5 +49,3 @@ function ProductSearch() {
     </div>
   );
 }
-
-export default ProductSearch;
