@@ -90,6 +90,10 @@
   --spacing-nav-sm: 2.5rem;
   --spacing-safe-top: env(safe-area-inset-top, 1em);
   --spacing-safe-bottom: env(safe-area-inset-bottom, 1em);
+  --spacing-hero-lg: calc(5rem * 1.2);
+  --spacing-hero-sm: calc(2.5rem * 1.2);
+  --spacing-container-block: calc(3rem);
+  --spacing-container-inline: calc(1rem);
 }
 
 :root {
@@ -207,27 +211,77 @@ body {
   }
   @apply width-transition mx-auto max-w-[75ch] px-6 leading-normal;
 }
-
 @utility layout-grid {
+  --grid-gutter: 1.5rem;
+  --grid-wide: 2rem;
+  
   display: grid;
   grid-template-columns:
-    [full-start] minmax(var(--container-padding), 1fr)
-    [popout-start] 2rem
-    [content-start] var(--content-width) [content-end]
-    2rem [popout-end]
-    minmax(var(--container-padding), 1fr) [full-end];
+    [full-start] minmax(var(--container-padding, 1rem), 1fr)
+    [wide-start] var(--grid-wide)
+    [content-start] min(100% - 2 * var(--grid-wide), var(--content-width, 65ch)) [content-end]
+    var(--grid-wide) [wide-end]
+    minmax(var(--container-padding, 1rem), 1fr) [full-end];
 
-  & > :not(.full-bleed, .popout) {
+  /* Default: content zone */
+  & > :not(.full-bleed, .wide) {
     grid-column: content;
   }
 
+  /* Full viewport width */
   & > .full-bleed {
     grid-column: full;
     @apply block w-full;
   }
 
-  & > .popout {
-    grid-column: popout;
+  /* Wide breakout */
+  & > .wide {
+    grid-column: wide;
+  }
+
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    --grid-wide: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    grid-template-columns: 
+      [full-start] 1rem
+      [wide-start content-start] 
+      minmax(var(--container-padding, 1rem), 1fr) 
+      [content-end wide-end]
+      1rem [full-end];
+    
+    & > .wide {
+      grid-column: content;
+    }
+  }
+
+  /* Nested grid support */
+  & > .layout-grid {
+    grid-column: full;
+    --container-padding: 0;
+  }
+
+  @apply width-transition;
+}
+
+@utility layout-grid-sidebar {
+  display: grid;
+  gap: var(--grid-gap, 2rem);
+  grid-template-columns: minmax(min(250px, 100%), 1fr) minmax(0, 3fr);
+  align-items: start;
+
+  & > .sidebar {
+    grid-column: 1;
+  }
+
+  @media (max-width: 1024px) {
+    grid-template-columns: 1fr;
+    
+    & > .sidebar {
+      grid-column: 1;
+    }
   }
 
   @apply width-transition;

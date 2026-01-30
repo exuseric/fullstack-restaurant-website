@@ -13,6 +13,10 @@ const config = {
         protocol: "https",
         hostname: "images.unsplash.com",
       },
+      {
+        protocol: "https",
+        hostname: "r6niw2f0z8.ufs.sh",
+      }
     ],
   },
 };

@@ -46,7 +46,7 @@ export default function DropdownMenu({ links, id }: DropdownMenuProps) {
                   <Link
                     href={{
                       pathname: "/menu",
-                      query: { category: item.slug },
+                      query: { category: item.id },
                     }}
                     className="no-underline"
                     onClick={() => setPopoverOpen({ id, state: false })}

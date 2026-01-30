@@ -1,5 +1,5 @@
 "use client";
-import { SearchIcon, XIcon } from "lucide-react";
+import { Loader, SearchIcon, XIcon } from "lucide-react";
 import React from "react";
 import {
   SearchField as AriaSearchField,
@@ -12,15 +12,16 @@ import {
   FieldGroup,
   Input,
   Label,
-} from "@/components/features/search/components/search-field/Field";
+} from "@/components/shared/search-field/Field";
 import { composeTailwindRenderProps } from "@/lib/react-aria-utils";
-import { FieldButton } from "@/components/features/search/components/search-field/FieldButton";
+import { FieldButton } from "@/components/shared/search-field/FieldButton";
 
 export interface SearchFieldProps extends AriaSearchFieldProps {
   label?: string;
   description?: string;
   errorMessage?: string | ((validation: ValidationResult) => string);
   placeholder?: string;
+  isPending?: boolean;
 }
 
 export function SearchField({
@@ -49,7 +50,11 @@ export function SearchField({
           className="rounded-none bg-transparent pl-2 [&::-webkit-search-cancel-button]:hidden"
         />
         <FieldButton className="mr-1 w-6 group-empty:invisible">
-          <XIcon aria-hidden className="h-4 w-4" />
+          {props.isPending ? (
+            <Loader className="text-primary h-4 w-4 animate-spin" />
+          ) : (
+            <XIcon aria-hidden className="h-4 w-4" />
+          )}
         </FieldButton>
       </FieldGroup>
       {description && <Description>{description}</Description>}

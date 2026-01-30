@@ -2,7 +2,7 @@ import { menuCategories, menuItems } from "@/server/db/schema";
 import { DEFAULT_MENU_STATE } from "@/server/services/lib/constants";
 import type { MenuBuilder, MenuState } from "@/server/services/lib/types";
 import type { MenuVariant } from "@/shared/types";
-import { and, eq, gte, lte, type SQL, sql } from "drizzle-orm";
+import { and, eq, gte, lte, type SQL, sql, inArray } from "drizzle-orm";
 import type { SelectedFields } from "drizzle-orm/pg-core";
 
 class Builder implements MenuBuilder {
@@ -62,7 +62,7 @@ class Builder implements MenuBuilder {
   }
 
   build() {
-    const { searchQuery, categoryId, priceRange, orderBy, id } = this.state;
+    const { searchQuery, categoryIds, priceRange, orderBy, id } = this.state;
 
     const where: SQL[] = [];
     const select: SelectedFields = { ...this.select };
@@ -77,7 +77,7 @@ class Builder implements MenuBuilder {
     if (min != null) where.push(gte(menuItems.price, min));
     if (max != null) where.push(lte(menuItems.price, max));
 
-    if (categoryId != null) where.push(eq(menuItems.categoryId, categoryId));
+    if (categoryIds && categoryIds.length > 0) where.push(inArray(menuItems.categoryId, categoryIds));
     if (id != null) where.push(eq(menuItems.id, id));
 
     const orderFn =

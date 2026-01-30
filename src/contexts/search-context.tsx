@@ -4,13 +4,13 @@ import type { GroupedSearchResults } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
 import {
   createContext,
-  useContext,
-  useEffect,
-  useState,
   type Dispatch,
   type ReactNode,
   type SetStateAction,
+  useContext,
+  useState,
 } from "react";
+import { useDebounce } from "@/hooks/use-debounce";
 
 type SearchValue = {
   query: string;
@@ -28,17 +28,8 @@ export const SearchContext = createContext<SearchValue | null>(null);
 
 export function SearchProvider({ children }: { children: ReactNode }) {
   const [query, setQuery] = useState("");
-  const [debouncedQuery, setDebouncedQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
-
-  // Custom debounce for query input
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDebouncedQuery(query);
-    }, searchConfig.debounceMs);
-
-    return () => clearTimeout(timer);
-  }, [query]);
+  const debouncedQuery = useDebounce(query, searchConfig.debounceMs);
 
   const { data, isFetching } = useQuery<GroupedSearchResults>({
     queryKey: ["search", debouncedQuery],
@@ -58,7 +49,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
     },
     // Only fetch if query is long enough
     enabled: debouncedQuery.length >= searchConfig.minQueryLength,
-    staleTime: 1 * 60 * 1000,
+    staleTime: 60 * 1000,
     gcTime: 5 * 60 * 1000,
   });
 

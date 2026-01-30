@@ -5,9 +5,10 @@ import type {
     Pagination,
     OrderBy,
 } from "@/server/services/lib/types";
+import type { MenuCategory } from "@/shared/types";
 
 export type MenuListOptions = {
-    categoryId?: number | null;
+    categoryIds?: MenuCategory["id"][] | null;
     priceRange?: PriceRange | null;
     pagination?: Pagination | null;
     query?: string | null;
@@ -19,11 +20,10 @@ export async function getMenuList(
 ): Promise<FindManyResult> {
     let svc = menuService();
 
-    if (opts.categoryId) svc = svc.findByCategoryId(opts.categoryId);
+    if (opts.categoryIds && opts.categoryIds.length > 0) svc = svc.findByCategoryIds(opts.categoryIds);
     if (opts.priceRange) svc = svc.findByPriceRange(opts.priceRange);
     if (opts.query) svc = svc.searchTerm({ query: opts.query });
     if (opts.pagination) svc = svc.page(opts.pagination);
 
-    const result = (await svc.execute()) as FindManyResult;
-    return result;
+    return (await svc.execute()) as FindManyResult;
 }

@@ -12,7 +12,7 @@ function DropdownMenu({ links }: { links: Navigation[] }) {
                 <Disclosure key={link.id}>
                     <DisclosureHeader>
                         <Link
-                            href={{ pathname: "/menu", query: { group: link.slug } }}
+                            href={{ pathname: "/menu", query: { group: link.id } }}
                             className="inline-flex-row-start items-center px-4 gap-x-1 no-underline text-xl min-h-12 w-full"
                             onClick={() => setMobileMenuOpen(false)}
                         >
@@ -22,7 +22,7 @@ function DropdownMenu({ links }: { links: Navigation[] }) {
                     <DisclosurePanel className="max-h-60 overflow-y-scroll overscroll-y-contain bg-surface-container-low">
                         {link.children?.map(child => (
                             <Link
-                                href={{ pathname: "/menu", query: { category: child.slug } }}
+                                href={{ pathname: "/menu", query: { category: child.id } }}
                                 className="inline-flex-row-start items-center px-4 gap-x-1 no-underline text-xl min-h-12 w-full"
                                 onClick={() => setMobileMenuOpen(false)}
                                 key={child.id}
