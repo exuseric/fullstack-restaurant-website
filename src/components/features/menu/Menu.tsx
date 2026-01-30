@@ -1,17 +1,12 @@
 import React, { Suspense } from "react";
-import { MenuResults } from "./components/MenuResults";
+import { MenuResultsContainer } from "./components/MenuResults/MenuResultsContainer";
 import type { MenuCategory } from "@/shared/types";
 import { LargeScreenContainer } from "@/components/features/menu/LargeScreenContainer";
+import type { URLFilters } from "@/components/features/menu/lib/types";
 
 type MenuContainerProps = {
   categories: MenuCategory[];
-  filters: {
-    category: number[];
-    query: string;
-    minPrice: number;
-    maxPrice: number;
-    page: number;
-  };
+  filters: URLFilters
 };
 export function Menu({ categories, filters }: MenuContainerProps) {
   return (
@@ -23,7 +18,7 @@ export function Menu({ categories, filters }: MenuContainerProps) {
           </div>
         }
       >
-        <MenuResults filters={filters} />
+        <MenuResultsContainer filters={filters} />
       </Suspense>
     </LargeScreenContainer>
   );

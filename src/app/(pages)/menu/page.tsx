@@ -4,7 +4,7 @@ import { type SearchParams } from "nuqs/server";
 import { urlParamsCache } from "@/lib/url-params";
 import { getAllCategories } from "@/use-cases/category";
 import { Suspense } from "react";
-// import { MenuResults } from "@/components/features/menu";
+// import { MenuResultsContainer } from "@/components/features/menu";
 import { Menu } from "@/components/features/menu";
 import { LargeScreenContainer } from "@/components/features/menu/LargeScreenContainer";
 
@@ -32,7 +32,7 @@ async function MenuPage({ searchParams }: PageProps) {
 
       {/*<ProductsList categories={categories}>*/}
       {/*  <Suspense fallback={<div className="py-20 text-center text-tertiary animate-pulse">Updating menu results...</div>}>*/}
-      {/*    <MenuResults filters={filters} />*/}
+      {/*    <MenuResultsContainer filters={filters} />*/}
       {/*  </Suspense>*/}
       {/*</ProductsList>*/}
     </section>

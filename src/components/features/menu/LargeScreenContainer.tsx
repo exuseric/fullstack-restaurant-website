@@ -32,7 +32,9 @@ export function LargeScreenContainer({
         </ProductFilter>
       </aside>
 
-      <div className="content min-h-[150vh]">{children}</div>
+      <div className="content min-h-[150vh]">
+        {children}
+      </div>
     </div>
   );
 }
