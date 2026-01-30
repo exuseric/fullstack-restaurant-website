@@ -1,7 +1,7 @@
 import PageHero from "@/components/shared/page-hero/PageHero";
 import { type SearchParams } from "nuqs/server";
 import ProductsList from "./components/ProductsList";
-import { urlParamsCache } from "@/lib/url-params.server";
+import { urlParamsCache } from "@/lib/url-params";
 import { getAllCategories } from "@/use-cases/category";
 import { Suspense } from "react";
 import { MenuResults } from "./components/MenuResults";

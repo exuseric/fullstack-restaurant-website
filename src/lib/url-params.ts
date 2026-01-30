@@ -1,4 +1,4 @@
-import { parseAsArrayOf, parseAsInteger, parseAsString } from "nuqs";
+import { parseAsArrayOf, parseAsInteger, parseAsString, createSearchParamsCache } from "nuqs/server";
 export const searchParamsParsers = {
   category: parseAsArrayOf(parseAsInteger).withDefault([]),
   query: parseAsString.withDefault(""),
@@ -10,3 +10,5 @@ export const searchParamsParsers = {
 export type SearchParamsType = typeof searchParamsParsers;
 
 export type SearchParamsKeys = keyof typeof searchParamsParsers
+
+export const urlParamsCache = createSearchParamsCache(searchParamsParsers);
