@@ -2,11 +2,11 @@ import type { Navigation } from "@/shared/types";
 import { Popover } from "./lib/Popover";
 import Link from "next/link";
 import {
-  Header,
-  ListBoxSection,
-  ListBox,
   Collection,
+  Header,
+  ListBox,
   ListBoxItem,
+  ListBoxSection,
 } from "react-aria-components";
 import { useNavigation } from "@/contexts/navigation-context";
 
@@ -27,7 +27,7 @@ export default function DropdownMenu({ links, id }: DropdownMenuProps) {
       <ListBox
         items={links}
         aria-label="Menu Items"
-        className="container w-full grid grid-cols-3 items-start gap-4 p-8"
+        className="container grid w-full grid-cols-3 items-start gap-4 p-8"
       >
         {(item) => (
           <ListBoxSection className="h-full w-full">

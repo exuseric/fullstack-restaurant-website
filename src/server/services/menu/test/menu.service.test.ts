@@ -139,7 +139,7 @@ describe("MenuService Integration Tests", () => {
 
       const targetCatId = allItems.items[0]!.category.id;
       const result = (await service
-        .findByCategoryId(targetCatId)
+        .findByCategoryIds([targetCatId])
         .execute()) as FindManyResult;
 
       expect(result.items.every((i) => i.category.id === targetCatId)).toBe(
@@ -175,21 +175,21 @@ describe("MenuService Integration Tests", () => {
   describe("Chaining and Immutability", () => {
     it("should maintain immutability when chaining", async () => {
       const baseService = menuService();
-      const filteredService = baseService.findByCategoryId(1);
+      const filteredService = baseService.findByCategoryIds([1]);
 
       expect(baseService).not.toBe(filteredService);
       // @ts-expect-error - checking private state for test purposes
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      expect(baseService.state.categoryId).toBeNull();
+      expect(baseService.state.categoryIds).toBeNull();
       // @ts-expect-error - checking private state for test purposes
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      expect(filteredService.state.categoryId).toBe(1);
+      expect(filteredService.state.categoryIds).toEqual([1]);
     });
 
     it("should prevent search/category filtering after findById", async () => {
       const service = menuService().findById(1);
 
-      expect(() => service.findByCategoryId(2)).toThrow(ValidationError);
+      expect(() => service.findByCategoryIds([2])).toThrow(ValidationError);
       expect(() => service.searchTerm({ query: "pizza" })).toThrow(
         ValidationError,
       );
@@ -197,7 +197,7 @@ describe("MenuService Integration Tests", () => {
 
     it("should allow filtering after reset()", async () => {
       const service = menuService().findById(1).reset();
-      expect(() => service.findByCategoryId(2)).not.toThrow();
+      expect(() => service.findByCategoryIds([2])).not.toThrow();
     });
   });
 

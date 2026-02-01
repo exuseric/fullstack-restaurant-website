@@ -342,6 +342,20 @@ body {
 @utility inline-flex-center {
   @apply inline-flex flex-row items-center justify-center;
 }
+
+@utility hide-scrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+
+  /* IE / old Edge (harmless elsewhere) */
+  -ms-overflow-style: none;
+
+  /* WebKit / Blink */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --container-transition: none;

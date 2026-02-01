@@ -29,6 +29,7 @@ class Repository implements CategoryRepository {
       id: row.id,
       title: row.title,
       description: row.description,
+      showcase: row.showcase ?? false,
       groupId: row.groupId!,
       slug: row.slug,
     };
