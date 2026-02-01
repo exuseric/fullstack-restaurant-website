@@ -7,7 +7,7 @@ A fullstack restaurant website built with Next.js and Drizzle ORM. It exposes a 
   - **Database / ORM**: Drizzle ORM
   - **Styling**: Tailwind CSS
 
-### Project structure
+### Project Structure
 
 - **`src/app`**: Next.js application routes and layout
 - **`src/server/db`**: Database schema and Drizzle client
@@ -20,25 +20,27 @@ A fullstack restaurant website built with Next.js and Drizzle ORM. It exposes a 
 - **Data fetching architecture** (how services and repositories work): See `docs/data-fetching.md`
 - **Menu service details**: See `src/server/services/menu/README.md`
 - **Category service details**: See `src/server/services/category/README.md`
+- **Navigation service details**: See `src/server/services/navigation/README.md`
+- **Search service details**: See `src/server/services/search/README.md`
 
-### Getting started
+### Getting Started
 
 1. **Install dependencies**
 
    ```bash
-   bun install
+   pnpm install
    ```
 
-2. **Start the database**
+2. **Run database migrations**
 
    ```bash
-   ./start-database.sh
+   pnpm drizzle-kit migrate
    ```
 
 3. **Run the development server**
 
    ```bash
-   bun dev
+   pnpm dev
    ```
 
 Then open `http://localhost:3000` in your browser.

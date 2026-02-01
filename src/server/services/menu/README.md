@@ -17,7 +17,7 @@ import menuService from "@/server/services/menu/menu.service";
 ```typescript
 // Find by ID
 const item = await menuService()
-  .findById('item-123')
+  .findById(123)
   .execute();
 ```
 
@@ -31,7 +31,7 @@ const results = await menuService()
 
 // With filters
 const results = await menuService()
-  .findByCategoryId('desserts')
+  .findByCategoryIds(['desserts'])
   .findByPriceRange({ min: 5, max: 15 })
   .page({ limit: 10, offset: 0 })
   .execute();
@@ -67,14 +67,14 @@ findMany(): MenuService
 **Example:**
 ```typescript
 const service = menuService()
-  .findById('item-1')  // Single item lookup
+  .findById(1)  // Single item lookup
   .findMany()          // Switches to multi-item mode
-  .findByCategoryId('drinks');
+  .findByCategoryIds(['drinks']);
 ```
 
 ---
 
-#### `findById(id: string)`
+#### `findById(id: number)`
 Queries for a single menu item by ID. Automatically clears category and search filters to prevent conflicts.
 
 ```typescript
@@ -92,7 +92,7 @@ findById(id: MenuItem["id"]): MenuService
 **Example:**
 ```typescript
 const item = await menuService()
-  .findById('menu-item-123')
+  .findById(123)
   .execute();
 ```
 
@@ -100,26 +100,26 @@ const item = await menuService()
 
 ---
 
-#### `findByCategoryId(categoryId: string)`
-Filters items by category.
+#### `findByCategoryIds(categoryIds: string[])`
+Filters items by one or more categories.
 
 ```typescript
-findByCategoryId(categoryId: MenuItem["categoryId"]): MenuService
+findByCategoryIds(categoryIds: MenuItem["categoryId"][]): MenuService
 ```
 
 **Parameters:**
-- `categoryId` - The category identifier
+- `categoryIds` - Array of category identifiers
 
 **Returns:** New service instance with category filter applied
 
 **Throws:**
 - `ValidationError` - If called after `findById()` (use `reset()` first)
-- `ValidationError` - If categoryId is invalid
+- `ValidationError` - If any categoryId is invalid
 
 **Example:**
 ```typescript
 const desserts = await menuService()
-  .findByCategoryId('desserts')
+  .findByCategoryIds(['desserts'])
   .execute();
 ```
 
@@ -237,11 +237,31 @@ reset(): MenuService
 **Example:**
 ```typescript
 const service = menuService()
-  .findByCategoryId('drinks')
+  .findByCategoryIds(['drinks'])
   .findByPriceRange({ min: 5, max: 10 })
   .reset()  // Clear everything
-  .findByCategoryId('desserts');
+  .findByCategoryIds(['desserts']);
 ```
+
+---
+
+#### `minMaxPrice()`
+Gets the minimum and maximum price of menu items.
+
+```typescript
+minMaxPrice(): MenuService
+```
+
+**Returns:** New service instance configured to fetch min/max prices.
+
+**Example:**
+```typescript
+// Resets state and prepares for min/max price query
+const minMax = await menuService()
+  .minMaxPrice()
+  .execute();
+```
+
 
 ---
 
@@ -287,14 +307,14 @@ execute(): Promise<FindOneResult | FindManyResult>
 ```typescript
 // Single item
 const item = await menuService()
-  .findById('item-123')
+  .findById(123)
   .execute();
 
 console.log(item.name);  // "Chocolate Cake"
 
 // Multiple items
 const results = await menuService()
-  .findByCategoryId('appetizers')
+  .findByCategoryIds(['appetizers'])
   .execute();
 
 console.log(results.items.length);      // 15
@@ -310,7 +330,7 @@ All methods return **new instances** with updated state. The original instance r
 
 ```typescript
 const base = menuService();
-const withCategory = base.findByCategoryId('drinks');
+const withCategory = base.findByCategoryIds(['drinks']);
 const withPrice = withCategory.findByPriceRange({ min: 5, max: 10 });
 
 // Each variable holds an independent query builder
@@ -327,22 +347,22 @@ await withPrice.execute();     // Both category and price filters
 ```typescript
 // Accumulation (AND logic)
 menuService()
-  .findByCategoryId('drinks')
+  .findByCategoryIds(['drinks'])
   .findByPriceRange({ min: 5, max: 10 })
-  // Queries: WHERE categoryId = 'drinks' AND price BETWEEN 5 AND 10
+  // Queries: WHERE categoryId IN ('drinks') AND price BETWEEN 5 AND 10
 
 // Override
 menuService()
-  .findByCategoryId('drinks')
-  .findByCategoryId('desserts')  // Overrides previous category
-  // Queries: WHERE categoryId = 'desserts'
+  .findByCategoryIds(['drinks'])
+  .findByCategoryIds(['desserts'])  // Overrides previous category
+  // Queries: WHERE categoryId IN ('desserts')
 
 // Exclusive behavior
 menuService()
-  .findByCategoryId('drinks')
+  .findByCategoryIds(['drinks'])
   .searchTerm({ query: 'cola' })
-  .findById('item-123')  // Clears category and search
-  // Queries: WHERE id = 'item-123' only
+  .findById(123)  // Clears category and search
+  // Queries: WHERE id = 123 only
 ```
 
 ### Validation
@@ -352,14 +372,14 @@ The service validates state to prevent ambiguous queries:
 ```typescript
 // ❌ This will throw ValidationError
 menuService()
-  .findById('item-123')
-  .findByCategoryId('drinks')  // Error: Cannot combine with findById
+  .findById(123)
+  .findByCategoryIds(['drinks'])  // Error: Cannot combine with findById
 
 // ✅ Use reset() to clear state
 menuService()
-  .findById('item-123')
+  .findById(123)
   .reset()
-  .findByCategoryId('drinks')  // OK
+  .findByCategoryIds(['drinks'])  // OK
 ```
 
 ## Advanced Examples
@@ -368,7 +388,7 @@ menuService()
 
 ```typescript
 const results = await menuService()
-  .findByCategoryId('mains')
+  .findByCategoryIds(['mains'])
   .findByPriceRange({ min: 15, max: 30 })
   .searchTerm({ query: 'vegetarian', orderBy: 'price' })
   .page({ limit: 20, offset: 0 })
@@ -384,11 +404,11 @@ const affordableItems = menuService()
 
 // Extend for different categories
 const affordableDrinks = await affordableItems
-  .findByCategoryId('drinks')
+  .findByCategoryIds(['drinks'])
   .execute();
 
 const affordableDesserts = await affordableItems
-  .findByCategoryId('desserts')
+  .findByCategoryIds(['desserts'])
   .execute();
 ```
 
@@ -403,7 +423,7 @@ function buildQuery(options: {
   let query = menuService().findMany();
 
   if (options.categoryId) {
-    query = query.findByCategoryId(options.categoryId);
+    query = query.findByCategoryIds([options.categoryId]);
   }
 
   if (options.maxPrice) {
@@ -449,7 +469,7 @@ async function getAllPages(baseQuery: MenuService) {
 
 // Usage
 const allDesserts = await getAllPages(
-  menuService().findByCategoryId('desserts')
+  menuService().findByCategoryIds(['desserts'])
 );
 ```
 
@@ -462,7 +482,7 @@ import { NotFoundError, ValidationError, InternalServerError } from "@/shared/er
 
 try {
   const item = await menuService()
-    .findById('non-existent-id')
+    .findById(999)
     .execute();
 } catch (error) {
   if (error instanceof NotFoundError) {
@@ -479,15 +499,15 @@ try {
 
 ```typescript
 // Invalid ID
-menuService().findById('');  // Throws ValidationError
+menuService().findById(0);  // Throws ValidationError
 
 // Invalid price range
 menuService().findByPriceRange({ min: 20, max: 10 });  // Throws ValidationError
 
 // Conflicting queries
 menuService()
-  .findById('item-1')
-  .findByCategoryId('drinks');  // Throws ValidationError
+  .findById(1)
+  .findByCategoryIds(['drinks']);  // Throws ValidationError
 ```
 
 ## Type Definitions
@@ -535,13 +555,13 @@ type FindOneResult = MenuItem;
 ```typescript
 // Chain related filters
 const results = await menuService()
-  .findByCategoryId('mains')
+  .findByCategoryIds(['mains'])
   .findByPriceRange({ min: 10, max: 25 })
   .execute();
 
 // Use meaningful variable names
 const vegetarianMains = await menuService()
-  .findByCategoryId('mains')
+  .findByCategoryIds(['mains'])
   .searchTerm({ query: 'vegetarian' })
   .execute();
 
@@ -562,8 +582,8 @@ try {
 ```typescript
 // Don't mix findById with other filters without reset
 menuService()
-  .findById('item-1')
-  .findByCategoryId('drinks');  // Throws ValidationError
+  .findById(1)
+  .findByCategoryIds(['drinks']);  // Throws ValidationError
 
 // Don't ignore type checking
 const result = await menuService().findMany().execute();
@@ -572,7 +592,7 @@ result.name;  // Error: FindManyResult has no 'name' property
 // Don't create unnecessary intermediate variables
 const s1 = menuService();
 const s2 = s1.findMany();
-const s3 = s2.findByCategoryId('drinks');
+const s3 = s2.findByCategoryIds(['drinks']);
 const result = await s3.execute();
 // Just chain instead ↑
 ```
@@ -588,25 +608,25 @@ import menuService from '@/server/services/menu/menu.service';
 describe('MenuService', () => {
   it('should find item by id', async () => {
     const mockRepo = {
-      findOne: vi.fn().mockResolvedValue({ id: '1', name: 'Test' }),
+      findOne: vi.fn().mockResolvedValue({ id: 1, name: 'Test' }),
       findMany: vi.fn(),
     };
 
     const result = await menuService(mockRepo)
-      .findById('1')
+      .findById(1)
       .execute();
 
     expect(mockRepo.findOne).toHaveBeenCalledWith(
-      expect.objectContaining({ id: '1' })
+      expect.objectContaining({ id: 1 })
     );
-    expect(result).toEqual({ id: '1', name: 'Test' });
+    expect(result).toEqual({ id: 1, name: 'Test' });
   });
 
   it('should throw ValidationError when combining findById with category', () => {
     expect(() => {
       menuService()
-        .findById('1')
-        .findByCategoryId('drinks');
+        .findById(1)
+        .findByCategoryIds(['drinks']);
     }).toThrow(ValidationError);
   });
 });

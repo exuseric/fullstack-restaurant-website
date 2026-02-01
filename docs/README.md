@@ -7,7 +7,7 @@ This is a fullstack restaurant website built with Next.js and Drizzle ORM. It ex
 
 The goal of the project is to provide a clean, testable backend service layer behind a modern React/Next.js UI.
 
-### High-level architecture
+### High-level Architecture
 
 - **Next.js app** in `src/app` renders the UI.
 - **Use Cases** in `src/use-cases` orchestrate application business logic.
@@ -17,7 +17,7 @@ The goal of the project is to provide a clean, testable backend service layer be
 
 For how data flows from the database to the UI, see `docs/data-fetching.md`.
 
-### Local development
+### Local Development
 
 1. **Install dependencies**
 
@@ -25,19 +25,13 @@ For how data flows from the database to the UI, see `docs/data-fetching.md`.
    pnpm install
    ```
 
-2. **Start the database**
-
-   ```bash
-   ./start-database.sh
-   ```
-
-3. **Run database migrations**
+2. **Run database migrations**
 
    ```bash
    pnpm drizzle-kit migrate
    ```
 
-4. **Run the dev server**
+3. **Run the dev server**
 
    ```bash
    pnpm dev
@@ -59,3 +53,5 @@ pnpm test
 - For service-specific docs, see:
   - `src/server/services/menu/README.md`
   - `src/server/services/category/README.md`
+  - `src/server/services/navigation/README.md`
+  - `src/server/services/search/README.md`
