@@ -1,9 +1,9 @@
 "use client";
 
-import { SearchProvider } from "@/contexts/search-context";
+import { SearchProvider } from "@/components/features/search/SearchContext";
 import SearchContainer from "./SearchContainer";
 
-export function Search() {
+export function GlobalSearch() {
   return (
     <SearchProvider>
       <SearchContainer />

@@ -1,7 +1,7 @@
 "use client";
 
 import SmallScreenSheet from "@/components/shared/SmallScreenSheet";
-import { useSearch } from "@/contexts/search-context";
+import { useSearch } from "@/components/features/search/SearchContext";
 import { SearchModalContent } from "./modal/ModalContent";
 
 export function SmallScreenPresenter() {
@@ -9,7 +9,11 @@ export function SmallScreenPresenter() {
 
   return (
     <>
-      <SmallScreenSheet isOpen={isOpen} setIsOpen={setIsOpen} title="Search Our Menu">
+      <SmallScreenSheet
+        isOpen={isOpen}
+        setIsOpen={setIsOpen}
+        title="Search Our Menu"
+      >
         <SearchModalContent />
       </SmallScreenSheet>
     </>

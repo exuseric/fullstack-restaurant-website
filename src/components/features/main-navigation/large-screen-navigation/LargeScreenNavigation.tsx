@@ -1,6 +1,6 @@
 "use client";
 
-import { Search } from "@/components/features/search";
+import { GlobalSearch } from "@/components/features/search/GlobalSearch";
 import LogoLink from "@/components/shared/LogoLink";
 import Menu from "./components/Menu";
 import { useNavigation } from "@/contexts/navigation-context";
@@ -15,7 +15,7 @@ export function LargeScreenNavigation() {
       <div className="glass-frosted flex-row-between min-h-nav-sm mx-auto items-center overflow-hidden p-1 md:max-w-1/2">
         <LogoLink />
         <Menu />
-        <Search />
+        <GlobalSearch />
       </div>
     </header>
   );

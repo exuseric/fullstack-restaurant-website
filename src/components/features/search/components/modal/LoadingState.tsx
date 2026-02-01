@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearch } from "@/contexts/search-context";
+import { useSearch } from "@/components/features/search/SearchContext";
 import { Loader } from "lucide-react";
 
 interface SearchLoadingStateProps {

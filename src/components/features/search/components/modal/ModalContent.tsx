@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/shared/button";
-import { useSearch } from "@/contexts/search-context";
+import { useSearch } from "@/components/features/search/SearchContext";
 import { SearchField } from "../../../../shared/search-field/SearchField";
 import { SearchEmptyState } from "./EmptyState";
 import { SearchLoadingState } from "./LoadingState";

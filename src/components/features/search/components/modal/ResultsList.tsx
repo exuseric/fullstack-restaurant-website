@@ -1,6 +1,6 @@
 "use client";
 
-import { useSearch } from "@/contexts/search-context";
+import { useSearch } from "@/components/features/search/SearchContext";
 import { AmountWithCurrency } from "@/lib/format-price";
 import type {
   MenuCategorySearchResult,
@@ -60,23 +60,19 @@ function SearchResultsSection<
             href={
               item?.type === "category"
                 ? {
-                  pathname: "/menu",
-                  query: { category: item.slug },
-                }
+                    pathname: "/menu",
+                    query: { category: item.slug },
+                  }
                 : {
-                  pathname: "/menu",
-                  hash: item.slug,
-                }
+                    pathname: "/menu",
+                    hash: item.slug,
+                  }
             }
             className="hover:bg-primary hover:text-on-primary flex cursor-pointer flex-col rounded-md px-2 py-2 no-underline transition-colors"
             onClick={() => setIsOpen(false)}
           >
-            <div className="flex-row-between items-center font-medium mb-2 w-full">
-              <Text
-                slot="label"
-              >
-                {item.title}
-              </Text>
+            <div className="flex-row-between mb-2 w-full items-center font-medium">
+              <Text slot="label">{item.title}</Text>
               <span>
                 {item?.type === "menu_item" &&
                   AmountWithCurrency(item.price ?? 0)}

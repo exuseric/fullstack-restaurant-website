@@ -1,5 +1,3 @@
-"use server";
-
 import categoryService from "@/server/services/category/category.service";
 import type { MenuCategory } from "@/shared/types";
 

@@ -1,4 +1,4 @@
-import { searchAction } from "@/app/actions/search";
+import { searchAction } from "@/components/features/search/actions/search.action";
 import { searchConfig } from "@/components/features/search/lib/search.config";
 import type { GroupedSearchResults } from "@/shared/types";
 import { useQuery } from "@tanstack/react-query";
