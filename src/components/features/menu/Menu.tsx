@@ -1,16 +1,14 @@
-import React, { Suspense } from "react";
-import { MenuResultsContainer } from "./components/MenuResults/MenuResultsContainer";
-import type { MenuCategory } from "@/shared/types";
 import { LargeScreenContainer } from "@/components/features/menu/LargeScreenContainer";
 import type { URLFilters } from "@/components/features/menu/lib/types";
+import { Suspense } from "react";
+import { MenuResultsContainer } from "./components/MenuResults/MenuResultsContainer";
 
 type MenuContainerProps = {
-  categories: MenuCategory[];
-  filters: URLFilters
+  filters: URLFilters;
 };
-export function Menu({ categories, filters }: MenuContainerProps) {
+export function Menu({ filters }: MenuContainerProps) {
   return (
-    <LargeScreenContainer categories={categories}>
+    <LargeScreenContainer>
       <Suspense
         fallback={
           <div className="text-tertiary animate-pulse py-20 text-center">

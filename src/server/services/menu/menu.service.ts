@@ -88,6 +88,10 @@ class Service implements MenuService {
     return new Service(this.repository, { ...DEFAULT_MENU_STATE });
   }
 
+  minMaxPrice() {
+    return new Service(this.repository, { ...DEFAULT_MENU_STATE });
+  }
+
   private updateState(updates: Partial<MenuState>): MenuState {
     return { ...this.state, ...updates };
   }

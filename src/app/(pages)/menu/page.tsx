@@ -1,10 +1,7 @@
-import PageHero from "@/components/shared/page-hero/PageHero";
-import { type SearchParams } from "nuqs/server";
-// import { ProductsList } from "@/components/features/menu";
-import { urlParamsCache } from "@/lib/url-params";
-import { getAllCategories } from "@/use-cases/category";
-// import { MenuResultsContainer } from "@/components/features/menu";
 import { Menu } from "@/components/features/menu";
+import PageHero from "@/components/shared/page-hero/PageHero";
+import { urlParamsCache } from "@/lib/url-params";
+import { type SearchParams } from "nuqs/server";
 
 type PageProps = {
   searchParams: Promise<SearchParams>;
@@ -12,7 +9,6 @@ type PageProps = {
 
 async function MenuPage({ searchParams }: PageProps) {
   const filters = urlParamsCache.parse(await searchParams);
-  const categories = await getAllCategories();
 
   return (
     <section className="menu">
@@ -25,14 +21,8 @@ async function MenuPage({ searchParams }: PageProps) {
       <section className="layout-grid py-container-block">
         <h2>Our Menu</h2>
 
-        <Menu categories={categories} filters={filters} />
+        <Menu filters={filters} />
       </section>
-
-      {/*<ProductsList categories={categories}>*/}
-      {/*  <Suspense fallback={<div className="py-20 text-center text-tertiary animate-pulse">Updating menu results...</div>}>*/}
-      {/*    <MenuResultsContainer filters={filters} />*/}
-      {/*  </Suspense>*/}
-      {/*</ProductsList>*/}
     </section>
   );
 }

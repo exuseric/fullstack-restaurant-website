@@ -144,3 +144,11 @@ export type NavigationResults = {
   catSlug: MenuCategory["slug"] | null;
   catGroupId: NavigationItem["groupId"];
 };
+
+export type PriceService = {
+  findMinMax: () => Promise<PriceRange>;
+};
+
+export type PriceRepository = {
+  getMinMax: () => Promise<PriceRange[]>;
+};
