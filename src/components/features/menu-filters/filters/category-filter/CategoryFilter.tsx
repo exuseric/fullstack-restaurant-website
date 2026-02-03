@@ -1,4 +1,4 @@
-import { getAllCategories } from "@/components/features/menu/lib/fetchCategories";
+import { getAllCategories } from "@/components/features/menu-filters/lib/fetchCategories";
 import { CategoryFilterClient } from "./CategoryFilterClient";
 
 export async function CategoryFilter() {

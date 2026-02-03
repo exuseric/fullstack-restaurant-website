@@ -1,5 +1,5 @@
 import { getMinMaxPrice } from "../../lib/fetchPrices";
-import { PriceFilterClient } from "./PriceFilterCLient";
+import { PriceFilterClient } from "./PriceFilterClient";
 
 export async function PriceFilter() {
   const minMax = await getMinMaxPrice();

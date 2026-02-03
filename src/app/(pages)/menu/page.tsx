@@ -1,12 +1,14 @@
-import { Menu } from "@/components/features/menu";
 import PageHero, {
   Content,
-  Heading,
   Description,
+  Heading,
   ImageContainer as Image,
 } from "@/components/shared/page-hero/PageHero";
 import { urlParamsCache } from "@/lib/url-params";
 import { type SearchParams } from "nuqs/server";
+import { Suspense } from "react";
+import { MenuResultsContainer } from "@/components/features/menu/MenuResultsContainer";
+import { MenuFilter } from "@/components/features/menu-filters/MenuFilter";
 
 type PageProps = {
   searchParams: Promise<SearchParams>;
@@ -16,7 +18,7 @@ async function MenuPage({ searchParams }: PageProps) {
   const filters = urlParamsCache.parse(await searchParams);
 
   return (
-    <section className="menu">
+    <>
       <PageHero>
         <Content>
           <Heading>Happy Hour</Heading>
@@ -27,12 +29,27 @@ async function MenuPage({ searchParams }: PageProps) {
           alt="cocktail"
         />
       </PageHero>
+
       <section className="layout-grid py-container-block">
         <h2>Our Menu</h2>
 
-        <Menu filters={filters} />
+        <div className="py-container-block md:layout-grid-sidebar relative isolate">
+          <MenuFilter />
+
+          <div className="max-sm:wide content min-h-[150vh]">
+            <Suspense
+              fallback={
+                <div className="text-tertiary animate-pulse py-20 text-center">
+                  Updating menu results...
+                </div>
+              }
+            >
+              <MenuResultsContainer filters={filters} />
+            </Suspense>
+          </div>
+        </div>
       </section>
-    </section>
+    </>
   );
 }
 export default MenuPage;

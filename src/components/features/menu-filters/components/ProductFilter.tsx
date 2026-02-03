@@ -3,7 +3,7 @@ import {
   Disclosure,
   DisclosureHeader,
   DisclosurePanel,
-} from "./shared/Disclosure";
+} from "@/components/features/menu-filters/components/shared/Disclosure";
 import type { ReactNode } from "react";
 import { Separator } from "@/components/shared/Separator";
 
@@ -17,7 +17,7 @@ export function ProductFilter({ heading, children }: ProductFilterProps) {
     <>
       <Disclosure defaultExpanded>
         <DisclosureHeader>{heading}</DisclosureHeader>
-        <DisclosurePanel className="overscroll-y-contain hide-scrollbar">
+        <DisclosurePanel className="hide-scrollbar overscroll-y-contain">
           {children}
         </DisclosurePanel>
       </Disclosure>

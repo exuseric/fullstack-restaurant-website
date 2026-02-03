@@ -70,7 +70,9 @@ export function Slider<T extends number | number[]>({
         "orientation-horizontal:grid orientation-vertical:flex orientation-horizontal:w-64 orientation-horizontal:max-w-[calc(100%-10px)] grid-cols-[1fr_auto] flex-col items-center gap-2 font-sans",
       )}
     >
-      {label && <Label>{label}</Label>}
+      {label && (
+        <Label className="m-0 text-sm font-semibold capitalize">{label}</Label>
+      )}
       <SliderOutput className="orientation-vertical:hidden text-on-surface text-sm">
         {({ state }) => {
           const min = AmountWithCurrency(state.values[0] ?? 0);
