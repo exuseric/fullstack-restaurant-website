@@ -1,11 +1,11 @@
 import { getMenuList } from "@/components/features/menu/lib/fetchMenuItems";
-import { MenuResultsList } from "@/components/features/menu/components/MenuResults/MenuResultsList";
+import { MenuResultsList } from "@/components/features/menu/MenuResultsList";
 import { MENU_CONFIG } from "@/components/features/menu/lib/menu.config";
 import type { URLFilters } from "@/components/features/menu/lib/types";
 
 type MenuResultsProps = {
   filters: URLFilters;
-}
+};
 
 export async function MenuResultsContainer({ filters }: MenuResultsProps) {
   const initialData = await getMenuList({
@@ -32,10 +32,7 @@ export async function MenuResultsContainer({ filters }: MenuResultsProps) {
           </p>
         </div>
       ) : (
-        <MenuResultsList
-          filters={filters}
-          initialData={dehydratedState}
-        />
+        <MenuResultsList filters={filters} initialData={dehydratedState} />
       )}
     </>
   );

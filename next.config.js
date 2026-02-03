@@ -16,7 +16,7 @@ const config = {
       {
         protocol: "https",
         hostname: "r6niw2f0z8.ufs.sh",
-      }
+      },
     ],
   },
 };
