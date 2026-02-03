@@ -1,9 +1,9 @@
 "use client";
 import { throttle, useQueryStates } from "nuqs";
 import { searchParamsParsers } from "@/lib/url-params";
-import { Slider } from "@/components/features/menu/components/shared/Slider";
+import { Slider } from "@/components/features/menu-filters/components/shared/Slider";
 import { MENU_CONFIG } from "@/components/features/menu/lib/menu.config";
-import type { PriceRange } from "@/server/services/lib/types";
+import type { PriceRange } from "@/services/lib/types";
 
 type PriceFIlterClientProps = {
   range: PriceRange;
@@ -38,6 +38,7 @@ export function PriceFilterClient({ range }: PriceFIlterClientProps) {
       step={50}
       thumbLabels={["start", "end"]}
       onChange={handlePriceChange}
+      label="Price Range"
     />
   );
 }
