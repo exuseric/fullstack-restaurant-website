@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import {
   composeRenderProps,
   Button as RACButton,
@@ -46,7 +45,7 @@ const button = tv({
   ],
 });
 
-export function Button(props: ButtonProps) {
+export function Button({ ...props }: ButtonProps) {
   return (
     <RACButton
       {...props}

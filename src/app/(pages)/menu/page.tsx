@@ -1,5 +1,10 @@
 import { Menu } from "@/components/features/menu";
-import PageHero from "@/components/shared/page-hero/PageHero";
+import PageHero, {
+  Content,
+  Heading,
+  Description,
+  ImageContainer as Image,
+} from "@/components/shared/page-hero/PageHero";
 import { urlParamsCache } from "@/lib/url-params";
 import { type SearchParams } from "nuqs/server";
 
@@ -12,12 +17,16 @@ async function MenuPage({ searchParams }: PageProps) {
 
   return (
     <section className="menu">
-      <PageHero
-        heading="Happy Hour"
-        description="Everyday from 4pm to 7pm"
-        src="https://r6niw2f0z8.ufs.sh/f/tcbNvrChZBJK6bybvAMpIanNzZiHsRMQtC4AockwVLxfTGu1"
-        alt="cocktail"
-      />
+      <PageHero>
+        <Content>
+          <Heading>Happy Hour</Heading>
+          <Description>Everyday from 4pm to 7pm</Description>
+        </Content>
+        <Image
+          src="https://r6niw2f0z8.ufs.sh/f/tcbNvrChZBJK6bybvAMpIanNzZiHsRMQtC4AockwVLxfTGu1"
+          alt="cocktail"
+        />
+      </PageHero>
       <section className="layout-grid py-container-block">
         <h2>Our Menu</h2>
 

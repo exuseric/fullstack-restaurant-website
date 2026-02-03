@@ -1,14 +1,25 @@
-import Image from "next/image";
+import PageHero, {
+  Content,
+  Heading,
+  Description,
+  ImageContainer as Image,
+} from "@/components/shared/page-hero/PageHero";
 
 export default function HomePage() {
   return (
-    <section className="layout-grid min-h-screen relative isolate">
-      {/* <Image
-        src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        alt="Hero Image"
-        className="full-bleed h-full max-w-md object-cover"
-        fill={true}
-      /> */}
-    </section>
+    <>
+      <PageHero variant="cover">
+        <Content>
+          <Heading>Welcome to Our Kitchen</Heading>
+          <Description>
+            Experience the finest flavors and freshest ingredients in town.
+          </Description>
+        </Content>
+        <Image
+          src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=1170&auto=format&fit=crop"
+          alt="Restaurant Interior"
+        />
+      </PageHero>
+    </>
   );
 }
