@@ -22,11 +22,20 @@ type SearchValue = {
   hasResults: boolean;
   shouldShowLoading: boolean;
   shouldShowEmptyState: boolean;
+  showButtonText: boolean;
+};
+
+type SearchProviderProps = {
+  children: ReactNode;
+  showButtonText?: boolean;
 };
 
 export const SearchContext = createContext<SearchValue | null>(null);
 
-export function SearchProvider({ children }: { children: ReactNode }) {
+export function SearchProvider({
+  children,
+  showButtonText = false,
+}: SearchProviderProps) {
   const [query, setQuery] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const debouncedQuery = useDebounce(query, searchConfig.debounceMs);
@@ -75,6 +84,7 @@ export function SearchProvider({ children }: { children: ReactNode }) {
         hasResults,
         shouldShowLoading,
         shouldShowEmptyState,
+        showButtonText,
       }}
     >
       {children}

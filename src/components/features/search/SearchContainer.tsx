@@ -7,16 +7,17 @@ import { Activity } from "react";
 import { useMobile } from "@/hooks/use-mobile";
 
 function SearchContainer() {
-  const { setIsOpen } = useSearch();
+  const { setIsOpen, showButtonText } = useSearch();
   const isMobile = useMobile();
   return (
     <>
       <Button variant="quiet" onPress={() => setIsOpen(true)}>
         <span className="flex flex-row items-center justify-start gap-x-2">
           <SearchIcon className="size-5" />
-          <span className="hidden md:block">Search our Menu</span>
+          {showButtonText && <span>Search</span>}
         </span>
       </Button>
+
       <Activity mode={isMobile ? "visible" : "hidden"}>
         <SmallScreenPresenter />
       </Activity>

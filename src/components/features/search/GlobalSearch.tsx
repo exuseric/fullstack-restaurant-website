@@ -3,9 +3,12 @@
 import { SearchProvider } from "@/components/features/search/SearchContext";
 import SearchContainer from "./SearchContainer";
 
-export function GlobalSearch() {
+type GlobalSearchProps = {
+  showButtonTextOnMobile?: boolean;
+};
+export function GlobalSearch({ showButtonTextOnMobile }: GlobalSearchProps) {
   return (
-    <SearchProvider>
+    <SearchProvider showButtonText={showButtonTextOnMobile}>
       <SearchContainer />
     </SearchProvider>
   );

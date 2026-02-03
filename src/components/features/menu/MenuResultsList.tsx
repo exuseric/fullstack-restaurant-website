@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { useInView } from "react-intersection-observer";
 import { AmountWithCurrency } from "@/lib/format-price";
 import {
@@ -11,8 +11,9 @@ import {
   Virtualizer,
 } from "react-aria-components";
 import type { URLFilters } from "@/components/features/menu/lib/types";
-import { useMenuInfiniteQuery } from "../../hooks/useMenuInfiniteQuery";
+import { useMenuInfiniteQuery } from "./hooks/useMenuInfiniteQuery";
 import type { FindManyResult } from "@/services/lib/types";
+import { useMobile } from "@/hooks/use-mobile";
 
 type MenuResultsListProps = {
   filters: URLFilters;
@@ -28,6 +29,7 @@ export function MenuResultsList({
 }: MenuResultsListProps) {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useMenuInfiniteQuery(filters, initialData);
+  const isMobile = useMobile();
 
   const { ref, inView } = useInView();
 
@@ -37,22 +39,23 @@ export function MenuResultsList({
     }
   }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
-  const allItems = data?.pages.flatMap((page) => page.items) ?? [];
+  const allItems = useMemo(
+    () => data?.pages.flatMap((page) => page.items) ?? [],
+    [data?.pages],
+  );
 
+  const itemSize = isMobile ? new Size(300, 150) : new Size(350, 150);
   return (
     <Virtualizer
       layout={GridLayout}
       layoutOptions={{
-        minItemSize: new Size(400, 150),
+        minItemSize: itemSize,
         minSpace: new Size(8, 8),
         maxColumns: Infinity,
         preserveAspectRatio: false,
       }}
     >
-      <ListBox
-        aria-label="Menu Items"
-        className="grid grid-cols-1 gap-2 md:grid-cols-2"
-      >
+      <ListBox aria-label="Menu Items">
         {allItems.map((item) => (
           <ListBoxItem
             key={item.item.id}
