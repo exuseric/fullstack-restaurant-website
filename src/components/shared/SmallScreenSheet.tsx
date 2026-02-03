@@ -9,6 +9,7 @@ import {
 import { type Dispatch, type ReactNode, type SetStateAction } from "react";
 import { Dialog, Heading, Modal, ModalOverlay } from "react-aria-components";
 import { Button } from "@/components/shared/button";
+import { ResetFilters } from "@/components/features/menu-filters/components/ResetFilters";
 
 // Wrap React Aria modal components so they support motion values.
 const MotionModal = motion.create(Modal);
@@ -86,9 +87,12 @@ export default function SmallScreenSheet({
                 </Button>
               </div>
               <Dialog className="max-h-full overflow-y-auto overscroll-y-contain p-4 pb-12">
-                <Heading slot="title" className="mt-0">
-                  {title}
-                </Heading>
+                {/*<Heading*/}
+                {/*  slot="title"*/}
+                {/*  className="flex-row-between mt-0 flex items-center"*/}
+                {/*>*/}
+                {/*  {title}*/}
+                {/*</Heading>*/}
                 {children}
               </Dialog>
             </MotionModal>
@@ -96,5 +100,20 @@ export default function SmallScreenSheet({
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+export function SheetHeader({
+  children,
+  title,
+}: {
+  children?: ReactNode;
+  title: string;
+}) {
+  return (
+    <Heading slot="title" className="flex-row-between mt-0 flex items-center">
+      {title}
+      {children}
+    </Heading>
   );
 }

@@ -5,6 +5,7 @@ import { MenuIcon } from "lucide-react";
 import { useNavigation } from "@/contexts/navigation-context";
 import MobileMenu from "./components/MobileMenu";
 import { lazy, Suspense } from "react";
+import { SheetHeader } from "@/components/shared/SmallScreenSheet";
 
 const SmallScreenSheet = lazy(
   () => import("../../../../components/shared/SmallScreenSheet"),
@@ -33,6 +34,15 @@ function SmallScreenNavigation() {
           setIsOpen={setMobileMenuOpen}
           title="Menu"
         >
+          <SheetHeader title="Menu">
+            <Button
+              variant="quiet"
+              onPress={() => setMobileMenuOpen(false)}
+              aria-label="Open Menu"
+            >
+              Close
+            </Button>
+          </SheetHeader>
           <MobileMenu />
         </SmallScreenSheet>
       </Suspense>
