@@ -15,7 +15,7 @@ export function LargeScreenPresenter() {
     <Suspense>
       <LargeScreenSheet
         isOpen={isOpen}
-        setIsOpen={setIsOpen}
+        setIsOpenAction={setIsOpen}
         title="Search Our Menu"
       >
         <SearchModalContent />

@@ -9,11 +9,7 @@ export function SmallScreenPresenter() {
 
   return (
     <>
-      <SmallScreenSheet
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        title="Search Our Menu"
-      >
+      <SmallScreenSheet isOpen={isOpen} setIsOpen={setIsOpen}>
         <SearchModalContent />
       </SmallScreenSheet>
     </>

@@ -22,18 +22,18 @@ const SHEET_MARGIN = 0;
 
 type SheetProps = {
   isOpen: boolean;
-  setIsOpen: Dispatch<SetStateAction<boolean>>;
+  setIsOpenAction: Dispatch<SetStateAction<boolean>>;
   children: ReactNode;
   position?: "left" | "right";
   title: string;
-}
+};
 
 export default function LargeScreenSheet({
   isOpen,
-  setIsOpen,
+  setIsOpenAction,
   children,
   position = "left",
-  title
+  title,
 }: SheetProps) {
   const w =
     typeof window !== "undefined" ? window.innerWidth - SHEET_MARGIN : 0;
@@ -47,7 +47,7 @@ export default function LargeScreenSheet({
         {isOpen && (
           <MotionModalOverlay
             isOpen
-            onOpenChange={setIsOpen}
+            onOpenChange={setIsOpenAction}
             isDismissable
             className="glass-frosted fixed inset-0 z-50 hidden md:block"
           >
@@ -62,7 +62,7 @@ export default function LargeScreenSheet({
                 right: SHEET_MARGIN,
               }}
             >
-              <Dialog className="p-4 overflow-y-auto overscroll-y-contain pb-4">
+              <Dialog className="overflow-y-auto overscroll-y-contain p-4 pb-4">
                 <Heading slot="title" className="mt-0">
                   {title}
                 </Heading>

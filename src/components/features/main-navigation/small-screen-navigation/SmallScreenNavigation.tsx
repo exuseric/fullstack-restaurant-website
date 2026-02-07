@@ -29,11 +29,7 @@ function SmallScreenNavigation() {
         </div>
       </div>
       <Suspense>
-        <SmallScreenSheet
-          isOpen={mobileMenuOpen}
-          setIsOpen={setMobileMenuOpen}
-          title="Menu"
-        >
+        <SmallScreenSheet isOpen={mobileMenuOpen} setIsOpen={setMobileMenuOpen}>
           <SheetHeader title="Menu">
             <Button
               variant="quiet"
