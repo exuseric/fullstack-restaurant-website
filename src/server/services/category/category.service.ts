@@ -72,6 +72,16 @@ class Service implements CategoryService {
       throw new InternalServerError(`Failed to retrieve categories.`);
     }
   }
+
+  async findShowcase() {
+    try {
+      const data = await this.repository.findShowcase();
+      return data;
+    } catch (err) {
+      console.error("[CategoryService.findShowcase] Error:", err);
+      throw new InternalServerError(`Failed to retrieve showcase categories.`);
+    }
+  }
 }
 
 export default function categoryService({

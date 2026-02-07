@@ -13,6 +13,7 @@ export interface CategoryRepository {
   findOne(id: MenuCategory["id"]): Promise<MenuCategory | null>;
   findMany(): Promise<MenuCategory[]>;
   findByGroupId(args: FindByGroupIdParams): Promise<MenuCategory[]>;
+  findShowcase(): Promise<MenuCategory[]>;
 }
 
 export interface CategoryService {
@@ -20,6 +21,7 @@ export interface CategoryService {
   findById(id: MenuCategory["id"]): Promise<MenuCategory>;
   findByGroupId(args: FindByGroupIdParams): Promise<MenuCategory[]>;
   findMany(categoryIds: MenuCategory["id"][]): Promise<MenuCategory[]>;
+  findShowcase(): Promise<MenuCategory[]>;
 }
 
 export interface MenuService {

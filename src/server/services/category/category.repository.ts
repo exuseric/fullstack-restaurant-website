@@ -77,6 +77,15 @@ class Repository implements CategoryRepository {
 
     return [];
   }
+
+  async findShowcase() {
+    const res = await db
+      .select(this.SELECT)
+      .from(menuCategories)
+      .where(eq(menuCategories.showcase, true));
+
+    return res.map((res) => this.mapToResult(res));
+  }
 }
 
 export default function createCategoryRepository() {

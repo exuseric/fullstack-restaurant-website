@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 
-const QUERY = "(max-width: 767px)";
+const BREAKPOINT = 768;
 
-export function useMobile(query = QUERY) {
-  const [isMobile, setIsMobile] = useState(false);
+export function useMobile(breakpoint = BREAKPOINT) {
+  const [isMobile, setIsMobile] = useState<boolean | undefined>(undefined);
 
   useEffect(() => {
-    const matches = window.matchMedia(query);
-    const updateIsMobile = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    const matches = window.matchMedia(`(max-width: ${breakpoint - 1}px)`);
+    const onChange = () => {
+      setIsMobile(window.innerWidth < breakpoint);
+    };
+    matches.addEventListener("change", onChange);
+    onChange();
+    return () => matches.removeEventListener("change", onChange);
+  }, []);
 
-    matches.addEventListener("change", updateIsMobile);
-    return () => matches.removeEventListener("change", updateIsMobile);
-  }, [query]);
-
-  return isMobile;
+  return !!isMobile;
 }
