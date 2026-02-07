@@ -9,355 +9,360 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  /* ============================================
-     TYPOGRAPHY
-     ============================================ */
-  --font-sans: var(--font-content), ui-sans-serif, system-ui, sans-serif;
-  --font-heading: var(--font-display), ui-serif, Georgia, serif;
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    --font-sans: var(--font-content), ui-sans-serif, system-ui, sans-serif;
+    --font-heading: var(--font-display), ui-serif, Georgia, serif;
 
-  /* ============================================
-     SURFACES (Material System)
-     ============================================ */
-  --color-surface: var(--md-sys-color-surface);
-  --color-on-surface: var(--md-sys-color-on-surface);
-  --color-surface-variant: var(--md-sys-color-surface-variant);
-  --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
+    /* ============================================
+       SURFACES (Material System)
+       ============================================ */
+    --color-surface: var(--md-sys-color-surface);
+    --color-on-surface: var(--md-sys-color-on-surface);
+    --color-surface-variant: var(--md-sys-color-surface-variant);
+    --color-on-surface-variant: var(--md-sys-color-on-surface-variant);
 
-  /* Surface Containers (M3 Hierarchy) */
-  --color-surface-container-lowest: var(
-    --md-sys-color-surface-container-lowest
-  );
-  --color-surface-container-low: var(--md-sys-color-surface-container-low);
-  --color-surface-container: var(--md-sys-color-surface-container);
-  --color-surface-container-high: var(--md-sys-color-surface-container-high);
-  --color-surface-container-highest: var(
-    --md-sys-color-surface-container-highest
-  );
+    /* Surface Containers (M3 Hierarchy) */
+    --color-surface-container-lowest: var(
+            --md-sys-color-surface-container-lowest
+    );
+    --color-surface-container-low: var(--md-sys-color-surface-container-low);
+    --color-surface-container: var(--md-sys-color-surface-container);
+    --color-surface-container-high: var(--md-sys-color-surface-container-high);
+    --color-surface-container-highest: var(
+            --md-sys-color-surface-container-highest
+    );
 
-  /* Special Surfaces */
-  --color-surface-dim: var(--md-sys-color-surface-dim);
-  --color-surface-bright: var(--md-sys-color-surface-bright);
-  --color-surface-inverse: var(--md-sys-color-inverse-surface);
-  --color-on-surface-inverse: var(--md-sys-color-inverse-on-surface);
+    /* Special Surfaces */
+    --color-surface-dim: var(--md-sys-color-surface-dim);
+    --color-surface-bright: var(--md-sys-color-surface-bright);
+    --color-surface-inverse: var(--md-sys-color-inverse-surface);
+    --color-on-surface-inverse: var(--md-sys-color-inverse-on-surface);
 
-  /* ============================================
-     BRAND & STATE COLORS
-     ============================================ */
+    /* ============================================
+       BRAND & STATE COLORS
+       ============================================ */
+    /* Primary */
+    --color-primary: var(--md-sys-color-primary);
+    --color-on-primary: var(--md-sys-color-on-primary);
+    --color-primary-container: var(--md-sys-color-primary-container);
+    --color-on-primary-container: var(--md-sys-color-on-primary-container);
+    --color-primary-inverse: var(--md-sys-color-inverse-primary);
 
-  /* Primary */
-  --color-primary: var(--md-sys-color-primary);
-  --color-on-primary: var(--md-sys-color-on-primary);
-  --color-primary-container: var(--md-sys-color-primary-container);
-  --color-on-primary-container: var(--md-sys-color-on-primary-container);
-  --color-primary-inverse: var(--md-sys-color-inverse-primary);
+    /* Secondary */
+    --color-secondary: var(--md-sys-color-secondary);
+    --color-on-secondary: var(--md-sys-color-on-secondary);
+    --color-secondary-container: var(--md-sys-color-secondary-container);
+    --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
 
-  /* Secondary */
-  --color-secondary: var(--md-sys-color-secondary);
-  --color-on-secondary: var(--md-sys-color-on-secondary);
-  --color-secondary-container: var(--md-sys-color-secondary-container);
-  --color-on-secondary-container: var(--md-sys-color-on-secondary-container);
+    /* Tertiary */
+    --color-tertiary: var(--md-sys-color-tertiary);
+    --color-on-tertiary: var(--md-sys-color-on-tertiary);
+    --color-tertiary-container: var(--md-sys-color-tertiary-container);
+    --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
 
-  /* Tertiary */
-  --color-tertiary: var(--md-sys-color-tertiary);
-  --color-on-tertiary: var(--md-sys-color-on-tertiary);
-  --color-tertiary-container: var(--md-sys-color-tertiary-container);
-  --color-on-tertiary-container: var(--md-sys-color-on-tertiary-container);
+    /* Error */
+    --color-error: var(--md-sys-color-error);
+    --color-on-error: var(--md-sys-color-on-error);
+    --color-error-container: var(--md-sys-color-error-container);
+    --color-on-error-container: var(--md-sys-color-on-error-container);
 
-  /* Error */
-  --color-error: var(--md-sys-color-error);
-  --color-on-error: var(--md-sys-color-on-error);
-  --color-error-container: var(--md-sys-color-error-container);
-  --color-on-error-container: var(--md-sys-color-on-error-container);
+    /* ============================================
+       BORDERS & UTILS
+       ============================================ */
+    --color-outline: var(--md-sys-color-outline);
+    --color-outline-variant: var(--md-sys-color-outline-variant);
 
-  /* ============================================
-     BORDERS & UTILS
-     ============================================ */
-  --color-outline: var(--md-sys-color-outline);
-  --color-outline-variant: var(--md-sys-color-outline-variant);
+    --color-scrim: var(--md-sys-color-scrim);
+    --color-shadow: var(--md-sys-color-shadow);
 
-  --color-scrim: var(--md-sys-color-scrim);
-  --color-shadow: var(--md-sys-color-shadow);
+    /* Fixed Colors (M3 specific for consistent look across themes) */
+    --color-primary-fixed: var(--md-sys-color-primary-fixed);
+    --color-secondary-fixed: var(--md-sys-color-secondary-fixed);
+    --color-tertiary-fixed: var(--md-sys-color-tertiary-fixed);
 
-  /* Fixed Colors (M3 specific for consistent look across themes) */
-  --color-primary-fixed: var(--md-sys-color-primary-fixed);
-  --color-secondary-fixed: var(--md-sys-color-secondary-fixed);
-  --color-tertiary-fixed: var(--md-sys-color-tertiary-fixed);
-
-  /* ============================================
-     LAYOUT & SPACING
-     ============================================ */
-  --spacing-nav-lg: 5rem;
-  --spacing-nav-sm: 2.5rem;
-  --spacing-safe-top: env(safe-area-inset-top, 1em);
-  --spacing-safe-bottom: env(safe-area-inset-bottom, 1em);
-  --spacing-hero-lg: calc(5rem * 1.2);
-  --spacing-hero-sm: calc(2.5rem * 1.2);
-  --spacing-container-block: calc(3rem);
-  --spacing-container-inline: calc(1rem);
+    /* ============================================
+       LAYOUT & SPACING
+       ============================================ */
+    --spacing-nav-lg: 5rem;
+    --spacing-nav-sm: 2.5rem;
+    --spacing-safe-top: env(safe-area-inset-top, 1em);
+    --spacing-safe-bottom: env(safe-area-inset-bottom, 1em);
+    --spacing-hero-lg: calc(5rem * 1.2);
+    --spacing-hero-sm: calc(2.5rem * 1.2);
+    --spacing-container-block: calc(3rem);
+    --spacing-container-inline: calc(1rem);
 }
 
 :root {
-  interpolate-size: allow-keywords;
-  --container-padding: clamp(1rem, 4vw, 2rem);
-  --container-max-width: 80rem; /* 1280px */
+    interpolate-size: allow-keywords;
+    --container-padding: clamp(1rem, 4vw, 2rem);
+    --container-max-width: 80rem; /* 1280px */
 
-  --content-width: min(
-    100% - (var(--container-padding) * 2),
-    var(--container-max-width)
-  );
+    --content-width: min(
+            100% - (var(--container-padding) * 2),
+            var(--container-max-width)
+    );
 }
 
 body,
 html {
-  @apply scroll-smooth antialiased;
+    @apply scroll-smooth antialiased;
 }
 
 body {
-  @apply bg-surface text-on-surface;
+    @apply bg-surface text-on-surface;
 }
 
 @layer base {
-  h1,
-  h2,
-  h3,
-  h4,
-  p,
-  ul,
-  ol {
-    @apply mb-5;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply text-on-surface leading-none font-bold tracking-tight text-balance;
-  }
-
-  h1 {
-    font-size: var(--text-3xl);
-  }
-  h2 {
-    font-size: var(--text-2xl);
-    @apply mt-9;
-  }
-  h3 {
-    font-size: var(--text-xl);
-    @apply mt-8;
-  }
-  h4 {
-    font-size: var(--text-lg);
-  }
-
-  p {
-    font-size: var(--text-base);
-    @apply text-on-surface leading-normal text-pretty;
-  }
-
-  small {
-    font-size: var(--text-xs);
-    @apply text-tertiary;
-  }
-
-  a {
-    @apply decoration-primary/30 underline underline-offset-4 transition-colors;
-    &:hover {
-      @apply decoration-primary text-primary;
+    h1,
+    h2,
+    h3,
+    h4,
+    p,
+    ul,
+    ol {
+        @apply mb-5;
     }
-  }
 
-  ul,
-  ol {
-    list-style-position: outside;
-    @apply pl-6;
-  }
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply text-on-surface leading-none font-bold tracking-tight text-balance;
+    }
 
-  ul {
-    @apply list-disc;
-  }
-  ol {
-    @apply list-decimal;
-  }
+    h1 {
+        font-size: var(--text-3xl);
+    }
 
-  li {
-    @apply mb-2;
-  }
+    h2 {
+        font-size: var(--text-2xl);
+        @apply mt-9;
+    }
 
-  h1:last-child,
-  h2:last-child,
-  h3:last-child,
-  p:last-child,
-  ul:last-child {
-    @apply mb-0;
-  }
+    h3 {
+        font-size: var(--text-xl);
+        @apply mt-8;
+    }
+
+    h4 {
+        font-size: var(--text-lg);
+    }
+
+    p {
+        font-size: var(--text-base);
+        @apply text-on-surface leading-normal text-pretty;
+    }
+
+    small {
+        font-size: var(--text-xs);
+        @apply text-tertiary;
+    }
+
+    a {
+        @apply decoration-primary/30 underline underline-offset-4 transition-colors;
+
+        &:hover {
+            @apply decoration-primary text-primary;
+        }
+    }
+
+    ul,
+    ol {
+        list-style-position: outside;
+        @apply pl-6;
+    }
+
+    ul {
+        @apply list-disc;
+    }
+
+    ol {
+        @apply list-decimal;
+    }
+
+    li {
+        @apply mb-2;
+    }
+
+    h1:last-child,
+    h2:last-child,
+    h3:last-child,
+    p:last-child,
+    ul:last-child {
+        @apply mb-0;
+    }
 }
 
 @utility width-transition {
-  transition: width var(--container-transition, 0.3s ease-in-out);
+    transition: width var(--container-transition, 0.3s ease-in-out);
 }
 
 @utility scroll-container {
-  scrollbar-gutter: stable;
-  @apply width-transition overflow-y-auto overscroll-contain;
+    scrollbar-gutter: stable;
+    @apply width-transition overflow-y-auto overscroll-contain;
 }
 
 @utility container {
-  @apply width-transition mx-auto w-(--content-width);
+    @apply width-transition mx-auto w-(--content-width);
 }
 
 @utility content-container {
-  & > * + * {
-    @apply mt-5;
-  }
-  @apply width-transition mx-auto max-w-[75ch] px-6 leading-normal;
+    & > * + * {
+        @apply mt-5;
+    }
+
+    @apply width-transition mx-auto max-w-[75ch] px-6 leading-normal;
 }
 @utility layout-grid {
-  --grid-gutter: 1.5rem;
-  --grid-wide: 2rem;
-  
-  display: grid;
-  grid-template-columns:
+    --grid-gutter: 1.5rem;
+    --grid-wide: 2rem;
+
+    display: grid;
+    grid-template-columns:
     [full-start] minmax(var(--container-padding, 1rem), 1fr)
     [wide-start] var(--grid-wide)
     [content-start] min(100% - 2 * var(--grid-wide), var(--content-width, 65ch)) [content-end]
     var(--grid-wide) [wide-end]
     minmax(var(--container-padding, 1rem), 1fr) [full-end];
 
-  /* Default: content zone */
-  & > :not(.full-bleed, .wide) {
-    grid-column: content;
-  }
+    /* Default: content zone */
+    & > :not(.full-bleed, .wide) {
+        grid-column: content;
+    }
 
-  /* Full viewport width */
-  & > .full-bleed {
-    grid-column: full;
-    @apply block w-full;
-  }
+    /* Full viewport width */
+    & > .full-bleed {
+        grid-column: full;
+        @apply block w-full;
+    }
 
-  /* Wide breakout */
-  & > .wide {
-    grid-column: wide;
-  }
+    /* Wide breakout */
+    & > .wide {
+        grid-column: wide;
+    }
 
-  /* Responsive adjustments */
-  @media (max-width: 768px) {
-    --grid-wide: 1.5rem;
-  }
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+        --grid-wide: 1.5rem;
+    }
 
-  @media (max-width: 640px) {
-    grid-template-columns: 
+    @media (max-width: 640px) {
+        grid-template-columns:
       [full-start] 1rem
       [wide-start content-start] 
       minmax(var(--container-padding, 1rem), 1fr) 
       [content-end wide-end]
       1rem [full-end];
-    
-    & > .wide {
-      grid-column: content;
+
+        & > .wide {
+            grid-column: content;
+        }
     }
-  }
 
-  /* Nested grid support */
-  & > .layout-grid {
-    grid-column: full;
-    --container-padding: 0;
-  }
+    /* Nested grid support */
+    & > .layout-grid {
+        grid-column: full;
+        --container-padding: 0;
+    }
 
-  @apply width-transition;
+    @apply width-transition;
 }
 
 @utility layout-grid-sidebar {
-  display: grid;
-  gap: var(--grid-gap, 2rem);
-  grid-template-columns: minmax(min(250px, 100%), 1fr) minmax(0, 3fr);
-  align-items: start;
+    display: grid;
+    gap: var(--grid-gap, 2rem);
+    grid-template-columns: minmax(min(250px, 100%), 1fr) minmax(0, 3fr);
+    align-items: start;
 
-  & > .sidebar {
-    grid-column: 1;
-  }
-
-  @media (max-width: 1024px) {
-    grid-template-columns: 1fr;
-    
     & > .sidebar {
-      grid-column: 1;
+        grid-column: 1;
     }
-  }
 
-  @apply width-transition;
+    @media (max-width: 1024px) {
+        grid-template-columns: 1fr;
+
+        & > .sidebar {
+            grid-column: 1;
+        }
+    }
+
+    @apply width-transition;
 }
 
 @utility button--pressed {
-  @apply scale-95 bg-primary text-on-primary;
+    @apply scale-95 bg-primary text-on-primary;
 }
 
 /* GLASSMORPHISM UTILITY */
 
 @utility glass {
-  @supports (backdrop-filter: blur(12px)) {
-    @apply bg-surface/20 backdrop-blur-md backdrop-saturate-180;
-  }
+    @supports (backdrop-filter: blur(12px)) {
+        @apply bg-surface/20 backdrop-blur-md backdrop-saturate-180;
+    }
 
-  @supports not (backdrop-filter: blur(12px)) {
-    @apply bg-surface;
-  }
+    @supports not (backdrop-filter: blur(12px)) {
+        @apply bg-surface;
+    }
 
-  @apply border-outline/20 border;
+    @apply border-outline/20 border;
 }
 
 @utility glass-frosted {
-  @supports (backdrop-filter: blur(24px)) {
-    @apply bg-surface/60 backdrop-blur-xl backdrop-saturate-180;
-  }
+    @supports (backdrop-filter: blur(24px)) {
+        @apply bg-surface/60 backdrop-blur-xl backdrop-saturate-180;
+    }
 
-  @supports not ((backdrop-filter: blur(24px))) {
-    @apply bg-surface;
-  }
+    @supports not (backdrop-filter: blur(24px)) {
+        @apply bg-surface;
+    }
 
-  @apply border-outline/40 border;
+    @apply border-outline/40 border;
 }
 
 @utility desktop-nav-grid {
-  display: grid;
-  /*align-items: center;*/
-  grid-template-columns: auto 1fr auto;
+    display: grid;
+    /*align-items: center;*/
+    grid-template-columns: auto 1fr auto;
 
-  grid-row: 1;
-  & > * {
-  }
+    grid-row: 1;
+    & > * {
+    }
 }
 
 @utility flex-row-between {
-  @apply flex flex-row justify-between;
+    @apply flex flex-row justify-between;
 }
 @utility flex-row-start {
-  @apply flex flex-row justify-start;
+    @apply flex flex-row justify-start;
 }
 @utility inline-flex-row-start {
-  @apply inline-flex flex-row justify-start;
+    @apply inline-flex flex-row justify-start;
 }
 @utility flex-center {
-  @apply flex flex-row items-center justify-center;
+    @apply flex flex-row items-center justify-center;
 }
 @utility inline-flex-center {
-  @apply inline-flex flex-row items-center justify-center;
+    @apply inline-flex flex-row items-center justify-center;
 }
 
 @utility hide-scrollbar {
-  /* Firefox */
-  scrollbar-width: none;
+    /* Firefox */
+    scrollbar-width: none;
 
-  /* IE / old Edge (harmless elsewhere) */
-  -ms-overflow-style: none;
+    /* IE / old Edge (harmless elsewhere) */
+    -ms-overflow-style: none;
 
-  /* WebKit / Blink */
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    /* WebKit / Blink */
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :root {
-    --container-transition: none;
-  }
+    :root {
+        --container-transition: none;
+    }
 }
